@@ -84,8 +84,23 @@ with sl.form("esg score calculator"):
     info_flow_time = sl.number_input("Time for information flow to reach required employees", min_value=0.0, step=0.01)
     sl.divider()
     sl.header("Employee Survey")
-    #employee questions here
-    # Submit Button
+    work_hours_week = sl.number_input("How many hours do you work in a week on average?", min_value=0, step=1)
+    company_culture_alignment = sl.slider("How strongly do you align with your company's culture and values? (1-10)", 1, 10)
+    break_length = sl.number_input("How long is the break you receive per day? (in hours)", min_value=0.0, step=0.5)
+    employer_satisfaction = sl.slider("How satisfied are you with your current employer? (1-10)", 1, 10)
+    compensation_fairness = sl.slider("I am fairly compensated for the work I do. (1-10)", 1, 10)
+    colleague_respect = sl.slider("On a scale of 1-10, how much do you feel that colleagues respect and value each other’s opinions?", 1, 10)
+    mental_wellbeing = sl.slider("I have good mental wellbeing at work. (1-10)", 1, 10)
+    inclusion = sl.slider("On a scale of 1-10, how included do you feel in team decision-making discussions and social interactions?", 1, 10)
+    informed_by_management = sl.slider("I feel well informed by colleagues and upper management. (1-10)", 1, 10)
+    work_travel_hours_year = sl.number_input("How many hours do you fly due to work yearly?", min_value=0, step=1)
+    training_opportunities = sl.slider("I receive training not only related to my job but opportunities that enhance my lifestyle, such as financial literacy or wellbeing courses. (1-10)", 1, 10)
+    work_hours_day = sl.number_input("How many hours do you work per day on average?", min_value=0, step=1)
+    information_flow_time = sl.number_input("On average, how long does it take for information to flow from the receiver to the required employees? (in hours)", min_value=0, step=1)
+    company_tenure = sl.number_input("How long have you been in the company? (in years)", min_value=0, step=1)
+    workplace_rating = sl.slider("Rate your physical workplace (1-10), considering seating, lighting, cleanliness, technology, and equipment.", 1, 10)
+    executive_tenure = sl.number_input("How long have you been in the company (as an Executive)? (in years)", min_value=0, step=1)
+    travel_hours_private_car = sl.number_input("How many hours do you spend traveling via private car in a year?", min_value=0, step=1)    # Submit Button
     if sl.form_submit_button("Submit"):
         
         sl.write("Thank you for completing the ESG Diagnosis Survey. Your responses have been recorded.")
