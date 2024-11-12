@@ -82,7 +82,7 @@ with sl.form("esg score calculator"):
     main_business_activity = sl.text_area("Description of main business activity (product/service)")
     green_product_revenue = sl.number_input("Green Product Revenue", min_value=0.0, step=0.01)
     info_flow_time = sl.number_input("Time for information flow to reach required employees", min_value=0.0, step=0.01)
-    sl.divder()
+    sl.divider()
     sl.header("Employee Survey")
     #employee questions here
     # Submit Button
