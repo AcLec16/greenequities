@@ -7,13 +7,39 @@ sl.write(
 with sl.form("esg score calculator"):
     sl.header("Company survey")
     year_of_opening = sl.number_input("Year of Opening", min_value=1900, max_value=2100, step=1)
-    office_address = sl.multiselect("Office Address", [
-        "Worli", "Malabar & Cumballa Hill", "Juhu", "Bandra Kurla Complex",
-        "Nariman Point", "Andheri", "Lower Parel",
-        "Parel", "Bandra","Santacruz", "Ghatkopar",
-        "Thane", "Goregaon", "Byculla", "Fort", "Borivali",
-        "Jogeshwari", "Khar", "Malad", "Vile Parle", "Chembur", "Dharavi", "Colaba", "Dadar"
-    ])
+    location_values = {
+    "Worli": 4.3,
+    "Malabar & Cumballa Hill": 4.5,
+    "Juhu": 4.4,
+    "Bandra Kurla Complex": 4.2,
+    "Nariman Point": 4.8,
+    "Andheri": 4.4,
+    "Lower Parel": 4.3,
+    "Parel": 4.5,
+    "Bandra": 4.9,
+    "Santacruz": 4.2,
+    "Ghatkopar": 4.0,
+    "Thane": 4.3,
+    "Goregaon": 4.3,
+    "Byculla": 4.1,
+    "Fort": 4.3,
+    "Borivali": 5.0,
+    "Jogeshwari": 4.2,
+    "Khar": 4.2,
+    "Malad": 4.2,
+    "Vile Parle": 4.4,
+    "Chembur": 4.3,
+    "Dharavi": 3.4,
+    "Colaba": 1.0,
+    "Dadar": 4.4
+}
+
+# Multi-select for locations
+selected_locations = st.multiselect(
+    "Select Office Locations:",
+    list(location_values.keys()),
+    help="Choose one or more office locations to calculate associated values."
+)
     industry = sl.multiselect("Industry",
     "FINANCIAL SERVICES", "FMCG", "HEALTHCARE",
     "IT", "MEDIA", "METAL", "PHARMA", "REALTY", "CONSUMER DURABLES", "OIL AND GAS")
