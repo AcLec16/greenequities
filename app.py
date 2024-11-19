@@ -44,14 +44,17 @@ with sl.form("esg_score_calculator"):
         help="Choose one or more office locations to calculate associated values."
     )
     
-   # Industry Multi-select
-industry = sl.multiselect(
-    "Select Industry:",
-    [
-        "Financial Services", "FMCG", "Healthcare", "IT", "Media",
-        "Metal", "Pharma", "Realty", "Consumer Durables", 
-        "Oil and Gas", "Other"
-    ])
+    # Industry Multi-select
+    industry = sl.multiselect(
+        "Select Industry:",
+        [
+            "Financial Services", "FMCG", "Healthcare", "IT", "Media",
+            "Metal", "Pharma", "Realty", "Consumer Durables", 
+            "Oil and Gas", "Other"
+        ]
+    )
+    
+    # Other Company Information
     website = sl.text_input("Website")
     email_address = sl.text_input("Email address")
     telephone = sl.text_input("Telephone")
@@ -125,6 +128,7 @@ industry = sl.multiselect(
     main_business_activity = sl.text_area("Description of main business activity (product/service)")
     green_product_revenue = sl.number_input("Green Product Revenue", min_value=0.0, step=0.01)
     info_flow_time = sl.number_input("Time for information flow to reach required employees", min_value=0.0, step=0.01)
+
     sl.divider()
     sl.header("Employee Survey")
     work_hours_week = sl.number_input("How many hours do you work in a week on average?", min_value=0, step=1)
