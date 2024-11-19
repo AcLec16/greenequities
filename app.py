@@ -39,18 +39,18 @@ with sl.form("esg_score_calculator"):
     
     # Multi-select for Office Locations
     selected_locations = sl.multiselect(
-        "Select Office Locations:",
+        "Select Office Location:",
         list(location_values.keys()),
         help="Choose one or more office locations to calculate associated values."
     )
     
     # Industry Multi-select
     industry = sl.multiselect(
-        "Industry",
-        [
-            "FINANCIAL SERVICES", "FMCG", "HEALTHCARE", "IT", "MEDIA", 
-            "METAL", "PHARMA", "REALTY", "CONSUMER DURABLES", "OIL AND GAS"
-        ]
+        industries = [
+    "Financial Services", "FMCG", "Healthcare", "IT", "Media",
+    "Metal", "Pharma", "Realty", "Consumer Durables", 
+    "Oil and Gas", "Other"
+]
     )
     website = sl.text_input("Website")
     email_address = sl.text_input("Email address")
