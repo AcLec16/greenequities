@@ -7,8 +7,16 @@ sl.write(
 with sl.form("esg score calculator"):
     sl.header("Company survey")
     year_of_opening = sl.number_input("Year of Opening", min_value=1900, max_value=2100, step=1)
-    office_address = sl.text_area("Office Address")
-    industry = sl.text_input("Industry")
+    office_address = sl.multiselect("Office Address", [
+        "Worli", "Malabar & Cumballa Hill", "Juhu", "Bandra Kurla Complex",
+        "Nariman Point", "Andheri", "Lower Parel",
+        "Parel", "Bandra","Santacruz", "Ghatkopar",
+        "Thane", "Goregaon", "Byculla", "Fort", "Borivali",
+        "Jogeshwari", "Khar", "Malad", "Vile Parle", "Chembur", "Dharavi", "Colaba", "Dadar"
+    ])
+    industry = sl.multiselect("Industry",
+    "FINANCIAL SERVICES", "FMCG", "HEALTHCARE",
+    "IT", "MEDIA", "METAL", "PHARMA", "REALTY", "CONSUMER DURABLES", "OIL AND GAS")
     website = sl.text_input("Website")
     email_address = sl.text_input("Email address")
     telephone = sl.text_input("Telephone")
