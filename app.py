@@ -51,8 +51,7 @@ industry = sl.multiselect(
         "Financial Services", "FMCG", "Healthcare", "IT", "Media",
         "Metal", "Pharma", "Realty", "Consumer Durables", 
         "Oil and Gas", "Other"
-    ]
-)
+    ])
     website = sl.text_input("Website")
     email_address = sl.text_input("Email address")
     telephone = sl.text_input("Telephone")
