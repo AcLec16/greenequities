@@ -56,7 +56,7 @@ with sl.form("esg_score_calculator"):
     )
     
     # Other Company Information
-    csr_person = st.radio("Does the entity have a specified Committee of the Board/Director responsible for corporate responsibility-related activities?", ("Yes", "No"))
+    csr_person = sl.radio("Does the entity have a specified Committee of the Board/Director responsible for corporate responsibility-related activities?", ("Yes", "No"))
     form_filler = website = sl.text_input("Name of person responsible for filling out this form") 
     website = sl.text_input("Website")
     email_address = sl.text_input("Email address")
