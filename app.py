@@ -7,6 +7,7 @@ with sl.form("esg_score_calculator"):
     sl.header("Company Survey")
     
     # Year of Opening Input
+    company_name = sl.text_input("Company name")
     year_of_opening = sl.number_input("Year of Opening", min_value=1900, max_value=2100, step=1)
     
     # Location Values
@@ -55,11 +56,14 @@ with sl.form("esg_score_calculator"):
     )
     
     # Other Company Information
+    st.write("Does the entity have a specified Committee of the Board/Director responsible for corporate responsibility-related activities?")
+    response = st.radio("Select your answer:", ("Yes", "No"))
+    form_filler = website = sl.text_input("Name of person responsible for filling out this form") 
     website = sl.text_input("Website")
     email_address = sl.text_input("Email address")
     telephone = sl.text_input("Telephone")
     social_media = sl.text_input("Social Media")
-    mission_statement = sl.text_area("Mission statement and future goals")
+    mission_statement = sl.text_area("Mission statement")
 
     # Financial and Operational Metrics Section
     sl.subheader("Financial and Operational Metrics")
