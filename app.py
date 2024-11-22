@@ -132,12 +132,18 @@ with sl.form("esg_score_calculator"):
     main_business_activity = sl.text_area("Description of main business activity (product/service)")
     green_product_revenue = sl.number_input("Green Product Revenue", min_value=0.0, step=0.01)
     info_flow_time = sl.number_input("Time for information flow to reach required employees", min_value=0.0, step=0.01)
+    def google_rating():
+    sl.write("Rate your current business performance (Google rating, 1-5 stars):")
+    rating = sl.radio(
+        "Select your rating:", 
+        options=[1, 2, 3, 4, 5], 
+        format_func=lambda x: "⭐" * x
+    )
 
     sl.divider()
     sl.header("Employee Survey")
     work_hours_week = sl.number_input("How many hours do you work in a week on average?", min_value=0, step=1)
     company_culture_alignment = sl.slider("How strongly do you align with your company's culture and values? (1-10)", 1, 10)
-    break_length = sl.number_input("How long is the break you receive per day? (in hours)", min_value=0.0, step=0.5)
     employer_satisfaction = sl.slider("How satisfied are you with your current employer? (1-10)", 1, 10)
     compensation_fairness = sl.slider("I am fairly compensated for the work I do. (1-10)", 1, 10)
     colleague_respect = sl.slider("On a scale of 1-10, how much do you feel that colleagues respect and value each other’s opinions?", 1, 10)
@@ -145,7 +151,7 @@ with sl.form("esg_score_calculator"):
     inclusion = sl.slider("On a scale of 1-10, how included do you feel in team decision-making discussions and social interactions?", 1, 10)
     informed_by_management = sl.slider("I feel well informed by colleagues and upper management. (1-10)", 1, 10)
     work_travel_hours_year = sl.number_input("How many hours do you fly due to work yearly?", min_value=0, step=1)
-    training_opportunities = sl.slider("I receive training not only related to my job but opportunities that enhance my lifestyle, such as financial literacy or wellbeing courses. (1-10)", 1, 10)
+    training_opportunities = sl.slider("Rate the training you receive not only related to your job but opportunities that enhance your lifestyle, such as financial literacy or wellbeing courses. (1-10)", 1, 10)
     work_hours_day = sl.number_input("How many hours do you work per day on average?", min_value=0, step=1)
     information_flow_time = sl.number_input("On average, how long does it take for information to flow from the receiver to the required employees? (in hours)", min_value=0, step=1)
     company_tenure = sl.number_input("How long have you been in the company? (in years)", min_value=0, step=1)
