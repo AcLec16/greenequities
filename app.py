@@ -67,6 +67,7 @@ with sl.form("esg_score_calculator"):
     monthly_electricity_bill = sl.number_input("What is the monthly Electricity bill?", min_value=0.0, step=0.01)
     monthly_profit = sl.number_input("Monthly Profit", min_value=0.0, step=0.01)
     monthly_labor_costs = sl.number_input("Monthly Labor Costs", min_value=0.0, step=0.01)
+    monthly_land_costs = sl.number_input("Monthly Land Costs (Rent, Storage facilities, Manufacturing facilities", min_value=0.0, step=0.01)
     monthly_raw_material_costs = sl.number_input("Monthly costs of acquiring new raw material (if applicable)", min_value=0.0, step=0.01)
     total_monthly_revenue = sl.number_input("Total Monthly Revenue", min_value=0.0, step=0.01)
 
@@ -147,7 +148,7 @@ with sl.form("esg_score_calculator"):
     company_tenure = sl.number_input("How long have you been in the company? (in years)", min_value=0, step=1)
     workplace_rating = sl.slider("Rate your physical workplace (1-10), considering seating, lighting, cleanliness, technology, and equipment.", 1, 10)
     executive_tenure = sl.number_input("How long have you been in the company (as an Executive)? (in years)", min_value=0, step=1)
-    travel_hours_private_car = sl.number_input("How many hours do you spend traveling via private car in a year?", min_value=0, step=1)    # Submit Button
+    travel_distance_private_car = sl.number_input("How many kilometers do you spend traveling via private car per day to work?", min_value=0, step=1)    # Submit Button
     if sl.form_submit_button("Submit"):
         
         sl.write("Thank you for completing the ESG Diagnosis Survey. Your responses have been recorded.")
