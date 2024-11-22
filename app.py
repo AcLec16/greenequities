@@ -132,9 +132,9 @@ with sl.form("esg_score_calculator"):
     main_business_activity = sl.text_area("Description of main business activity (product/service)")
     green_product_revenue = sl.number_input("Green Product Revenue", min_value=0.0, step=0.01)
     info_flow_time = sl.number_input("Time for information flow to reach required employees", min_value=0.0, step=0.01)
-    def google_rating():
-    sl.write("Rate your current business performance (Google rating, 1-5 stars):")
+    google_rating = sl.write("Rate your current business performance (Google rating, 1-5 stars):")
     return sl.radio("Select your rating:", options=[1, 2, 3, 4, 5], format_func=lambda x: "⭐" * x)
+    
 
     sl.divider()
     sl.header("Employee Survey")
