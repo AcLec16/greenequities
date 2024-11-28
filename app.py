@@ -1,4 +1,5 @@
 import streamlit as sl
+import math
 
 sl.title("Start ESG Diagnosis - By Green Equities")
 sl.write("Let's start")
@@ -153,7 +154,64 @@ with sl.form("esg_score_calculator"):
     company_tenure = sl.number_input("How long have you been in the company? (in years)", min_value=0, step=1)
     workplace_rating = sl.slider("Rate your physical workplace (1-10), considering seating, lighting, cleanliness, technology, and equipment.", 1, 10)
     executive_tenure = sl.number_input("How long have you been in the company (as an Executive)? (in years)", min_value=0, step=1)
-    travel_distance_private_car = sl.number_input("How many kilometers do you spend traveling via private car per day to work?", min_value=0, step=1)    # Submit Button
+    travel_distance_private_car = sl.number_input("How many kilometers do you spend traveling via private car per day to work?", min_value=0, step=1)   
+
+    
     if sl.form_submit_button("Submit"):
+         #Enviroment 
+
+        #Social
+        # Formulas
+# Average of Employee Answers for "Company Culture" + EMP Satisfaction / 2
+average_culture_satisfaction = (sum(employee_answers_culture) / len(employee_answers_culture) + emp_satisfaction) / 2
+
+# EMP Opinion + EMP Social / 2
+average_opinion_social = (emp_opinion + emp_social) / 2
+
+# Diversity Index
+diversity_index = ((male_employees / total_employees) * 100 + 
+                   (female_employees / total_employees) * 100 + 
+                   (lgbtq_employees / total_employees) * 100 + 
+                   (differently_abled_employees / total_employees) * 100) / 4
+
+# Adjusted Score
+adjusted_score = max(1, min(10, math.ceil((diversity_index / 100) * 9 + 1)))
+
+# Revenue Efficiency
+revenue_efficiency = company_revenue / (wL * labor_input + wC * capital_input + wM * material_input)
+
+# Average Employee Salary Rating
+average_salary_rating = sum(employee_answers_culture) / len(employee_answers_culture)
+
+# Work Hours Rating
+if weekly_work_hours >= 60:
+    work_hours_rating = 1
+elif 54 <= weekly_work_hours < 60:
+    work_hours_rating = 2
+elif 51 <= weekly_work_hours < 54:
+    work_hours_rating = 3
+elif 48 <= weekly_work_hours < 51:
+    work_hours_rating = 4
+else:
+    work_hours_rating = 5
+
+# Tenure-Based Promotion Index
+tenure_promotion_index = ((average_tenure_employees / average_tenure_executives) * 
+                          (total_employees / internal_promotions)) * 10
+
+# Health and Satisfaction Index
+health_satisfaction_index = (health_confidence + emp_satisfaction) / 2
+
+# Employee Separation Rate
+separation_rate = (employee_separations / total_employees) * 100
+
+# Average of Training Opportunities
+average_training_opportunities = sum(training_opportunities) / len(training_opportunities)
+
+# Mental Wellbeing and Non-Job-Related Training
+wellbeing_training_index = (mental_wellbeing + non_job_training) / 2
+
+
+        #Governance
         
         sl.write("Thank you for completing the ESG Diagnosis Survey. Your responses have been recorded.")
