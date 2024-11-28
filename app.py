@@ -42,7 +42,7 @@ with sl.form("esg_score_calculator"):
     selected_locations = sl.multiselect(
         "Select Office Location:",
         list(location_values.keys()),
-        help="Choose one or more office locations to calculate associated values."
+        help ="Choose one or more office locations to calculate associated values."
     )
     
     # Industry Multi-select
@@ -103,7 +103,6 @@ with sl.form("esg_score_calculator"):
     anti_corruption_policy = sl.selectbox("Does the business have anti-corruption policies?", ("Yes", "No"))
     anti_corruption_policy_link = sl.text_input("Anti-corruption policy link (if available)")
     board_director_responsibility = sl.selectbox("Entity has Board/Director responsible for corporate responsibility activities", ("Yes", "No"))
-    corporate_responsibility_involvement = sl.text_input("Name of person responsible for filling out this form")
 
     # Social and Community Engagement Section
     sl.subheader("Social and Community Engagement")
@@ -138,6 +137,7 @@ with sl.form("esg_score_calculator"):
 
     sl.divider()
     sl.header("Employee Survey")
+    employee_form_name = sl.text_input("Name of employee responsible for filling out this form")
     work_hours_week = sl.number_input("How many hours do you work in a week on average?", min_value=0, step=1)
     company_culture_alignment = sl.slider("How strongly do you align with your company's culture and values? (1-10)", 1, 10)
     employer_satisfaction = sl.slider("How satisfied are you with your current employer? (1-10)", 1, 10)
