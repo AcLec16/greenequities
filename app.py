@@ -159,9 +159,43 @@ with sl.form("esg_score_calculator"):
     
     if sl.form_submit_button("Submit"):
          #Enviroment 
+# Revenue Efficiency
+revenue_efficiency = (revenue - (energy_cost + general_utilities) - intermediate_inputs) / (
+    (energy_cost + general_utilities) - intermediate_inputs
+)
 
+# Carbon Credit Score
+carbon_credit_score = (carbon_credit / total_carbon) * 10
+
+# Green Product Revenue Percentage
+green_product_revenue_percentage = green_product_revenue / revenue
+
+# Waste Generator Score
+waste_generator_score = (1 / primary_waste_generator) * 10
+
+# Green Energy Score
+green_energy_score = (green_energy / total_energy) * 10
+
+# Average Energy-Related Costs
+average_energy_costs = (electricity + air_travel + employee_commute) / 3
+
+# Annual Electricity Emissions
+annual_electricity_emissions = electricity_kwh_monthly * 0.85 * 12
+
+# Emissions Rating
+emissions_rating = 10 - ((annual_electricity_emissions - 871.25 * num_employees) / (403.75 * num_employees)) * 9
+
+# Water Usage Rating
+water_usage_rating = 10 - ((water_cost / 0.05 - 62.85 * num_employees) / (25.7 * num_employees)) * 9
+
+# Flight Emissions Rating
+flight_emissions = num_employees * flight_time_per_employee * 48 * 3.1
+flight_emissions_rating = 10 - ((flight_emissions - 119398.2466 * num_employees) / (255136.7094 * num_employees)) * 9
+
+# Travel Distance Emissions
+travel_emissions = (((num_employees * average_travel_distance * 255) / 100) * fuel_efficiency) * 2.474
+travel_emissions_rating = 10 - ((travel_emissions - 971.5 * num_employees) / (403.7 * num_employees)) * 9
         #Social
-        # Formulas
 # Average of Employee Answers for "Company Culture" + EMP Satisfaction / 2
 average_culture_satisfaction = (sum(employee_answers_culture) / len(employee_answers_culture) + emp_satisfaction) / 2
 
@@ -211,7 +245,39 @@ average_training_opportunities = sum(training_opportunities) / len(training_oppo
 # Mental Wellbeing and Non-Job-Related Training
 wellbeing_training_index = (mental_wellbeing + non_job_training) / 2
 
+#Governance
+# 1. Hiring Cost Formula
+hiring_cost = (num_employees * turnover_rate * average_departure_cost) + (
+    hiring_manager_cost + average_hours_required + (percentage_salary_spent_on_development * hiring_manager_cost)
+)
 
-        #Governance
+# 2. Supplier Retention Score
+supplier_retention_score = (remaining_suppliers / all_time_suppliers) * 10
+
+# 3. Tanh-Based Rating
+tanh_rating = 5 + 5 * math.tanh((RPR - 1) / 0.5)
+
+# 4. Workplace Average
+workplace_average = (location_rating + physical_workplace_rating) / 2
+
+# 5. Organizational Structure
+if 25 <= P30 <= 28 and AH1 > 4:
+    structure = "Hierarchical (Traditional) Structure"
+elif 13 <= P30 <= 24 and AH1 < 4:
+    structure = "Flat (Horizontal) Structure"
+elif 15 <= P30 <= 21 and AH1 > 3 and AI1 == "Department Head":
+    structure = "Matrix Structure Score"
+elif 14 <= P30 <= 24 and AI1 in ["General", "Department Head"]:
+    structure = "Divisional Structure Score"
+else:
+    structure = "Undefined Structure"
+
+# Outputs for verification
+print("Hiring Cost:", hiring_cost)
+print("Supplier Retention Score:", supplier_retention_score)
+print("Tanh-Based Rating:", tanh_rating)
+print("Workplace Average:", workplace_average)
+print("Organizational Structure:", structure)
+
         
         sl.write("Thank you for completing the ESG Diagnosis Survey. Your responses have been recorded.")
