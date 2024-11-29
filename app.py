@@ -284,15 +284,14 @@ with sl.form("esg_score_calculator"):
         # 5. Organizational Structure
         total_score = sum(role_scores[role] for role in selection)
         if 25 <= total_score <= 28:
-                sl.write("Hierarchical (Traditional) Structure")
-            elif 13 <= total_score <= 24:
-                sl.write("Flat (Horizontal) Structure")
-            elif 15 <= total_score <= 21 and ai1 == "Department Head":
-                sl.write("Matrix Structure Score")
-            elif 14 <= total_score <= 24 and ai1 in ["General", "Department Head"]:
-                sl.write("Divisional Structure Score")
-            else:
-                sl.write("Undefined Structure")
+            sl.write("Hierarchical (Traditional) Structure")
+        elif 13 <= total_score <= 24:
+            sl.write("Flat (Horizontal) Structure")
+        elif 15 <= total_score <= 21 and ai1 == "Department Head":
+            sl.write("Matrix Structure Score")
+        elif 14 <= total_score <= 24 and ai1 in ["General", "Department Head"]:
+            sl.write("Divisional Structure Score")
+        else:
+            sl.write("Undefined Structure")
         
-                
-                sl.write("Thank you for completing the ESG Diagnosis Survey. Your responses have been recorded.")
+        sl.write("Thank you for completing the ESG Diagnosis Survey. Your responses have been recorded.")
