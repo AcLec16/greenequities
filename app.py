@@ -283,7 +283,7 @@ with sl.form("esg_score_calculator"):
         
         # 5. Organizational Structure
         total_score = sum(role_scores[role] for role in selection)
-         if 25 <= total_score <= 28:
+        if 25 <= total_score <= 28:
                 return "Hierarchical (Traditional) Structure"
             elif 13 <= total_score <= 24:
                 return "Flat (Horizontal) Structure"
