@@ -132,14 +132,15 @@ with sl.form("esg_score_calculator"):
         "Employee": 1,
         "": 0  # For empty selections
     }
-    sl.write("Please list the management structure of your company from the top down by selecting positions from the dropdowns below:")
+
     # Dropdown menus for roles
-    roles = ["", "Chairman", "CEO", "COO", "CFO", "General Manager", "Department Head", "Employee"]
-    # Create six dropdowns for top-to-bottom selection
-    selection = [
-        sl.selectbox(f"Position {i+1}", roles, key=f"position_{i+1}")
-        for i in range(6)
-    ]
+    roles = sl.multiselect(
+        "Please list the management structure of your company from the top down by selecting positions from the dropdowns below:",
+        [
+            "Chairman", "CEO", "COO", "CFO", "General Manager", "Department Head", "Employee"
+        ]
+    )
+    
 
     # Additional Information Section
     sl.subheader("Additional Information")
