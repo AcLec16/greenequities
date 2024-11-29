@@ -184,7 +184,7 @@ with sl.form("esg_score_calculator"):
         carbon_credit_score = (carbon_credit / total_carbon) * 10
         
         # Green Product Revenue Percentage
-        green_product_revenue_percentage = green_product_revenue / revenue
+        green_product_revenue_percentage = green_product_revenue / total_monthly_revenue
         
         # Waste Generator Score
         waste_generator_score = (1 / primary_waste_generator) * 10
@@ -231,9 +231,7 @@ with sl.form("esg_score_calculator"):
         
         # Adjusted Score
         adjusted_score = max(1, min(10, math.ceil((diversity_index / 100) * 9 + 1)))
-        
-        # Revenue Efficiency
-        revenue_efficiency = company_revenue / (wL * labor_input + wC * capital_input + wM * material_input)
+    
         
         # Average Employee Salary Rating
         average_salary_rating = sum(employee_answers_culture) / len(employee_answers_culture)
