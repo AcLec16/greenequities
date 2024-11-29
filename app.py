@@ -181,7 +181,7 @@ with sl.form("esg_score_calculator"):
         #)
         
         # Carbon Credit Score
-        carbon_credit_score = (carbon_credit / total_carbon) * 10
+        carbon_credit_score = (carbon_credits_bought/ total_carbon) * 10
         
         # Green Product Revenue Percentage
         green_product_revenue_percentage = green_product_revenue / total_monthly_revenue
