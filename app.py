@@ -122,9 +122,29 @@ with sl.form("esg_score_calculator"):
     ])
 
     # Management and Structure Section
+    # Role-to-score mapping
+role_scores = {
+    "Chairman": 7,
+    "CEO": 6,
+    "COO": 5,
+    "CFO": 4,
+    "General Manager": 3,
+    "Department Head": 2,
+    "Employee": 1,
+    "": 0  # For empty selections
+}
     sl.subheader("Management and Structure")
-    management_structure = sl.text_area("List management structure from the top down")
-    number_of_executives = sl.number_input("Number of Executives/managers in the company", min_value=0, step=1)
+    # Instruction
+sl.write("Please list the management structure of your company from the top down by selecting positions from the dropdowns below:")
+
+# Dropdown menus for roles
+roles = ["", "Chairman", "CEO", "COO", "CFO", "General Manager", "Department Head", "Employee"]
+
+# Create six dropdowns for top-to-bottom selection
+selection = [
+    sl.selectbox(f"Position {i+1}", roles, key=f"position_{i+1}")
+    for i in range(6)
+]
 
     # Additional Information Section
     sl.subheader("Additional Information")
