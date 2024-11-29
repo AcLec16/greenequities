@@ -121,7 +121,17 @@ with sl.form("esg_score_calculator"):
         "Partnerships for the Goals"
     ])
     sl.subheader("Management and Structure")
-    # Instruction
+    # Role-to-score mapping
+    role_scores = {
+        "Chairman": 7,
+        "CEO": 6,
+        "COO": 5,
+        "CFO": 4,
+        "General Manager": 3,
+        "Department Head": 2,
+        "Employee": 1,
+        "": 0  # For empty selections
+    }
     sl.write("Please list the management structure of your company from the top down by selecting positions from the dropdowns below:")
     # Dropdown menus for roles
     roles = ["", "Chairman", "CEO", "COO", "CFO", "General Manager", "Department Head", "Employee"]
@@ -186,20 +196,25 @@ average_energy_costs = (electricity + air_travel + employee_commute) / 3
 
 # Annual Electricity Emissions
 annual_electricity_emissions = electricity_kwh_monthly * 0.85 * 12
+phone_charges = (electricity_kwh * 1000) * 5
 
 # Emissions Rating
 emissions_rating = 10 - ((annual_electricity_emissions - 871.25 * num_employees) / (403.75 * num_employees)) * 9
 
 # Water Usage Rating
 water_usage_rating = 10 - ((water_cost / 0.05 - 62.85 * num_employees) / (25.7 * num_employees)) * 9
+bath_tubs_full = (water_cost / 0.05) / 302
 
 # Flight Emissions Rating
 flight_emissions = num_employees * flight_time_per_employee * 48 * 3.1
 flight_emissions_rating = 10 - ((flight_emissions - 119398.2466 * num_employees) / (255136.7094 * num_employees)) * 9
+distance_to_the_moon = (num_employees * flight_time_per_employee * 835) / 384400  # Distance to the moon in km
 
 # Travel Distance Emissions
 travel_emissions = (((num_employees * average_travel_distance * 255) / 100) * fuel_efficiency) * 2.474
 travel_emissions_rating = 10 - ((travel_emissions - 971.5 * num_employees) / (403.7 * num_employees)) * 9
+times_around_earth = (num_employees * avg_travel_distance_per_employee * 255) / 40075  # Earth circumference in km
+
         #Social
 # Average of Employee Answers for "Company Culture" + EMP Satisfaction / 2
 average_culture_satisfaction = (sum(employee_answers_culture) / len(employee_answers_culture) + emp_satisfaction) / 2
@@ -266,23 +281,17 @@ tanh_rating = 5 + 5 * math.tanh((RPR - 1) / 0.5)
 workplace_average = (location_rating + physical_workplace_rating) / 2
 
 # 5. Organizational Structure
-if 25 <= P30 <= 28 and AH1 > 4:
-    structure = "Hierarchical (Traditional) Structure"
-elif 13 <= P30 <= 24 and AH1 < 4:
-    structure = "Flat (Horizontal) Structure"
-elif 15 <= P30 <= 21 and AH1 > 3 and AI1 == "Department Head":
-    structure = "Matrix Structure Score"
-elif 14 <= P30 <= 24 and AI1 in ["General", "Department Head"]:
-    structure = "Divisional Structure Score"
-else:
-    structure = "Undefined Structure"
-
-# Outputs for verification
-print("Hiring Cost:", hiring_cost)
-print("Supplier Retention Score:", supplier_retention_score)
-print("Tanh-Based Rating:", tanh_rating)
-print("Workplace Average:", workplace_average)
-print("Organizational Structure:", structure)
+total_score = sum(role_scores[role] for role in selection)
+ if 25 <= total_score <= 28:
+        return "Hierarchical (Traditional) Structure"
+    elif 13 <= total_score <= 24:
+        return "Flat (Horizontal) Structure"
+    elif 15 <= total_score <= 21 and ai1 == "Department Head":
+        return "Matrix Structure Score"
+    elif 14 <= total_score <= 24 and ai1 in ["General", "Department Head"]:
+        return "Divisional Structure Score"
+    else:
+        return "Undefined Structure"
 
         
         sl.write("Thank you for completing the ESG Diagnosis Survey. Your responses have been recorded.")
