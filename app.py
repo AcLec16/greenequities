@@ -93,8 +93,8 @@ with sl.form("esg_score_calculator"):
     # Environmental and Energy Metrics Section
     sl.subheader("Environmental and Energy Metrics")
     carbon_credits_bought = sl.number_input("Carbon credits bought (Co2 emissions)", min_value=0.0, step=0.01)
-    energy_sustainable_sources = sl.number_input("Energy from Sustainable sources (KwH)", min_value=0.0, step=0.01)
-    total_energy_used = sl.number_input("Total Energy Used per month (KwH)", min_value=0.0, step=0.01)
+    green_energy = sl.number_input("Energy from Sustainable sources (KwH)", min_value=0.0, step=0.01)
+    total_energy = sl.number_input("Total Energy Used per month (KwH)", min_value=0.0, step=0.01)
     primary_waste_generator = sl.text_input("Primary Waste generator")
     company_stance_sustainability = sl.text_area("Business’ current stance on environmental sustainability (100 words or less)")
     clean_tech_initiatives = sl.text_area("Company initiatives on clean technology, energy efficiency, renewable energy, etc.")
@@ -179,11 +179,7 @@ with sl.form("esg_score_calculator"):
        # revenue_efficiency = (total_monthly_revenue - (energy_cost + general_utilities) - intermediate_inputs) / (
             #(energy_cost + general_utilities) - intermediate_inputs
         
-        total_carbon = annual_electricity_emissions + flight_emissions + travel_emissions
 
-        # Carbon Credit Score
-        carbon_credit_score = (carbon_credits_bought/ total_carbon) * 10
-        
         # Green Product Revenue Percentage
         green_product_revenue_percentage = green_product_revenue / total_monthly_revenue
         
@@ -192,10 +188,7 @@ with sl.form("esg_score_calculator"):
         
         # Green Energy Score
         green_energy_score = (green_energy / total_energy) * 10
-        
-        # Average Energy-Related Costs
-        average_energy_costs = (electricity + air_travel + employee_commute) / 3
-        
+                
         # Annual Electricity Emissions
         annual_electricity_emissions = electricity_kwh_monthly * 0.85 * 12
         phone_charges = (electricity_kwh * 1000) * 5
@@ -214,6 +207,13 @@ with sl.form("esg_score_calculator"):
         travel_emissions = (((num_employees * average_travel_distance * 255) / 100) * fuel_efficiency) * 2.474
         travel_emissions_rating = 10 - ((travel_emissions - 971.5 * num_employees) / (403.7 * num_employees)) * 9
         times_around_earth = (num_employees * avg_travel_distance_per_employee * 255) / 40075  # Earth circumference in km
+
+        total_carbon = annual_electricity_emissions + flight_emissions + travel_emissions
+
+        # Carbon Credit Score
+        carbon_credit_score = (carbon_credits_bought/ total_carbon) * 10
+        average_energy_score = (travel_emissions_rating + emissions_rating + flight_emissions_rating) / 3
+
         
                 #Social
         # Average of Employee Answers for "Company Culture" + EMP Satisfaction / 2
