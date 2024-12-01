@@ -178,8 +178,9 @@ with sl.form("esg_score_calculator"):
 # Revenue Efficiency
        # revenue_efficiency = (total_monthly_revenue - (energy_cost + general_utilities) - intermediate_inputs) / (
             #(energy_cost + general_utilities) - intermediate_inputs
-        #)
         
+        total_carbon = annual_electricity_emissions + flight_emissions + travel_emissions
+
         # Carbon Credit Score
         carbon_credit_score = (carbon_credits_bought/ total_carbon) * 10
         
@@ -198,10 +199,8 @@ with sl.form("esg_score_calculator"):
         # Annual Electricity Emissions
         annual_electricity_emissions = electricity_kwh_monthly * 0.85 * 12
         phone_charges = (electricity_kwh * 1000) * 5
-        
-        # Emissions Rating
         emissions_rating = 10 - ((annual_electricity_emissions - 871.25 * num_employees) / (403.75 * num_employees)) * 9
-        
+
         # Water Usage Rating
         water_usage_rating = 10 - ((water_cost / 0.05 - 62.85 * num_employees) / (25.7 * num_employees)) * 9
         bath_tubs_full = (water_cost / 0.05) / 302
