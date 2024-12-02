@@ -46,7 +46,7 @@ with sl.form("esg_score_calculator"):
     )
     
     # Industry Multi-select
-    industry = sl.multiselect(
+    industry = sl.radio(
         "Select Industry:",
         [
             "Financial Services", "FMCG", "Healthcare", "IT", "Media",
