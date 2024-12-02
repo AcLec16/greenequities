@@ -123,6 +123,7 @@ with sl.form("esg_score_calculator"):
     sl.subheader("Social and Community Engagement")
     human_rights_ngo = sl.text_area("Does the company on human rights extend to any NGOs/Others? If yes, list")
     social_impact_partnerships = sl.text_area("Has your organization partnered with Social impact organizations, NGOs, or charities?")
+    health_confidence ​​= sl.slider("How confident are you in the current health and safety measures at your company?", 1, 10)
     compliance_certifications = sl.text_area("List any Compliance certifications received by the business")
     awards_received = sl.file_uploader("List any Awards received by the business, upload pictures", type=["jpg", "jpeg", "png", "pdf"])
     selected_sdgs = sl.multiselect("Choose 3 SDGs that relate best to your organization", [
@@ -173,7 +174,7 @@ with sl.form("esg_score_calculator"):
     employer_satisfaction = sl.slider("How satisfied are you with your current employer? (1-10)", 1, 10)
     compensation_fairness = sl.slider("I am fairly compensated for the work I do. (1-10)", 1, 10)
     colleague_respect = sl.slider("On a scale of 1-10, how much do you feel that colleagues respect and value each other’s opinions?", 1, 10)
-    mental_wellbeing = sl.slider("I have good mental wellbeing at work. (1-10)", 1, 10)
+    health_wellbeing = sl.slider(""Do you feel that your workplace supports your physical and mental health effectively through its environment, policies, and resources?" (1-10)", 1, 10)
     inclusion = sl.slider("On a scale of 1-10, how included do you feel in team decision-making discussions and social interactions?", 1, 10)
     informed_by_management = sl.slider("I feel well informed by colleagues and upper management. (1-10)", 1, 10)
     work_travel_hours_year = sl.number_input("How many hours do you fly due to work yearly?", min_value=0, step=1)
@@ -186,8 +187,8 @@ with sl.form("esg_score_calculator"):
 
     
     if sl.form_submit_button("Submit"):
-         #Enviroment 
-# Revenue Efficiency
+         Enviroment 
+         Revenue Efficiency
        # revenue_efficiency = (total_monthly_revenue - (energy_cost + general_utilities) - intermediate_inputs) / (
             #(energy_cost + general_utilities) - intermediate_inputs
         
@@ -229,7 +230,7 @@ with sl.form("esg_score_calculator"):
         
                 #Social
         # Average of Employee Answers for "Company Culture" + EMP Satisfaction / 2
-        average_culture_satisfaction = (sum(employee_answers_culture) / len(employee_answers_culture) + emp_satisfaction) / 2
+        company_culture_calc = (sum(company_culture_alignment) + sum(emp_satisfaction) / (total_employees*2))
         
         # EMP Opinion + EMP Social / 2
         average_opinion_social = (emp_opinion + emp_social) / 2
@@ -247,7 +248,7 @@ with sl.form("esg_score_calculator"):
         # Average Employee Salary Rating
         average_salary_rating = sum(employee_answers_culture) / len(employee_answers_culture)
         
-        # Work Hours Rating
+         #Work Hours Rating
         if work_hours_week >= 60:
             work_hours_rating = 1
         elif 54 <= work_hours_week < 60:
@@ -264,8 +265,7 @@ with sl.form("esg_score_calculator"):
                                   (total_employees / internal_promotions)) * 10
         
         # Health and Satisfaction Index
-        health_satisfaction_index = (health_confidence + emp_satisfaction) / 2
-        
+        health_satisfaction_index = (0.4*health_confidence + 0.6*(sum(health_wellbeing)/(total_employees)) / 2
         # Employee Separation Rate
         separation_rate = (employee_separations / total_employees) * 100
         
@@ -273,7 +273,7 @@ with sl.form("esg_score_calculator"):
         average_training_opportunities = sum(training_opportunities) / len(training_opportunities)
         
         # Mental Wellbeing and Non-Job-Related Training
-        wellbeing_training_index = (mental_wellbeing + non_job_training) / 2
+        wellbeing_training_index = (sum(health_wellbeing) + sum(training_opportunities)) / (total_employees*2)
         
         #Governance
         # 1. Hiring Cost Formula
@@ -302,5 +302,19 @@ with sl.form("esg_score_calculator"):
             sl.write("Divisional Structure Score")
         else:
             sl.write("Undefined Structure")
-        
+        economic_policy_uncertianty = 5.789922892
+        volatility_rating = {
+            "Other": 3.298536157,
+            "Auto": 4.749502197,
+            "Financial Services": 4.839357183,
+            "FMCG": 4.460524163,
+            "Healthcare": 3.829375817,
+            "IT": 0,
+            "Media": 0,
+            "Metal": 2.744592168,
+            "Pharma": 3.733156627,
+            "Realty": 2.259080821,
+            "Consumer Durables": 5.125909737,
+            "Oil and Gas ": 4.542399009,
+            }
         sl.write("Thank you for completing the ESG Diagnosis Survey. Your responses have been recorded.")
