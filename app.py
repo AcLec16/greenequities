@@ -285,7 +285,20 @@ with sl.form("esg_score_calculator"):
         supplier_retention_score = (remaining_suppliers / all_time_suppliers) * 10
         
         # 3. Tanh-Based Rating
-        tanh_rating = 5 + 5 * math.tanh((RPR - 1) / 0.5)
+        sector_growth = {
+            "microcap 250": 9.826755689,
+            "auto": 9.890083442,
+            "financial services": 6.961733465,
+            "fmcg": 8.907935441,
+            "healthcare": 9.674815306,
+            "it": 6.910124583,
+            "media": 0.4095309581,
+            "metal": 4.107664261,
+            "pharma": 9.761552019,
+            "realty": 6.590694316,
+            "consumer durables": 9.952556905,
+            "oil and gas index": 5.458379762
+        }
         
         # 4. Workplace Average
         workplace_average = (location_rating + physical_workplace_rating) / 2
