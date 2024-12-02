@@ -43,7 +43,6 @@ with sl.form("esg_score_calculator"):
     selected_locations = sl.multiselect(
         "Select Office Location:",
         list(location_values.keys()),
-        help ="Choose one or more office locations to calculate associated values."
     )
     
     # Industry Multi-select
@@ -93,9 +92,24 @@ with sl.form("esg_score_calculator"):
     # Environmental and Energy Metrics Section
     sl.subheader("Environmental and Energy Metrics")
     carbon_credits_bought = sl.number_input("Carbon credits bought (Co2 emissions)", min_value=0.0, step=0.01)
+    green_product_revenue = sl.number_input("Green Product Revenue", min_value=0.0, step=0.01)
     green_energy = sl.number_input("Energy from Sustainable sources (KwH)", min_value=0.0, step=0.01)
     total_energy = sl.number_input("Total Energy Used per month (KwH)", min_value=0.0, step=0.01)
-    primary_waste_generator = sl.text_input("Primary Waste generator")
+    waste_values = {
+    "Plastic": 7,
+    "Food Waste": 6, 
+    "Electronic Waste (e-waste)": 5, 
+    "Fabric Scraps": 4,
+    "Damaged or Expired Goods": 3,
+    "Scrap Metals": 2,
+    "Paper Waste": 1,
+    }
+
+# Streamlit multiselect for selecting primary waste generators
+    primary_waste_generator = st.multiselect(
+    "What is your company's primary waste generator:",
+    list(waste_values.keys()),
+    )
     company_stance_sustainability = sl.text_area("Business’ current stance on environmental sustainability (100 words or less)")
     clean_tech_initiatives = sl.text_area("Company initiatives on clean technology, energy efficiency, renewable energy, etc.")
 
@@ -146,8 +160,7 @@ with sl.form("esg_score_calculator"):
     sl.subheader("Additional Information")
     current_financial_year_month = sl.text_input("Current financial year and month")
     main_business_activity = sl.text_area("Description of main business activity (product/service)")
-    green_product_revenue = sl.number_input("Green Product Revenue", min_value=0.0, step=0.01)
-    info_flow_time = sl.number_input("Time for information flow to reach required employees", min_value=0.0, step=0.01)
+    info_flow_time = sl.number_input("Time for information flow to reach required employees (mins)", min_value=0.0, step=0.01)
     sl.write("Rate your current business performance:")
     rating = sl.radio("Select your rating:", options=[1, 2, 3, 4, 5], format_func=lambda x: "⭐" * x)
     
@@ -165,8 +178,7 @@ with sl.form("esg_score_calculator"):
     informed_by_management = sl.slider("I feel well informed by colleagues and upper management. (1-10)", 1, 10)
     work_travel_hours_year = sl.number_input("How many hours do you fly due to work yearly?", min_value=0, step=1)
     training_opportunities = sl.slider("Rate the training you receive not only related to your job but opportunities that enhance your lifestyle, such as financial literacy or wellbeing courses. (1-10)", 1, 10)
-    work_hours_day = sl.number_input("How many hours do you work per day on average?", min_value=0, step=1)
-    information_flow_time = sl.number_input("On average, how long does it take for information to flow from the receiver to the required employees? (in hours)", min_value=0, step=1)
+    information_flow_time = sl.number_input("On average, how long does it take for information to flow from the receiver to the required employees? (mins)", min_value=0, step=1)
     company_tenure = sl.number_input("How long have you been in the company? (in years)", min_value=0, step=1)
     workplace_rating = sl.slider("Rate your physical workplace (1-10), considering seating, lighting, cleanliness, technology, and equipment.", 1, 10)
     executive_tenure = sl.number_input("How long have you been in the company (as an Executive)? (in years)", min_value=0, step=1)
@@ -184,8 +196,8 @@ with sl.form("esg_score_calculator"):
         green_product_revenue_percentage = green_product_revenue / total_monthly_revenue
         
         # Waste Generator Score
-        waste_generator_score = (1 / primary_waste_generator) * 10
-        
+        waste_rating = (1/waste_value)*10
+
         # Green Energy Score
         green_energy_score = (green_energy / total_energy) * 10
                 
@@ -236,13 +248,13 @@ with sl.form("esg_score_calculator"):
         average_salary_rating = sum(employee_answers_culture) / len(employee_answers_culture)
         
         # Work Hours Rating
-        if weekly_work_hours >= 60:
+        if work_hours_week >= 60:
             work_hours_rating = 1
-        elif 54 <= weekly_work_hours < 60:
+        elif 54 <= work_hours_week < 60:
             work_hours_rating = 2
-        elif 51 <= weekly_work_hours < 54:
+        elif 51 <= work_hours_week < 54:
             work_hours_rating = 3
-        elif 48 <= weekly_work_hours < 51:
+        elif 48 <= work_hours_week < 51:
             work_hours_rating = 4
         else:
             work_hours_rating = 5
