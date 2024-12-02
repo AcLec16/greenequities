@@ -123,7 +123,7 @@ with sl.form("esg_score_calculator"):
     sl.subheader("Social and Community Engagement")
     human_rights_ngo = sl.text_area("Does the company on human rights extend to any NGOs/Others? If yes, list")
     social_impact_partnerships = sl.text_area("Has your organization partnered with Social impact organizations, NGOs, or charities?")
-    health_confidence ​​= sl.slider("How confident are you in the current health and safety measures at your company?", 1, 10)
+    health_confidence = sl.slider("Rate your confidence in workplace health and safety measures (1-10):", 1, 10)
     compliance_certifications = sl.text_area("List any Compliance certifications received by the business")
     awards_received = sl.file_uploader("List any Awards received by the business, upload pictures", type=["jpg", "jpeg", "png", "pdf"])
     selected_sdgs = sl.multiselect("Choose 3 SDGs that relate best to your organization", [
