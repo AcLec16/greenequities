@@ -96,19 +96,19 @@ with sl.form("esg_score_calculator"):
     green_energy = sl.number_input("Energy from Sustainable sources (KwH)", min_value=0.0, step=0.01)
     total_energy = sl.number_input("Total Energy Used per month (KwH)", min_value=0.0, step=0.01)
     waste_values = {
-    "Plastic": 7,
-    "Food Waste": 6, 
-    "Electronic Waste (e-waste)": 5, 
-    "Fabric Scraps": 4,
-    "Damaged or Expired Goods": 3,
-    "Scrap Metals": 2,
-    "Paper Waste": 1,
-    }
+        "Plastic": 7,
+        "Food Waste": 6, 
+        "Electronic Waste (e-waste)": 5, 
+        "Fabric Scraps": 4,
+        "Damaged or Expired Goods": 3,
+        "Scrap Metals": 2,
+        "Paper Waste": 1,
+        }
 
 # Streamlit multiselect for selecting primary waste generators
     primary_waste_generator = st.multiselect(
-    "What is your company's primary waste generator:",
-    list(waste_values.keys()),
+        "What is your company's primary waste generator:",
+        list(waste_values.keys()),
     )
     company_stance_sustainability = sl.text_area("Business’ current stance on environmental sustainability (100 words or less)")
     clean_tech_initiatives = sl.text_area("Company initiatives on clean technology, energy efficiency, renewable energy, etc.")
