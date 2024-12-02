@@ -106,7 +106,7 @@ with sl.form("esg_score_calculator"):
         }
 
 # Streamlit multiselect for selecting primary waste generators
-    primary_waste_generator = st.multiselect(
+    primary_waste_generator = sl.multiselect(
         "What is your company's primary waste generator:",
         list(waste_values.keys()),
     )
