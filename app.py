@@ -174,7 +174,7 @@ with sl.form("esg_score_calculator"):
     employer_satisfaction = sl.slider("How satisfied are you with your current employer? (1-10)", 1, 10)
     compensation_fairness = sl.slider("I am fairly compensated for the work I do. (1-10)", 1, 10)
     colleague_respect = sl.slider("On a scale of 1-10, how much do you feel that colleagues respect and value each other’s opinions?", 1, 10)
-    health_wellbeing = sl.slider(""Do you feel that your workplace supports your physical and mental health effectively through its environment, policies, and resources?" (1-10)", 1, 10)
+    health_wellbeing = sl.slider("Do you feel that your workplace supports your physical and mental health effectively through its environment, policies, and resources?" (1-10)", 1, 10)
     inclusion = sl.slider("On a scale of 1-10, how included do you feel in team decision-making discussions and social interactions?", 1, 10)
     informed_by_management = sl.slider("I feel well informed by colleagues and upper management. (1-10)", 1, 10)
     work_travel_hours_year = sl.number_input("How many hours do you fly due to work yearly?", min_value=0, step=1)
