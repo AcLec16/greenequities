@@ -167,7 +167,7 @@ with sl.form("esg_score_calculator"):
     
 
     sl.divider()
-    sl.header("Employee Survey")
+    sl.header("Employee Survey 1")
     employee_form_name = sl.text_input("Name of employee responsible for filling out this form")
     work_hours_week = sl.number_input("How many hours do you work in a week on average?", min_value=0, step=1)
     company_culture_alignment = sl.slider("How strongly do you align with your company's culture and values? (1-10)", 1, 10)
@@ -184,7 +184,24 @@ with sl.form("esg_score_calculator"):
     workplace_rating = sl.slider("Rate your physical workplace (1-10), considering seating, lighting, cleanliness, technology, and equipment.", 1, 10)
     executive_tenure = sl.number_input("How long have you been in the company (as an Executive)? (in years)", min_value=0, step=1)
     travel_distance_private_car = sl.number_input("How many kilometers do you spend traveling via private car per day to work?", min_value=0, step=1)   
-
+    sl.divider()
+    sl.header("Employee Survey 2")
+    employee_form_name_2 = sl.text_input("Name of employee responsible for filling out this form")
+    work_hours_week_2 = sl.number_input("How many hours do you work in a week on average?", min_value=0, step=1)
+    company_culture_alignment_2 = sl.slider("How strongly do you align with your company's culture and values? (1-10)", 1, 10)
+    employer_satisfaction_2 = sl.slider("How satisfied are you with your current employer? (1-10)", 1, 10)
+    compensation_fairness_2 = sl.slider("I am fairly compensated for the work I do. (1-10)", 1, 10)
+    colleague_respect_2 = sl.slider("On a scale of 1-10, how much do you feel that colleagues respect and value each other’s opinions?", 1, 10)
+    health_wellbeing_2 = sl.slider("Do you feel your workplace supports your physical and mental health effectively (1-10)?", 1, 10)
+    inclusion_2 = sl.slider("On a scale of 1-10, how included do you feel in team decision-making discussions and social interactions?", 1, 10)
+    informed_by_management_2 = sl.slider("I feel well informed by colleagues and upper management. (1-10)", 1, 10)
+    work_travel_hours_year_2 = sl.number_input("How many hours do you fly due to work yearly?", min_value=0, step=1)
+    training_opportunities_2 = sl.slider("Rate the training you receive not only related to your job but opportunities that enhance your lifestyle, such as financial literacy or wellbeing courses. (1-10)", 1, 10)
+    information_flow_time_2 = sl.number_input("On average, how long does it take for information to flow from the receiver to the required employees? (mins)", min_value=0, step=1)
+    company_tenure_2 = sl.number_input("How long have you been in the company? (in years)", min_value=0, step=1)
+    workplace_rating_2 = sl.slider("Rate your physical workplace (1-10), considering seating, lighting, cleanliness, technology, and equipment.", 1, 10)
+    executive_tenure_2 = sl.number_input("How long have you been in the company (as an Executive)? (in years)", min_value=0, step=1)
+    travel_distance_private_car_2 = sl.number_input("How many kilometers do you spend traveling via private car per day to work?", min_value=0, step=1)   
     
     if sl.form_submit_button("Submit"):
          #Enviroment 
@@ -213,13 +230,13 @@ with sl.form("esg_score_calculator"):
         bath_tubs_full = (monthly_water_bill / 0.05) / 302
         
         # Flight Emissions Rating
-        flight_time_per_employee = sum(work_travel_hours_year)/total_employees
+        flight_time_per_employee = sum([work_travel_hours_year])/total_employees
         flight_emissions = total_employees * flight_time_per_employee * 48 * 3.1
         flight_emissions_rating = 10 - ((flight_emissions - 119398.2466 * total_employees) / (255136.7094 * total_employees)) * 9
         distance_to_the_moon = (total_employees * flight_time_per_employee * 835) / 384400  # Distance to the moon in km
         
         # Travel Distance Emissions
-        avg_travel_distance_per_employee = sum(travel_distance_private_car)/total_employees
+        avg_travel_distance_per_employee = sum([travel_distance_private_car])/total_employees
         travel_emissions = (((total_employees * average_travel_distance * 255) / 100) * 8) * 2.474
         travel_emissions_rating = 10 - ((travel_emissions - 971.5 * total_employees) / (403.7 * total_employees)) * 9
         times_around_earth = (total_employees * avg_travel_distance * 255) / 40075  # Earth circumference in km
@@ -280,7 +297,7 @@ with sl.form("esg_score_calculator"):
         
         #Governance
         # 1. Hiring Cost Formula
-        hiring_cost = (num_employees * turnover_rate * average_departure_cost) + (
+        hiring_cost = (total_employees * turnover_rate * average_departure_cost) + (
             hiring_manager_cost + average_hours_required + (percentage_salary_spent_on_development * hiring_manager_cost)
         )
         
