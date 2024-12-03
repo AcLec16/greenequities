@@ -204,8 +204,8 @@ with sl.form("esg_score_calculator"):
         green_energy_score = (green_energy / total_energy) * 10
                 
         # Annual Electricity Emissions
-        annual_electricity_emissions = electricity_kwh_monthly * 0.85 * 12
-        phone_charges = (electricity_kwh * 1000) * 5
+        annual_electricity_emissions = total_energy * 0.85 * 12
+        phone_charges = (total_energy * 1000) * 5
         emissions_rating = 10 - ((annual_electricity_emissions - 871.25 * num_employees) / (403.75 * num_employees)) * 9
 
         # Water Usage Rating
