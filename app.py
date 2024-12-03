@@ -197,7 +197,8 @@ with sl.form("esg_score_calculator"):
         green_product_revenue_percentage = green_product_revenue / total_monthly_revenue
         
         # Waste Generator Score
-        waste_rating = (1/waste_values)*10
+        waste_value = wastes_values[primary_waste_generator]
+        waste_rating = (1/waste_value)*10
 
         # Green Energy Score
         green_energy_score = (green_energy / total_energy) * 10
