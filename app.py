@@ -187,7 +187,7 @@ with sl.form("esg_score_calculator"):
 
     
     if sl.form_submit_button("Submit"):
-         Enviroment 
+         #Enviroment 
          #Revenue Efficiency
        # revenue_efficiency = (total_monthly_revenue - (energy_cost + general_utilities) - intermediate_inputs) / (
             #(energy_cost + general_utilities) - intermediate_inputs
