@@ -206,21 +206,23 @@ with sl.form("esg_score_calculator"):
         # Annual Electricity Emissions
         annual_electricity_emissions = total_energy * 0.85 * 12
         phone_charges = (total_energy * 1000) * 5
-        emissions_rating = 10 - ((annual_electricity_emissions - 871.25 * num_employees) / (403.75 * num_employees)) * 9
+        emissions_rating = 10 - ((annual_electricity_emissions - 871.25 * total_employees) / (403.75 * total_employees)) * 9
 
         # Water Usage Rating
-        water_usage_rating = 10 - ((water_cost / 0.05 - 62.85 * num_employees) / (25.7 * num_employees)) * 9
+        water_usage_rating = 10 - ((water_cost / 0.05 - 62.85 * total_employees) / (25.7 * total_employees)) * 9
         bath_tubs_full = (water_cost / 0.05) / 302
         
         # Flight Emissions Rating
-        flight_emissions = num_employees * flight_time_per_employee * 48 * 3.1
-        flight_emissions_rating = 10 - ((flight_emissions - 119398.2466 * num_employees) / (255136.7094 * num_employees)) * 9
-        distance_to_the_moon = (num_employees * flight_time_per_employee * 835) / 384400  # Distance to the moon in km
+        flight_time_per_employee = sum(work_travel_hours_year)/total_employees
+        flight_emissions = total_employees * flight_time_per_employee * 48 * 3.1
+        flight_emissions_rating = 10 - ((flight_emissions - 119398.2466 * total_employees) / (255136.7094 * total_employees)) * 9
+        distance_to_the_moon = (total_employees * flight_time_per_employee * 835) / 384400  # Distance to the moon in km
         
         # Travel Distance Emissions
-        travel_emissions = (((num_employees * average_travel_distance * 255) / 100) * fuel_efficiency) * 2.474
-        travel_emissions_rating = 10 - ((travel_emissions - 971.5 * num_employees) / (403.7 * num_employees)) * 9
-        times_around_earth = (num_employees * avg_travel_distance_per_employee * 255) / 40075  # Earth circumference in km
+        avg_travel_distance_per_employee = sum(travel_distance_private_car)/total_employees
+        travel_emissions = (((total_employees * average_travel_distance * 255) / 100) * 8) * 2.474
+        travel_emissions_rating = 10 - ((travel_emissions - 971.5 * total_employees) / (403.7 * total_employees)) * 9
+        times_around_earth = (total_employees * avg_travel_distance * 255) / 40075  # Earth circumference in km
 
         total_carbon = annual_electricity_emissions + flight_emissions + travel_emissions
 
