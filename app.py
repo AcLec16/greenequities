@@ -209,8 +209,8 @@ with sl.form("esg_score_calculator"):
         emissions_rating = 10 - ((annual_electricity_emissions - 871.25 * total_employees) / (403.75 * total_employees)) * 9
 
         # Water Usage Rating
-        water_usage_rating = 10 - ((water_cost / 0.05 - 62.85 * total_employees) / (25.7 * total_employees)) * 9
-        bath_tubs_full = (water_cost / 0.05) / 302
+        water_usage_rating = 10 - ((monthly_water_bill / 0.05 - 62.85 * total_employees) / (25.7 * total_employees)) * 9
+        bath_tubs_full = (monthly_water_bill / 0.05) / 302
         
         # Flight Emissions Rating
         flight_time_per_employee = sum(work_travel_hours_year)/total_employees
