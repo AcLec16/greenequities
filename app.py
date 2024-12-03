@@ -265,7 +265,7 @@ with sl.form("esg_score_calculator"):
                                   (total_employees / internal_promotions)) * 10
         
         # Health and Satisfaction Index
-        health_satisfaction_index = (0.4*health_confidence + 0.6*(sum(health_wellbeing)/(total_employees)) / 2
+        health_satisfaction_index = (0.4*health_confidence + 0.6*(sum(health_wellbeing))/(total_employees)) / 2
         # Employee Separation Rate
         separation_rate = (employee_separations / total_employees) * 100
         
