@@ -76,8 +76,8 @@ def run():
     ##########Waste values 
     waste_values = {
         "Plastic": 7,
-        "Food Waste": 6, 
-        "Electronic Waste (e-waste)": 5, 
+        "Food Waste": 6,
+        "Electronic Waste (e-waste)": 5,
         "Fabric Scraps": 4,
         "Damaged or Expired Goods": 3,
         "Scrap Metals": 2,
