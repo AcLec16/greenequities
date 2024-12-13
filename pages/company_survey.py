@@ -74,17 +74,18 @@ def run():
     company_answers["green_energy"] = st.number_input("Energy from Sustainable sources (KwH)", min_value=0.0, step=0.01)
     company_answers["total_energy"] = st.number_input("Total Energy Used per month (KwH)", min_value=0.0, step=0.01)
     ##########Waste values 
-    waste_values = {
-        "Plastic": 7,
-        "Food Waste": 6,
-        "Electronic Waste (e-waste)": 5,
-        "Fabric Scraps": 4,
-        "Damaged or Expired Goods": 3,
-        "Scrap Metals": 2,
-        "Paper Waste": 1,
-    }
+    # waste_values = {
+    #     "Plastic": 7,
+    #     "Food Waste": 6,
+    #     "Electronic Waste (e-waste)": 5,
+    #     "Fabric Scraps": 4,
+    #     "Damaged or Expired Goods": 3,
+    #     "Scrap Metals": 2,
+    #     "Paper Waste": 1,
+    # }
     company_answers["primary_waste_generator"] = st.radio(
-        "What is your company's primary waste generator:", list(waste_values.keys())
+        "What is your company's primary waste generator:", ["Plastic", "Food Waste", 
+        "Electronic Waste (e-waste)", "Fabric Scraps", "Damaged or Expired Goods", "Scrap Metals", "Paper Waste"]
     )
     company_answers["company_stance_sustainability"] = st.text_area(
         "Business’ current stance on environmental sustainability (100 words or less)"
