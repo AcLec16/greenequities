@@ -17,9 +17,10 @@ def run():
                 if not company_data or not employee_data:
                     st.error("Invalid company code or no data found!")
                 else:
-                    report = calculate_esg_score(company_data["answers"], employee_data)
+                    # report = calculate_esg_score(company_data, employee_data)
                     st.write("**ESG Report**")
-                    st.json(report)
+                    st.json(company_data)
+                    st.json(employee_data)
 
         else:
             st.error(f"Not enough employees filled the survey! Number of Employees Filled: {num_emp}")
