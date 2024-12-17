@@ -103,12 +103,16 @@ def run():
     company_answers["board_director_responsibility"] = st.selectbox(
         "Entity has Board/Director responsible for corporate responsibility activities", ("Yes", "No")
     )
+    company_answers["Investor/Shareholder_statement"] = st.text_area("How does your company ensure that its investments and shareholder activities align with sustainable environmental, social, and governance (ESG) practices, and what steps are taken to support long-term responsible growth?")
+    company_answers["Business Partners_statement"] = st.text_area("What measures does your company take to ensure that its business partnerships align with sustainable practices across environmental, social, and governance (ESG) aspects, and how do you assess their commitment to these values?")
+    company_answers["Non-profit/NGO Partners"] = st.text_area("In what ways does your company collaborate with non-profit and NGO partners to foster sustainability, and how do you ensure these partnerships contribute positively to environmental, social, and governance (ESG) objectives?")
+
 
     # Social and Community Engagement
-    company_answers["human_rights_ngo"] = st.text_area("Does the company on human rights extend to any NGOs/Others? If yes, list")
+    company_answers["ngo_statement"] = st.text_area("How does your company ensure sustainability across its supply chain, and what specific measures are taken to align with environmental, social, and governance (ESG) principles?")
     company_answers["social_impact_partnerships"] = st.text_area(
-        "Has your organization partnered with Social impact organizations, NGOs, or charities?"
-    )
+        "Has your organization partnered with Social impact organizations, NGOs, or charities? If so, please list"
+
     company_answers["health_confidence"] = st.slider(
         "Rate your confidence in workplace health and safety measures (1-10):", 1, 10
     )
