@@ -8,8 +8,8 @@ def run():
     company_code = st.text_input("Enter Company Code")
 
     if company_code != '' and check_company_code(company_code):
-    
-        if get_employee_count(company_code) > 1:
+        num_emp = get_employee_count(company_code)
+        if num_emp > 1:
             if st.button("Generate Report"):
                 company_data = get_company_data(company_code)
                 employee_data = get_employee_data(company_code)
@@ -22,7 +22,7 @@ def run():
                     st.json(report)
 
         else:
-            st.error("Not enough employees filled the survey!")
+            st.error(f"Not enough employees filled the survey! Number of Employees Filled: {num_emp}")
     
     elif company_code != '':
         st.error("Incorrect Company Code")
