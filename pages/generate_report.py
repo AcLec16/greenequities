@@ -9,7 +9,7 @@ def run():
 
     if company_code != '' and check_company_code(company_code):
     
-        if get_employee_count(company_code) > 6:
+        if get_employee_count(company_code) > 1:
             if st.button("Generate Report"):
                 company_data = get_company_data(company_code)
                 employee_data = get_employee_data(company_code)
