@@ -1,5 +1,5 @@
-import firebase_admin
-from firebase_admin import credentials, firestore
+from google.cloud import firestore
+from google.oauth2 import service_account
 
 # Initialize Firebase
 cred = credentials.Certificate("path/to/your/firebase/credentials.json")

@@ -1,16 +1,11 @@
 import streamlit as st
 import uuid
 import json
-from google.cloud import firestore
-from google.oauth2 import service_account
+
 # from firebase_config import store_company_data
 
 def run():
     st.header("Company Survey Form")
-    key_dict = json.loads(st.secrets["textkey"])
-    creds = service_account.Credentials.from_service_account_info(key_dict)
-    db = firestore.Client(credentials=creds, project="green-equities")
-    db.collection("companies").document("random").set({"test":124})
     # company_name = st.text_input("Company Name")
     company_answers = {}
     
