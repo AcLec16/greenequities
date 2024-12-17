@@ -1,10 +1,10 @@
 from google.cloud import firestore
 from google.oauth2 import service_account
+import json
 
-# Initialize Firebase
-cred = credentials.Certificate("path/to/your/firebase/credentials.json")
-firebase_admin.initialize_app(cred)
-db = firestore.client()
+key_dict = json.loads(st.secrets["textkey"])
+creds = service_account.Credentials.from_service_account_info(key_dict)
+db = firestore.Client(credentials=creds, project="green-equities")
 
 # Functions to interact with Firebase
 def store_company_data(company_code, company_data):

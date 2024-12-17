@@ -1,8 +1,7 @@
 import streamlit as st
 import uuid
-import json
 
-# from firebase_config import store_company_data
+from firebase_config import store_company_data
 
 def run():
     st.header("Company Survey Form")
@@ -111,7 +110,7 @@ def run():
     # Social and Community Engagement
     company_answers["ngo_statement"] = st.text_area("How does your company ensure sustainability across its supply chain, and what specific measures are taken to align with environmental, social, and governance (ESG) principles?")
     company_answers["social_impact_partnerships"] = st.text_area(
-        "Has your organization partnered with Social impact organizations, NGOs, or charities? If so, please list"
+        "Has your organization partnered with Social impact organizations, NGOs, or charities? If so, please list")
 
     company_answers["health_confidence"] = st.slider(
         "Rate your confidence in workplace health and safety measures (1-10):", 1, 10
@@ -155,5 +154,5 @@ def run():
 
     if st.button("Submit"):
         company_code = str(uuid.uuid4())[:8]  # Generate unique code
-        # store_company_data(company_code, {"name": company_name, "answers": company_answers})
+        store_company_data(company_code, company_answers)
         st.success(f"Survey submitted! Share this code with your employees: {company_code}")
