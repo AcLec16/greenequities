@@ -27,3 +27,13 @@ def check_company_code(company_code):
     
     doc_ref = db.collection("companies").document(company_code)
     return doc_ref.get().exists
+
+def get_employee_count(company_code):
+    if not company_code or company_code.strip() == "":
+        raise ValueError("Company code cannot be empty.")
+    
+    try:
+        employees = db.collection("companies").document(company_code.strip()).collection("employees").stream()
+        return len(list(employees))
+    except Exception as e:
+        raise RuntimeError(f"Error fetching employee count: {e}")
