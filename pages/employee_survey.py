@@ -6,7 +6,7 @@ def run():
     
     company_code = st.text_input("Enter Company Code")
     
-    if check_company_code(company_code):
+    if company_code != '' and check_company_code(company_code):
         st.write(f"Filling form for company: {company_code}")
         employee_answers = {}
         
@@ -31,5 +31,5 @@ def run():
             store_employee_data(company_code, employee_answers)
             st.success("Employee survey submitted!")
 
-    else:
+    elif company_code != '':
         st.error("Incorrect Company Code")
