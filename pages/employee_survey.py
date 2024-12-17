@@ -1,12 +1,12 @@
 import streamlit as st
-# from firebase_config import store_employee_data
+from firebase_config import store_employee_data, check_company_code
 
 def run():
     st.header("Employee Survey Form")
     
     company_code = st.text_input("Enter Company Code")
     
-    if company_code:
+    if check_company_code(company_code):
         st.write(f"Filling form for company: {company_code}")
         employee_answers = {}
         
@@ -28,5 +28,8 @@ def run():
         employee_answers["travel_distance_private_car"] = st.number_input("How many kilometers do you spend traveling via private car per day to work?", min_value=0, step=1)
 
         if st.button("Submit"):
-            # store_employee_data(company_code, employee_answers)
+            store_employee_data(company_code, employee_answers)
             st.success("Employee survey submitted!")
+
+    else:
+        st.error("Incorrect Company Code")
