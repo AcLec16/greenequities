@@ -22,5 +22,8 @@ def get_employee_data(company_code):
     return [emp.to_dict() for emp in employees]
 
 def check_company_code(company_code):
+    if not company_code or company_code.strip() == "":
+        raise ValueError("Company code cannot be empty.")
+    
     doc_ref = db.collection("companies").document(company_code)
     return doc_ref.get().exists
