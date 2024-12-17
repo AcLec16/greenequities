@@ -1,5 +1,6 @@
 from google.cloud import firestore
 from google.oauth2 import service_account
+import streamlit as st
 import json
 
 key_dict = json.loads(st.secrets["textkey"])
@@ -19,3 +20,7 @@ def get_company_data(company_code):
 def get_employee_data(company_code):
     employees = db.collection("companies").document(company_code).collection("employees").stream()
     return [emp.to_dict() for emp in employees]
+
+def check_company_code(company_code):
+    doc_ref = db.collection("companies").document(company_code)
+    return doc_ref.get().exists
