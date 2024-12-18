@@ -10,3 +10,179 @@ def calculate_esg_score(company_data, employee_data):
     # report["social_score"] = company_data[] + total_salary
     # report["social_score"] = company_data[] + employee_data[]
     return report
+
+   
+    if sl.form_submit_button("Submit"):
+
+        #Enviroment 
+# Revenue Efficiency
+       # revenue_efficiency = (total_monthly_revenue - (energy_cost + general_utilities) - intermediate_inputs) / (
+            #(energy_cost + general_utilities) - intermediate_inputs
+        
+
+        # Green Product Revenue Percentage
+        report["green_product_revenue_percentage"] = company_data["green_product_revenue"] / company_data["total_monthly_revenue"]
+        
+        # Waste Generator Score
+        report["waste_generator_score"] = (1 / company_data["primary_waste_generator"]) * 10
+        
+        # Green Energy Score
+        report["green_energy_score"] = (company_data["green_energy"] / company_data["total_energy"]) * 10
+                
+        # Annual Electricity Emissions
+        annual_electricity_emissions = electricity_kwh_monthly * 0.85 * 12
+        phone_charges = (electricity_kwh * 1000) * 5
+        emissions_rating = 10 - ((annual_electricity_emissions - 871.25 * total_employees) / (403.75 * total_employees)) * 9
+
+        # Water Usage Rating
+        water_usage_rating = 10 - ((water_cost / 0.05 - 62.85 * total_employees) / (25.7 * total_employees)) * 9
+        bath_tubs_full = (water_cost / 0.05) / 302
+        
+        # Flight Emissions Rating
+        total_flight_time = 0
+        for emp in employee_data:
+            total_flight_time += emp["work_travel_hours_year"]
+        flight_time_per_employee = total_flight_time / len(employee_data)
+         
+        flight_emissions = total_employees * flight_time_per_employee * 48 * 3.1
+        flight_emissions_rating = 10 - ((flight_emissions - 119398.2466 * total_employees) / (255136.7094 * total_employees)) * 9
+        distance_to_the_moon = (total_employees * flight_time_per_employee * 835) / 384400  # Distance to the moon in km
+        
+        # Travel Distance Emissions
+        total_car_dist = 0
+        for emp in employee_data:
+            total_car_dist += emp["travel_distance_private_car"]
+        average_travel_distance = total_car_time / len(employee_data)
+        
+        travel_emissions = (((total_employees * average_travel_distance * 255) / 100) * fuel_efficiency) * 2.474
+        travel_emissions_rating = 10 - ((travel_emissions - 971.5 * total_employees) / (403.7 * total_employees)) * 9
+        times_around_earth = (total_employees * avg_travel_distance_per_employee * 255) / 40075  # Earth circumference in km
+
+        total_carbon = annual_electricity_emissions + flight_emissions + travel_emissions
+
+        # Carbon Credit Score
+        report["carbon_credit_score"] = (company_data["carbon_credits_bought"]/company_data["total_carbon"]) * 10
+        average_energy_score = (travel_emissions_rating + emissions_rating + flight_emissions_rating) / 3
+
+                #Social
+        # Average of Employee Answers for "Company Culture" + EMP Satisfaction / 2
+        average_culture_satisfaction = (sum(employee_answers_culture) / len(employee_answers_culture) + emp_satisfaction) / 2
+        
+        # EMP Opinion + EMP Social / 2
+        average_opinion_social = (emp_opinion + emp_social) / 2
+        
+        # Diversity Index
+        diversity_index_score = ((company_data["male_employees"] / company_data["total_employees"]) * 100 + 
+                           (company_data["female_employees"] / company_data["total_employees"]) * 100 + 
+                           (company_data["lgbtq_employees"] / company_data["total_employees"]) * 100 + 
+                           (company_data["differently_abled_employees"] / company_data["total_employees"]) * 100) / 4
+        
+        # Final Adjusted Score
+        report["diversity_index"] = max(1, min(10, math.ceil((diversity_index_score / 100) * 9 + 1)))
+    
+        
+        # Average Employee Salary Rating
+        total_salary_rating = 0
+        for emp in employee_data:
+            total_salary_rating += emp["compensation_fairness"]
+        average_salary_rating = total_salary_rating / len(employee_data)
+    report["employee_compensation_fairness"] = average_salary_rating
+        
+        # Work Hours Rating
+
+
+        if weekly_work_hours >= 60:
+            work_hours_rating = 1
+        elif 54 <= weekly_work_hours < 60:
+            work_hours_rating = 2
+        elif 51 <= weekly_work_hours < 54:
+            work_hours_rating = 3
+        elif 48 <= weekly_work_hours < 51:
+            work_hours_rating = 4
+        else:
+            work_hours_rating = 5
+        
+        # Tenure-Based Promotion Index
+        total_emp_tenure = 0
+        for emp in employee_data:
+            total_emp_tenure += employee_data["company_tenure"]
+            average_tenure_employees = total_emp_tenure / len(employee_data)
+        report["tenure_promotion_index"] = ((average_tenure_employees / average_tenure_executives) * 
+                                  (company_data["total_employees"] / company_data["internal_promotions"])) * 10
+        
+        # Health and Satisfaction Index
+        selected_practices = len(company_data["health_practices"])
+        health_confidence = (selected_practices / 10) * 10
+        total_employee_health = 0
+        for emp in employee_data:
+            total_employee_health += emp["health_wellbeing"]
+        employee_health = total_employee_health / len(employee_data)
+        report["health_satisfaction_index"] = (health_confidence + employee_health) / 2
+        
+        # Employee Separation Rate
+        report["turnover_rate"] = (company_data["employee_separations"] / company_data["total_employees"]) * 100
+        
+        # Job related Average of Training Opportunities
+        
+    average_training_opportunities = sum(training_opportunities) / len(training_opportunities)
+        
+        # Mental Wellbeing and Non-Job-Related Training
+        total_employee_training = 0 
+        for emp in employee_data:
+            total_employee_training += emp["training_opportunities"]
+        employee_training_opportunities = total_employee_training / len(employee_data)
+        report["wellbeing_training_index"] = (employee_health + employee_training_opportunities) / 2
+        
+        #Governance
+        # 1. Hiring Cost Formula
+        report["hiring_cost"] = (company_data["total_employees"] * report["turnover_rate"] * average_departure_cost) + (
+            hiring_manager_cost + average_hours_required + (percentage_salary_spent_on_development * hiring_manager_cost)
+        )
+        
+        # 2. Supplier Retention Score
+        report["supplier_retention_score"] = (company_data["remaining_suppliers"] / ["all_time_suppliers"]) * 10
+        
+        # 3. Sector Growth Rating
+        sector_ratings = {
+            "MICROCAP 250": 9.82,
+            "Auto": 9.89,
+            "Financial Services": 6.96,
+            "FMCG": 8.90,
+            "Healthcare": 9.67,
+            "IT": 6.91,
+            "Media": 0.40,
+            "Metal": 4.10,
+            "Pharma": 9.76,
+            "Realty": 6.59,
+            "Consumer Durables": 9.95,
+            "Oil and Gas": 5.45
+        }
+        def get_sector_value(company_data["industry"]):
+            # If industry is "Other", use "NIFTY MICROCAP 250"
+            if industry == "Other":
+                return sector_ratings["MICROCAP 250"]
+            # If industry exists in the sector_ratings dictionary, return its value
+            else industry in sector_ratings:
+                return sector_ratings[industry]
+        company_report("Sector growth Rating") = def(get_sector_value)
+        # 4. Workplace Average
+        total_health_wellbeing = 0 
+        for emp in employee_data:
+            total_health_wellbeing += emp["workplace_rating"]
+            physical_workplace_rating = total_health_wellbeing / len(employee_data)
+        report["workplace_average"] = (company_data["location_rating"] + physical_workplace_rating) / 2
+        
+        # 5. Organizational Structure
+        total_score = sum(role_scores[role] for role in selection)
+        if 25 <= total_score <= 28:
+            sl.write("Hierarchical (Traditional) Structure")
+        elif 13 <= total_score <= 24:
+            sl.write("Flat (Horizontal) Structure")
+        elif 15 <= total_score <= 21 and ai1 == "Department Head":
+            sl.write("Matrix Structure Score")
+        elif 14 <= total_score <= 24 and ai1 in ["General", "Department Head"]:
+            sl.write("Divisional Structure Score")
+        else:
+            sl.write("Undefined Structure")
+        
+        sl.write("Thank you for completing the ESG Diagnosis Survey. Your responses have been recorded.")
