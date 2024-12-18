@@ -29,6 +29,23 @@ def run():
         "Oil and Gas", "Other"
     ]
 )
+    company_answers["health_practices"] = st.multiselect(
+    "Which of the following health practices does your business currently implement?",
+    [
+        "Comprehensive health and safety policies",
+        "Mental health support resources",
+        "Physical wellness programs (e.g., fitness initiatives)",
+        "Ergonomic workspaces",
+        "Health insurance and wellness benefits",
+        "Healthy food options in the workplace",
+        "Adequate sick leave and flexible work policies",
+        "Hygiene and cleanliness of workplace facilities",
+        "Regular health education and training sessions",
+        "Mechanisms for employee feedback on health and wellness",
+    ]
+)
+
+)
     company_answers["csr_person"] = st.radio(
     "Does the entity have a specified Committee of the Board/Director responsible for corporate responsibility-related activities?", 
     ("Yes", "No")
