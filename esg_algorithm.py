@@ -2,23 +2,16 @@ import math
 
 def calculate_esg_score(company_data, employee_data):
     report = {}
-    # total_salary = 0
-    # for emp in employee_data:
-    #     total_salary = total_salary + emp["salary"]
-    # print(total_salary)
-    # report["company_name"] = company_data["company_name"]
-    # report["social_score"] = company_data[] + total_salary
-    # report["social_score"] = company_data[] + employee_data[]
     
-
+        company_data["monthly_electricity_bill"] = 
+        kwh_electricity = company_data["monthly_electricity_bill"] / 8
         #Enviroment 
-# Revenue Efficiency
-       # revenue_efficiency = (total_monthly_revenue - (energy_cost + general_utilities) - intermediate_inputs) / (
-            #(energy_cost + general_utilities) - intermediate_inputs
-        
-
+        # Value Based Revenue Efficiency
+        VRE_denominator = company_data["monthly_electricity_bill"] + company_data["monthly_water_bill"] + company_data["monthly_salary_costs"] + company_data["monthly_land_costs"] + company_data["monthly_raw_material_costs"]
+        report["value_based_resource_efficiency"] = company_data["total_yearly_revenue"] /  VRE_denominator
+        report["value_based_resource_efficiency_s"] = (f"Value-Based Resource Efficiency (value_based_resource_efficiency) for every ₹1 of stressed resources: {value_based_resource_efficiency:.2f}")
         # Green Product Revenue Percentage
-        report["green_product_revenue_percentage"] = company_data["green_product_revenue"] / company_data["total_monthly_revenue"]
+        report["green_product_revenue_percentage"] = company_data["green_product_revenue"] / company_data["total_yearly_revenue"]
         
         # Waste Generator Score
         report["waste_generator_score"] = (1 / company_data["primary_waste_generator"]) * 10
@@ -27,12 +20,12 @@ def calculate_esg_score(company_data, employee_data):
         report["green_energy_score"] = (company_data["green_energy"] / company_data["total_energy"]) * 10
                 
         # Annual Electricity Emissions
-        annual_electricity_emissions = electricity_kwh_monthly * 0.85 * 12
-        phone_charges = (electricity_kwh * 1000) * 5
-        emissions_rating = 10 - ((annual_electricity_emissions - 871.25 * total_employees) / (403.75 * total_employees)) * 9
+        annual_electricity_emissions"] = kwh_electricity * 0.85 * 12
+        report["phone_charges"] = (kwh_electricity * 1000) * 5
+        report["emissions_rating"] = 10 - ((annual_electricity_emissions - 871.25 * company_data["total_employees"]) / (403.75 * company_data["total_employees"])) * 9
 
         # Water Usage Rating
-        water_usage_rating = 10 - ((water_cost / 0.05 - 62.85 * total_employees) / (25.7 * total_employees)) * 9
+        water_usage_rating = 10 - ((water_cost / 0.05 - 62.85 * company_data["total_employees"]) / (25.7 * company_data["total_employees"])) * 9
         bath_tubs_full = (water_cost / 0.05) / 302
         
         # Flight Emissions Rating
@@ -42,8 +35,8 @@ def calculate_esg_score(company_data, employee_data):
         flight_time_per_employee = total_flight_time / len(employee_data)
          
         flight_emissions = total_employees * flight_time_per_employee * 48 * 3.1
-        flight_emissions_rating = 10 - ((flight_emissions - 119398.2466 * total_employees) / (255136.7094 * total_employees)) * 9
-        distance_to_the_moon = (total_employees * flight_time_per_employee * 835) / 384400  # Distance to the moon in km
+        flight_emissions_rating = 10 - ((flight_emissions - 119398.2466 * company_data["total_employees"]) / (255136.7094 * company_data["total_employees"])) * 9
+        distance_to_the_moon = (company_data["total_employees"] * flight_time_per_employee * 835) / 384400  # Distance to the moon in km
         
         # Travel Distance Emissions
         total_car_dist = 0
@@ -62,7 +55,9 @@ def calculate_esg_score(company_data, employee_data):
         report["average_energy_score"] = (travel_emissions_rating + emissions_rating + flight_emissions_rating) / 3
 
         #Primary Waste generator 
-        waste_values = {
+        
+        def get_waste_value(waste_value):
+             waste_values = {
          "Plastic": 7,
          "Food Waste": 6,
          "Electronic Waste (e-waste)": 5,
@@ -71,6 +66,9 @@ def calculate_esg_score(company_data, employee_data):
          "Scrap Metals": 2,                        #?????????????????????
          "Paper Waste": 1,
      }
+            return waste_values[waste_value]
+        report["waste_value"] = get_waste_value(company_data["waste_value"])
+        
 
         #SDGs
         report["selected_sdgs"] = company_data["selected_sdgs"]
@@ -111,12 +109,14 @@ def calculate_esg_score(company_data, employee_data):
         total_salary_rating = 0
         for emp in employee_data:
             total_salary_rating += emp["compensation_fairness"]
-        average_salary_rating = total_salary_rating / len(employee_data)
+            average_salary_rating = total_salary_rating / len(employee_data)
     report["employee_compensation_fairness"] = average_salary_rating
         
         # Work Hours Rating
-
-
+        total_work_hours = 0
+        for emp in employee_data:
+            total_work_hours == emp["work_hours_week"]
+            weekly_work_hours =  total_work_hours / len(employee_data)
         if weekly_work_hours >= 60:
             work_hours_rating = 1
         elif 54 <= weekly_work_hours < 60:
@@ -127,12 +127,19 @@ def calculate_esg_score(company_data, employee_data):
             work_hours_rating = 4
         else:
             work_hours_rating = 5
-        
+        report["work_hours"] =  work_hours_rating
         # Tenure-Based Promotion Index
         total_emp_tenure = 0
         for emp in employee_data:
-            total_emp_tenure += employee_data["company_tenure"]
-            average_tenure_employees = total_emp_tenure / len(employee_data)
+            total_emp_tenure += employee_data["company_tenure"]               #??????????????????????????????? conditional (exec only)
+        average_tenure_employees = total_emp_tenure / len(employee_data)
+        total_exec_tenure = 0
+        num_executives = 0
+        for emp in employee_data:
+            if employee_data["executice_tenure"] > 0:
+                total_exec_tenure += employee_data["executive_tenure"]
+                num_executives++
+        average_tenure_executives =  total_exec_tenure / num_executives
         report["tenure_promotion_index"] = ((average_tenure_employees / average_tenure_executives) * 
                                   (company_data["total_employees"] / company_data["internal_promotions"])) * 10
         
@@ -150,7 +157,7 @@ def calculate_esg_score(company_data, employee_data):
         
         # Job related Average of Training Opportunities
         
-        average_training_opportunities = sum(training_opportunities) / len(training_opportunities)
+        average_training_opportunities = sum(training_opportunities) / len(training_opportunities) ######??????
         
         # Mental Wellbeing and Non-Job-Related Training
         total_employee_training = 0 
@@ -158,7 +165,6 @@ def calculate_esg_score(company_data, employee_data):
             total_employee_training += emp["training_opportunities"]
         employee_training_opportunities = total_employee_training / len(employee_data)
         report["wellbeing_training_index"] = (employee_health + employee_training_opportunities) / 2
-        ##########################################################################################################################################
         ##########################################################################################################################################
         ##########################################################################################################################################
         #Governance
@@ -183,7 +189,9 @@ def calculate_esg_score(company_data, employee_data):
         
        
         # 3. Sector Growth Rating
-        sector_ratings = {
+        
+        def get_sector_value(industry):                #####################?????????????????????????/
+            sector_ratings = {
             "MICROCAP 250": 9.82,
             "Auto": 9.89,
             "Financial Services": 6.96,
@@ -197,15 +205,13 @@ def calculate_esg_score(company_data, employee_data):
             "Consumer Durables": 9.95,
             "Oil and Gas": 5.45
         }
-        
-        def get_sector_value(company_data["industry"]):
             # If industry is "Other", use "NIFTY MICROCAP 250"
             if industry == "Other":
                 return sector_ratings["MICROCAP 250"]
             # If industry exists in the sector_ratings dictionary, return its value
             else industry in sector_ratings:
                 return sector_ratings[industry]
-        report["Sector growth Rating"] = def(get_sector_value)
+        report["Sector_growth_Rating"] = get_sector_value(company_data["industry"])
         # 4. Workplace Average
         total_health_wellbeing = 0 
         for emp in employee_data:
@@ -224,7 +230,9 @@ def calculate_esg_score(company_data, employee_data):
         report["Anti_Corruption_score"] = (selected_anti / 10) * 10
 
         #Volatility 
-        sector_ratings_volatility = {
+        
+        def get_volatility_value(industry):
+            sector_ratings_volatility = {
             "MICROCAP 250": 3.29,
             "Auto": 4.74,
             "Financial Services": 4.83,
@@ -238,16 +246,44 @@ def calculate_esg_score(company_data, employee_data):
             "Consumer Durables": 5.12,
             "Oil and Gas": 4.54
         }
-        def get_volatility_value(company_data["industry"]):
             # If industry is "Other", use "NIFTY MICROCAP 250"
             if industry == "Other":
                 return sector_ratings_volatility["MICROCAP 250"]
             # If industry exists in the sector_ratings dictionary, return its value
             else industry in sector_ratings_volatility:
                 return sector_ratings_volatility[industry]
-        #Infomation Flow 
-
         
+        #Information Asymmetry
+        total_informed = 0 
+        for emp in employee_data:
+            total_informed += emp["informed_by_management"]
+            informed_rating = total_informed / len(employee_data)
+        total_time
+        for emp in employee_data:
+            total_time += emp["information_flow_time"]
+            average_time = total_time / len(employee_data)
+                
+            if average_time <= 0.5:
+                time_score = 10
+            elif 0.5 < average_time <= 1:
+                time_score = 9
+            elif 1 < average_time <= 2:
+                time_score = 8
+            elif 2 < average_time <= 3:
+                time_score = 7
+            elif 3 < average_time <= 5:
+                time_score = 6
+            elif 5 < average_time <= 7:  # 1-2 days
+                time_score = 5
+            elif 7 < average_time <= 10:  # 2-3 days
+                time_score = 4
+            elif 10 < average_time <= 15:  # 3-5 days
+                time_score = 3
+            elif 15 < average_time <= 20:  # 5-7 days
+                time_score = 2
+            else: 
+                time_score = 1
+            report["infomation_flow_efficency"] = (informed_rating + time_score) / 2
         #GeoPoli Risk 
         report["Geopolitical_Risk_Index"] = 6.6 
         report["India_News_sentiment"] = 5.09
