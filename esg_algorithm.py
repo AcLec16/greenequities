@@ -9,10 +9,7 @@ def calculate_esg_score(company_data, employee_data):
     # report["company_name"] = company_data["company_name"]
     # report["social_score"] = company_data[] + total_salary
     # report["social_score"] = company_data[] + employee_data[]
-    return report
-
-   
-    if sl.form_submit_button("Submit"):
+    
 
         #Enviroment 
 # Revenue Efficiency
@@ -62,14 +59,44 @@ def calculate_esg_score(company_data, employee_data):
 
         # Carbon Credit Score
         report["carbon_credit_score"] = (company_data["carbon_credits_bought"]/company_data["total_carbon"]) * 10
-        average_energy_score = (travel_emissions_rating + emissions_rating + flight_emissions_rating) / 3
+        report["average_energy_score"] = (travel_emissions_rating + emissions_rating + flight_emissions_rating) / 3
+
+        #Primary Waste generator 
+        waste_values = {
+         "Plastic": 7,
+         "Food Waste": 6,
+         "Electronic Waste (e-waste)": 5,
+         "Fabric Scraps": 4,
+         "Damaged or Expired Goods": 3,
+         "Scrap Metals": 2,                        #?????????????????????
+         "Paper Waste": 1,
+     }
+
+        #SDGs
+        report["selected_sdgs"] = company_data["selected_sdgs"]
 
                 #Social
         # Average of Employee Answers for "Company Culture" + EMP Satisfaction / 2
-        average_culture_satisfaction = (sum(employee_answers_culture) / len(employee_answers_culture) + emp_satisfaction) / 2
+        total_emp_culture = 0 
+        for emp in employee_data:
+            total_emp_culture += emp["company_culture_alignment"]
+        employee_answers_culture = total_emp_culture / len(employee_data)
+        total_emp_satisfaction = 0 
+        for emp in employee_data:
+            total_emp_satisfaction += emp["employer_satisfaction"]
+        emp_satisfaction = total_emp_satisfaction / len(employee_data)
+        average_culture_satisfaction = employee_answers_culture + emp_satisfaction) / 2
         
-        # EMP Opinion + EMP Social / 2
-        average_opinion_social = (emp_opinion + emp_social) / 2
+        # Inclusion at the workplace
+        total_respect_rating = 0
+        for emp in employee_data:
+            total_respect_rating += emp["colleague_respect"]
+        emp_opinion = total_respect_rating / len(employee_data)
+        total_inclusion_rating = 0
+        for emp in employee_data:
+            total_inclusion_rating += emp["inclusion"]
+        emp_social = total_inclusion_rating / len(employee_data)
+        report["employee_inclusion"] = (emp_opinion + emp_social) / 2
         
         # Diversity Index
         diversity_index_score = ((company_data["male_employees"] / company_data["total_employees"]) * 100 + 
@@ -77,7 +104,6 @@ def calculate_esg_score(company_data, employee_data):
                            (company_data["lgbtq_employees"] / company_data["total_employees"]) * 100 + 
                            (company_data["differently_abled_employees"] / company_data["total_employees"]) * 100) / 4
         
-        # Final Adjusted Score
         report["diversity_index"] = max(1, min(10, math.ceil((diversity_index_score / 100) * 9 + 1)))
     
         
@@ -124,7 +150,7 @@ def calculate_esg_score(company_data, employee_data):
         
         # Job related Average of Training Opportunities
         
-    average_training_opportunities = sum(training_opportunities) / len(training_opportunities)
+        average_training_opportunities = sum(training_opportunities) / len(training_opportunities)
         
         # Mental Wellbeing and Non-Job-Related Training
         total_employee_training = 0 
@@ -132,16 +158,30 @@ def calculate_esg_score(company_data, employee_data):
             total_employee_training += emp["training_opportunities"]
         employee_training_opportunities = total_employee_training / len(employee_data)
         report["wellbeing_training_index"] = (employee_health + employee_training_opportunities) / 2
-        
+        ##########################################################################################################################################
+        ##########################################################################################################################################
+        ##########################################################################################################################################
         #Governance
+        #stakeholder_engagment
+        #NGOs 
+        report["NGO_statement"] = company_answers["NGO_statement"]
+        company_answers["social_impact_partnerships"] = company_answers["social_impact_partnerships"]
+        
+         # 2. Supply chain ESG
+        report["supplier_retention_score"] = (company_data["remaining_suppliers"] / company_date["all_time_suppliers"]) * 10
+        report["supply_statement"] = company_data["supply_statement"]
+        
+        #Investor/Shareholder Feedback
+        report["Investor/Shareholder_statement"] = company_data["Investor/Shareholder_statement"]
+
+        #Bussines Partner 
+        report["Business Partners_statement"] = company_data["Business Partners_statement"]
         # 1. Hiring Cost Formula
         report["hiring_cost"] = (company_data["total_employees"] * report["turnover_rate"] * average_departure_cost) + (
             hiring_manager_cost + average_hours_required + (percentage_salary_spent_on_development * hiring_manager_cost)
         )
         
-        # 2. Supplier Retention Score
-        report["supplier_retention_score"] = (company_data["remaining_suppliers"] / ["all_time_suppliers"]) * 10
-        
+       
         # 3. Sector Growth Rating
         sector_ratings = {
             "MICROCAP 250": 9.82,
@@ -157,6 +197,7 @@ def calculate_esg_score(company_data, employee_data):
             "Consumer Durables": 9.95,
             "Oil and Gas": 5.45
         }
+        
         def get_sector_value(company_data["industry"]):
             # If industry is "Other", use "NIFTY MICROCAP 250"
             if industry == "Other":
@@ -164,14 +205,54 @@ def calculate_esg_score(company_data, employee_data):
             # If industry exists in the sector_ratings dictionary, return its value
             else industry in sector_ratings:
                 return sector_ratings[industry]
-        company_report("Sector growth Rating") = def(get_sector_value)
+        report["Sector growth Rating"] = def(get_sector_value)
         # 4. Workplace Average
         total_health_wellbeing = 0 
         for emp in employee_data:
             total_health_wellbeing += emp["workplace_rating"]
             physical_workplace_rating = total_health_wellbeing / len(employee_data)
         report["workplace_average"] = (company_data["location_rating"] + physical_workplace_rating) / 2
+       
+        #Business Awards and Recognition
+        report["awards_received"] = company_data["awards_received"]
         
+        #Compliance certifications
+        report["compliance_certifications"] = company_data["compliance_certifications"]
+
+        #Anti Corruption
+        selected_anti = len(company_data["Anti_Corruption"])
+        report["Anti_Corruption_score"] = (selected_anti / 10) * 10
+
+        #Volatility 
+        sector_ratings_volatility = {
+            "MICROCAP 250": 3.29,
+            "Auto": 4.74,
+            "Financial Services": 4.83,
+            "FMCG": 4.46,
+            "Healthcare": 3.82,
+            "IT": 1,
+            "Media": 1,
+            "Metal": 2.74,
+            "Pharma": 3.73,
+            "Realty": 2.25,
+            "Consumer Durables": 5.12,
+            "Oil and Gas": 4.54
+        }
+        def get_volatility_value(company_data["industry"]):
+            # If industry is "Other", use "NIFTY MICROCAP 250"
+            if industry == "Other":
+                return sector_ratings_volatility["MICROCAP 250"]
+            # If industry exists in the sector_ratings dictionary, return its value
+            else industry in sector_ratings_volatility:
+                return sector_ratings_volatility[industry]
+        #Infomation Flow 
+
+        
+        #GeoPoli Risk 
+        report["Geopolitical_Risk_Index"] = 6.6 
+        report["India_News_sentiment"] = 5.09
+        report["India_Google_Uncertainty"] = 6.08
+        report["Market_Uncertainty"] = 5.78
         # 5. Organizational Structure
         total_score = sum(role_scores[role] for role in selection)
         if 25 <= total_score <= 28:
@@ -186,3 +267,14 @@ def calculate_esg_score(company_data, employee_data):
             sl.write("Undefined Structure")
         
         sl.write("Thank you for completing the ESG Diagnosis Survey. Your responses have been recorded.")
+
+Strategic Risk
+Compliance and Regulatory Risk
+Financial Risk
+Operational Risk
+
+
+return report
+
+   
+    if sl.form_submit_button("Submit"):
