@@ -121,11 +121,11 @@ def run():
     )
     company_answers["Investor/Shareholder_statement"] = st.text_area("How does your company ensure that its investments and shareholder activities align with sustainable environmental, social, and governance (ESG) practices, and what steps are taken to support long-term responsible growth?")
     company_answers["Business Partners_statement"] = st.text_area("What measures does your company take to ensure that its business partnerships align with sustainable practices across environmental, social, and governance (ESG) aspects, and how do you assess their commitment to these values?")
-    company_answers["Non-profit/NGO Partners"] = st.text_area("In what ways does your company collaborate with non-profit and NGO partners to foster sustainability, and how do you ensure these partnerships contribute positively to environmental, social, and governance (ESG) objectives?")
+    company_answers["supply_statement"] = st.text_area("How does your company ensure sustainability across its supply chain, and what specific measures are taken to align with environmental, social, and governance (ESG) principles?")
 
 
     # Social and Community Engagement
-    company_answers["ngo_statement"] = st.text_area("How does your company ensure sustainability across its supply chain, and what specific measures are taken to align with environmental, social, and governance (ESG) principles?")
+    company_answers["NGO_statement"] = st.text_area("In what ways does your company collaborate with non-profit and NGO partners to foster sustainability, and how do you ensure these partnerships contribute positively to environmental, social, and governance (ESG) objectives?")
     company_answers["social_impact_partnerships"] = st.text_area(
         "Has your organization partnered with Social impact organizations, NGOs, or charities? If so, please list")
 
@@ -133,8 +133,8 @@ def run():
         "Rate your confidence in workplace health and safety measures (1-10):", 1, 10
     )
     company_answers["compliance_certifications"] = st.text_area("List any Compliance certifications received by the business")
-    company_answers["awards_received"] = st.file_uploader(
-        "List any Awards received by the business, upload pictures", type=["jpg", "jpeg", "png", "pdf"]
+    company_answers["awards_received"] = st.text_area(
+        "List any Awards received by the business, upload pictures"
     )
     company_answers["selected_sdgs"] = st.multiselect(
         "Choose 3 SDGs that relate best to your organization", [
