@@ -71,7 +71,7 @@ company_answers["Anti_Corruption"] = st.multiselect("Which of the following anti
 
     # Financial and Operational Metrics
     company_answers["monthly_water_bill"] = st.number_input("What is the monthly Water Bill?", min_value=0.0, step=0.01)
-    company_answers["monthly_electricity_bill"] = st.number_input("What is the monthly Electricity bill?", min_value=0.0, step=0.01)
+    company_answers["monthly_electricity_bill"] = st.number_input("What is the monthly Electricity consumption (KwH)?", min_value=0.0, step=0.01)
     company_answers["monthly_profit"] = st.number_input("Monthly Profit", min_value=0.0, step=0.01)
     company_answers["monthly_labor_costs"] = st.number_input("Monthly Labor Costs", min_value=0.0, step=0.01)
     company_answers["monthly_land_costs"] = st.number_input(
