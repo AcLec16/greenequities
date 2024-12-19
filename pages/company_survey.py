@@ -30,7 +30,7 @@ def run():
     ]
 )
     company_answers["health_practices"] = st.multiselect(
-    "Which of the following health practices does your business currently implement?",
+    "Which of the following health practices does your business currently implement? Select all that apply.",
     [
         "Comprehensive health and safety policies",
         "Mental health support resources",
@@ -44,7 +44,19 @@ def run():
         "Mechanisms for employee feedback on health and wellness",
     ]
 )
-
+company_answers["Anti_Corruption"] = st.multiselect("Which of the following anti-corruption measures does your business currently implement? Select all that apply." ,
+    [
+        "Formal Code of Ethics and Anti-Corruption Policy",
+        "Secure Whistleblower Mechanism",
+        "Third-Party Due Diligence Process",
+        "Regular Anti-Corruption Training for Employees",
+        "Clear Gift and Hospitality Guidelines",
+        "Conflict of Interest Disclosure System",
+        "Transparent Financial Record-Keeping",
+        "Regular (Quarterly or Annually) Internal Audits for Corruption Risks",
+        "Anti-Corruption Clauses in Vendor/Partner Contracts",
+        "Leadership Commitment to Ethical Standards"
+    ]                                                
 )
     company_answers["csr_person"] = st.radio(
     "Does the entity have a specified Committee of the Board/Director responsible for corporate responsibility-related activities?", 
@@ -129,9 +141,7 @@ def run():
     company_answers["social_impact_partnerships"] = st.text_area(
         "Has your organization partnered with Social impact organizations, NGOs, or charities? If so, please list")
 
-    company_answers["health_confidence"] = st.slider(
-        "Rate your confidence in workplace health and safety measures (1-10):", 1, 10
-    )
+
     company_answers["compliance_certifications"] = st.text_area("List any Compliance certifications received by the business")
     company_answers["awards_received"] = st.text_area(
         "List any Awards received by the business, upload pictures"
