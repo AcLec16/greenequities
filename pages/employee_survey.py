@@ -21,7 +21,7 @@ def run():
         employee_answers["informed_by_management"] = st.slider("I feel well informed by colleagues and upper management. (1-10)", 1, 10)
         employee_answers["work_travel_hours_year"] = st.number_input("How many hours do you fly due to work yearly?", min_value=0, step=1)
         employee_answers["training_opportunities"] = st.slider("Rate the training you receive not only related to your job but opportunities that enhance your lifestyle, such as financial literacy or wellbeing courses. (1-10)", 1, 10)
-        employee_answers["information_flow_time"] = st.number_input("On average, how long does it take for information to flow from the receiver to the required employees? (mins)", min_value=0, step=1)
+        employee_answers["information_flow_time"] = st.number_input("On average, how long does it take for information to flow from the receiver to the required employees? (hours, ie. 0.5, 1...)", min_value=0, step=1)
         employee_answers["company_tenure"] = st.number_input("How long have you been in the company? (in years)", min_value=0, step=1)
         employee_answers["workplace_rating"] = st.slider("Rate your physical workplace (1-10), considering seating, lighting, cleanliness, technology, and equipment.", 1, 10)
         employee_answers["executive_tenure"] = st.number_input("How long have you been in the company (as an Executive)? (in years)", min_value=0, step=1)
