@@ -10,7 +10,12 @@ def calculate_esg_score(company_data, employee_data):
         VRE_denominator = company_data["monthly_electricity_bill"] + company_data["monthly_water_bill"] + company_data["monthly_salary_costs"] + company_data["monthly_land_costs"] + company_data["monthly_raw_material_costs"]
         report["value_based_resource_efficiency"] = company_data["total_yearly_revenue"] /  VRE_denominator
         report["value_based_resource_efficiency_s"] = (f"Value-Based Resource Efficiency (value_based_resource_efficiency) for every ₹1 of stressed resources: {value_based_resource_efficiency:.2f}")
+
+        #sustainability_statement
+        report["sustainability_stance"] = company_data["company_stance_sustainability"]
+        
         # Green Product Revenue Percentage
+        
         report["green_product_revenue_percentage"] = company_data["green_product_revenue"] / company_data["total_yearly_revenue"]
         
         # Waste Generator Score
@@ -155,20 +160,25 @@ def calculate_esg_score(company_data, employee_data):
         # Employee Separation Rate
         report["turnover_rate"] = (company_data["employee_separations"] / company_data["total_employees"]) * 100
         
-        # Job related Average of Training Opportunities
-        
-        average_training_opportunities = sum(training_opportunities) / len(training_opportunities) ######??????
-        
         # Mental Wellbeing and Non-Job-Related Training
         total_employee_training = 0 
         for emp in employee_data:
             total_employee_training += emp["training_opportunities"]
         employee_training_opportunities = total_employee_training / len(employee_data)
         report["wellbeing_training_index"] = (employee_health + employee_training_opportunities) / 2
+        
+
+ 
+        
+
+    
+    
         ##########################################################################################################################################
         ##########################################################################################################################################
         #Governance
-        #stakeholder_engagment
+        #Stakeholder_engagment
+        report["Customer_feedbacks"] = company_answers["customer_feedback_score"]
+        report["customer_statement"] = company_answers["customer_feedback"]
         #NGOs 
         report["NGO_statement"] = company_answers["NGO_statement"]
         company_answers["social_impact_partnerships"] = company_answers["social_impact_partnerships"]
@@ -180,8 +190,6 @@ def calculate_esg_score(company_data, employee_data):
         #Investor/Shareholder Feedback
         report["Investor/Shareholder_statement"] = company_data["Investor/Shareholder_statement"]
 
-        #Bussines Partner 
-        report["Business Partners_statement"] = company_data["Business Partners_statement"]
         # 1. Hiring Cost Formula
         report["hiring_cost"] = (company_data["total_employees"] * report["turnover_rate"] * average_departure_cost) + (
             hiring_manager_cost + average_hours_required + (percentage_salary_spent_on_development * hiring_manager_cost)
@@ -304,10 +312,20 @@ def calculate_esg_score(company_data, employee_data):
         
         sl.write("Thank you for completing the ESG Diagnosis Survey. Your responses have been recorded.")
 
-Strategic Risk
-Compliance and Regulatory Risk
-Financial Risk
-Operational Risk
+#Strategic Risk
+
+#Compliance and Regulatory Risk
+
+#Financial Risk
+
+#Operational Risk 
+
+#Total Environment
+
+#Total social
+
+#Total Governance 
+
 
 
 return report
