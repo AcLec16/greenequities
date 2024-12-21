@@ -12,7 +12,7 @@ def run():
 
     company_answers["company_name"] = st.text_input("Company name") 
     company_answers["form_filler"] = st.text_input("Name of person responsible for filling out this form")
-    company_answers["current_financial_year_month"] = st.text_input("Current data YYYY/MM/DD")
+    company_answers["current_financial_year_month"] = st.text_input("Current date YYYY/MM/DD")
     company_answers["main_business_activity"] = st.text_area("Description of main business activity (product/service)")
     company_answers["website"] = st.text_input("Website")
     company_answers["email_address"] = st.text_input("Email address")
