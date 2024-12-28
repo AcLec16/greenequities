@@ -433,7 +433,7 @@ def calculate_esg_score(company_data, employee_data):
     report["cooperate_stucture"] = structure_type
         
     #profit to revenue ratio 
-    profit_to_revenue_ratio = (cost_to_company_data["monthly_profit"] / company_data["total_yearly_revenue"]) * 100
+    profit_to_revenue_ratio = (company_data["monthly_profit"] / company_data["total_yearly_revenue"]) * 100
     if profit_to_revenue_ratio >= 20:
         profit_rating = 10
     elif profit_to_revenue_ratio >= 15:
@@ -488,76 +488,74 @@ def calculate_esg_score(company_data, employee_data):
             "Dadar": 5
         }
         custom_location = company_data["custom_location"]
-        if selected_location == "Other":
-            custom_location = selected_location 
-                return location_ratings["Khar"]
+        if selected_locations == "Other":
+            custom_location = selected_locations 
+            return location_ratings["Khar"]
             # If industry exists in the sector_ratings dictionary, return its value
         elif selected_locations in location_ratings:
                 return location_ratings[selected_locations]
-            location_rating = location_ratings
-            report["buissnes_location_rating"] = location_rating            #??????????????????????
+        location_rating = location_ratings
+        report["buissnes_location_rating"] = location_rating            #??????????????????????
 #Strategic Risk
-          Strategic_Risk =  sector_ratings[industry] +  (Customer_feedbacks * 2) + vbre + leader_confidence + informed_rating
-          if Strategic_Risk >= 70:
+        strategic_risk =  get_sector_value(company_data["industry"]) +  (Customer_feedbacks * 2) + vbre + leader_confidence + informed_rating
+        if strategic_risk >= 70:
             risk_level_strat = "high probability"
-            elif Strategic_Risk >= 40:
+        elif strategic_risk >= 40:
             risk_level_strat = "medium probability"
-            else:
+        else:
             risk_level_strat = "low probability"             #??????????????/
         
-        report["Strategic_Risk"] = (f"Strategic Risk stands at {Strategic_Risk:.2f}% putting you at a {risk_level_strat} of risk in this area.")
+        report["strategic_risk"] = (f"Strategic Risk stands at {strategic_risk:.2f}% putting you at a {risk_level_strat} of risk in this area.")
 
 #Compliance and Regulatory Risk
-
-          Compliance_and_Regulatory_Risk = ((health_confidence - 1) / 9) + ((enviro_comp - 1) / 9) + ((employee_job_related_training - 1) / 9) + ((employee_health - 1) / 9) + ((emp_satisfaction - 1) / 9) 
-                + ((average_salary_rating - 1) / 9) + ((selected_data_laws - 1) / 9)) * 100 
-            if Compliance_and_Regulatory_Risk >= 70:
+        Compliance_and_Regulatory_Risk = ((health_confidence - 1) / 9) + ((enviro_comp - 1) / 9) + ((employee_job_related_training - 1) / 9) + ((employee_health - 1) / 9) + ((emp_satisfaction - 1) / 9) 
+        + ((average_salary_rating - 1) / 9) + ((selected_data_laws - 1) / 9) * 100 
+        if Compliance_and_Regulatory_Risk >= 70:
             risk_level = "high probability"
-            elif Compliance_and_Regulatory_Risk >= 40:
+        elif Compliance_and_Regulatory_Risk >= 40:
             risk_level = "medium probability"
-            else:
+        else:
             risk_level = "low probability"
         
         report["Compliance_and_Regulatory_Risk"] = (f"Compliance and Regulatory Risk stands at {Compliance_and_Regulatory_Risk:.2f}% putting you at a {risk_level} of risk in this area.")
         #Financial Risk
-        Financial_risk = ((sector_ratings_volatility[industry] - 1) / 9) + ((sector_ratings[industry] - 1) / 9) +  ((profit_rating - 1) / 9) / 3 
+        Financial_risk = ((get_volatility_value(company_data["industry"]) - 1) / 9) + ((get_sector_value(company_data["industry"]) - 1) / 9) +  ((profit_rating - 1) / 9) / 3 
         if  Financial_risk >= 70:
             risk_level_fin = "high probability"
-            elif Financial_risk >= 40:
+        elif Financial_risk >= 40:
             risk_level_fin = "medium probability"
-            else:
+        else:
             risk_level_fin = "low probability"
         
         report["Financial_Risk"] = (f"Financial Risk stands at {Financial_risk:.2f}% putting you at a {risk_level_fin} of risk in this area.")
         
         #Operational Risk 
-        Operational_Risk = ((infomation_flow_efficency - 1) / 9) + ((supplier_retention_score - 1) / 9) + (0.61) + ((location_rating - 1 / 9) + ((selected_anti - 1 / 9)
+        Operational_Risk = ((infomation_flow_efficency - 1) / 9) + ((supplier_retention_score - 1) / 9) + (0.61) + ((location_rating - 1) / 9) + ((selected_anti - 1) / 9)
         if Operational_Risk >= 70:
             risk_level_opp = "high probability"
-            elif Operational_Risk >= 40:
+        elif Operational_Risk >= 40:
             risk_level_opp = "medium probability"
-            else:
+        else:
             risk_level_opp = "low probability"
         
         report["Operational_Risk"] = (f"Compliance and Regulatory Risk stands at {Operational_Risk:.2f}% putting you at a {risk_level_opp} of risk in this area.")
 
         #Total Environment
-            (vbre + enviro_comp + waste_generator_score + green_energy_score + emissions_rating + water_usage_rating + flight_emissions_rating + travel_emissions_rating) / 8
+        (vbre + enviro_comp + waste_generator_score + green_energy_score + emissions_rating + water_usage_rating + flight_emissions_rating + travel_emissions_rating) / 8
 
         
         #Total social
-            (leader_confidence + employee_inclusion + average_salary_rating + diversity_index + (work_hours_rating)(2) 
+        (leader_confidence + employee_inclusion + average_salary_rating + diversity_index + (work_hours_rating)(2) 
              + tenure_promotion_index + health_satisfaction_index + wellbeing_training_index + employee_job_related_training + turnover_rating + wellbeing_training_index + average_culture_satisfaction ) / 12
 
 
         
         #Total Governance ##????????????????
 
-            (location_rating + supplier_retention_score + get_volatility_value(company_data["industry"]) + sector_ratings[industry] + profit_rating + infomation_flow_efficency + structure_rating
+        (location_rating + supplier_retention_score + get_volatility_value(company_data["industry"]) + get_sector_value(company_data["industry"]) + profit_rating + infomation_flow_efficency + structure_rating
              + selected_data_laws + selected_anti + (Customer_feedbacks * 2) + physical_workplace_rating + 5.88) / 12
 
 
 return report
 
-   
     if sl.form_submit_button("Submit"):
