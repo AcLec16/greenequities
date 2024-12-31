@@ -25,8 +25,9 @@ def run():
     ["Bengaluru", "Delhi", "Hyderabad" "Worli", "Malabar & Cumballa Hill", "Juhu", "Bandra Kurla Complex", "Nariman Point", 
      "Andheri", "Lower Parel", "Parel", "Bandra", "Santacruz", "Ghatkopar", "Thane", 
      "Goregaon", "Byculla", "Fort", "Borivali", "Jogeshwari", "Khar", "Malad", 
-     "Vile Parle", "Chembur", "Dharavi", "Colaba", "Dadar"]
-)
+     "Vile Parle", "Chembur", "Dharavi", "Colaba", "Dadar"])
+    
+    company_answers["custom_location"] = st.text_input("Specify other location")
     company_answers["industry"] = st.radio(
     "Select Industry:",
     [
@@ -35,7 +36,7 @@ def run():
         "Oil and Gas", "Other"
     ]
 )
-     company_answers["csr_person"] = st.radio(
+    company_answers["csr_person"] = st.radio(
     "Does the entity have a specified Committee of the Board/Director responsible for corporate responsibility-related activities?", 
     ("Yes", "No"))
     
@@ -50,8 +51,7 @@ def run():
         "What is your company's primary waste generator:", ["Plastic", "Food Waste", 
         "Electronic Waste (e-waste)", "Fabric Scraps", "Damaged or Expired Goods", "Scrap Metals", "Paper Waste"]
     )
-    company_answers["waste_stance"] = st.text_area("Briefly describe the waste management practices adopted in your establishments. Describe the strategy adopted by your company to reduce usage of hazardous and toxic chemicals in your products and processes and the practices
-    adopted to manage such wastes")
+    company_answers["waste_stance"] = st.text_area("Briefly describe the waste management practices adopted in your establishments. Describe the strategy adopted by your company to reduce usage of hazardous and toxic chemicals in your products and processes and the practices adopted to manage such wastes")
 
     company_answers["compliant_laws"] = st.multiselect(
         "Is your entity compliant with the following environmental laws? Select all that apply:",
@@ -73,10 +73,9 @@ def run():
         "Business’ current stance on environmental sustainability (100 words or less)"
     )
     company_answers["clean_tech_initiatives"] = st.text_area(
-        "If the entity has undertaken any specific initiatives or used innovative technology or solutions to improve resource
+        """If the entity has undertaken any specific initiatives or used innovative technology or solutions to improve resource
     efficiency, or reduce impact due to emissions/effluent discharge/waste generated, please provide details of the same
-    as well as outcome of such initiatives:"
-    )
+    as well as outcome of such initiatives:""")
     
     # Social Metrics
 
@@ -113,7 +112,7 @@ def run():
     company_answers["social_impact_partnerships"] = st.text_area(
         "Has your organization partnered with Social impact organizations, NGOs, or charities? If so, please list")
 
-     company_answers["selected_sdgs"] = st.multiselect(
+    company_answers["selected_sdgs"] = st.multiselect(
         "Choose 3 SDGs that relate best to your organization", [
             "No Poverty", "Zero Hunger", "Good Health and Well-Being", "Quality Education",
             "Gender Equality", "Clean Water and Sanitation", "Affordable and Clean Energy",
