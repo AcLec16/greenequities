@@ -195,7 +195,7 @@ def calculate_esg_score(company_data, employee_data):
     total_exec_tenure = 0
     num_executives = 0
     for emp in employee_data:
-        if emp["executice_tenure"] > 0:
+        if emp["executive_tenure"] > 0:
             total_exec_tenure += emp["executive_tenure"]
             num_executives+=1
     average_tenure_executives =  total_exec_tenure / num_executives
