@@ -190,13 +190,13 @@ def calculate_esg_score(company_data, employee_data):
     # Tenure-Based Promotion Index
     total_emp_tenure = 0
     for emp in employee_data:
-        total_emp_tenure += employee_data["company_tenure"]   
+        total_emp_tenure += emp["company_tenure"]   
     average_tenure_employees = total_emp_tenure / len(employee_data)
     total_exec_tenure = 0
     num_executives = 0
     for emp in employee_data:
-        if employee_data["executice_tenure"] > 0:
-            total_exec_tenure += employee_data["executive_tenure"]
+        if emp["executice_tenure"] > 0:
+            total_exec_tenure += emp["executive_tenure"]
             num_executives+=1
     average_tenure_executives =  total_exec_tenure / num_executives
     tenure_promotion_index = ((average_tenure_employees / average_tenure_executives) * 
