@@ -311,7 +311,7 @@ def calculate_esg_score(company_data, employee_data):
     for emp in employee_data:
         total_health_wellbeing += emp["workplace_rating"]
     physical_workplace_rating = total_health_wellbeing / len(employee_data)
-    report["workplace_average"] = (company_data["location_rating"] + physical_workplace_rating) / 2
+   
        
     #Business Awards and Recognition
     report["awards_received"] = company_data["awards_received"]
@@ -492,6 +492,7 @@ def calculate_esg_score(company_data, employee_data):
         report["selected_locations"] = company_data["custom_locations"]
     else:
         report["selected_locations"] = company_data["selected_locations"]
+        report["workplace_average"] = (location_rating + physical_workplace_rating) / 2
 
     #Strategic Risk
     strategic_risk =  ((get_sector_value(company_data["industry"]) - 1 / 9)) +  (((Customer_feedbacks * 2) - 1 / 9)) + ((vbre - 1) / 9) + ((leader_confidence - 1) / 9) + ((informed_rating - 1) / 9)
