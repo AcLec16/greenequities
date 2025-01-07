@@ -484,7 +484,7 @@ def calculate_esg_score(company_data, employee_data):
         if selected_locations == "Other":
             return location_ratings["Khar"]
             # If industry exists in the sector_ratings dictionary, return its value
-        elif selected_locations in location_ratings:
+        elif selected_locations in location_ratings.keys():
                 return location_ratings[selected_locations]
     location_rating = get_location_value(company_data["selected_locations"])
     report["buissnes_location_rating"] = location_rating
