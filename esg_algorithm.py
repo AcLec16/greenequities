@@ -1,3 +1,4 @@
+
 import math
 
 def calculate_esg_score(company_data, employee_data):
@@ -241,6 +242,7 @@ def calculate_esg_score(company_data, employee_data):
     # Example usage
     turnover_rate = (company_data["employee_separations"] / company_data["total_employees"]) * 100
     turnover_rating = calculate_turnover_rating(turnover_rate)
+    report["turnover_rating"] = turnover_rating
         
     # Mental Wellbeing and Non-Job-Related Training
     total_employee_training = 0 
@@ -281,8 +283,7 @@ def calculate_esg_score(company_data, employee_data):
     
     #Investor/Shareholder Feedback
     report["Investor/Shareholder_statement"] = company_data["Investor/Shareholder_statement"]
-        
-       
+    
     # 3. Sector Growth Rating
     
     def get_sector_value(industry): 
@@ -496,7 +497,7 @@ def calculate_esg_score(company_data, employee_data):
         report["selected_locations"] = company_data["selected_locations"]
 
     #Strategic Risk
-    strategic_risk =  get_sector_value(company_data["industry"]) +  (Customer_feedbacks * 2) + vbre + leader_confidence + informed_rating
+    strategic_risk =  ((get_sector_value(company_data["industry"]) - 1 / 9)) +  (((Customer_feedbacks * 2) - 1 / 9)) + ((vbre - 1) / 9) + ((leader_confidence - 1) / 9) + ((informed_rating - 1) / 9)
     if strategic_risk >= 70:
         risk_level_strat = "high probability"
     elif strategic_risk >= 40:

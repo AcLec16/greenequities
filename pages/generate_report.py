@@ -14,16 +14,9 @@ def run():
                 company_data = get_company_data(company_code)
                 employee_data = get_employee_data(company_code)
                 
-                # report = calculate_esg_score(company_data, employee_data)
+                report = calculate_esg_score(company_data, employee_data)
                 st.write("**ESG Report**")
-                # st.json(company_data)
-                # st.json(employee_data)
-                # a = company_data["male_employees"]/company_data["total_employees"]
-                # total_salary = 0
-                # for emp in employee_data:
-                #     total_salary = total_salary + emp["salary"]
-                # print(total_salary)
-                # print(a)
+                st.json(report)
 
         else:
             st.error(f"Not enough employees filled the survey! Number of Employees Filled: {num_emp}")
