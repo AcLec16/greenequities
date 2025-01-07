@@ -55,9 +55,7 @@ def calculate_esg_score(company_data, employee_data):
     # Green Product Revenue Percentage
     report["green_product_revenue_percentage"] = company_data["green_product_revenue"] / company_data["total_yearly_revenue"]
         
-    # Waste Generator Score
-    waste_generator_score = (1 / company_data["primary_waste_generator"]) * 10
-    report["waste_generator_score"] = waste_generator_score
+    
 
     # Green Energy Score
     green_energy_score = (company_data["green_energy"] / company_data["total_energy"]) * 10
@@ -121,7 +119,6 @@ def calculate_esg_score(company_data, employee_data):
         return waste_values[primary_waste_generator]
     
     report["waste_value"] = get_waste_value(company_data["waste_value"])
-        
 
     #SDGs
     report["selected_sdgs"] = company_data["selected_sdgs"]
