@@ -48,9 +48,19 @@ def run():
     company_answers["total_energy"] = st.number_input("Total Energy Used per month (KwH)", min_value=0.0, step=0.01)
 
     company_answers["primary_waste_generator"] = st.radio(
-        "What is your company's primary waste generator:", ["Plastic", "Food Waste", 
-        "Electronic Waste (e-waste)", "Fabric Scraps", "Damaged or Expired Goods", "Scrap Metals", "Paper Waste"]
+        "What is your company's primary waste generator:", ["Plastic Waste",
+            "Food Waste",
+            "Electronic Waste (e-waste)",
+            "Fabric Scraps",
+            "Scrap Metals",
+            "Paper Waste",
+            "Glass Waste",
+            "Hazardous Chemicals or Substances",
+            "Construction and Demolition Debris",
+            "Packaging Waste"]
+
     )
+
     company_answers["waste_stance"] = st.text_area("Briefly describe the waste management practices adopted in your establishments. Describe the strategy adopted by your company to reduce usage of hazardous and toxic chemicals in your products and processes and the practices adopted to manage such wastes")
 
     company_answers["compliant_laws"] = st.multiselect(
