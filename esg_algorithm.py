@@ -118,7 +118,7 @@ def calculate_esg_score(company_data, employee_data):
         }
         return waste_values[primary_waste_generator]
     
-    report["waste_value"] = get_waste_value(company_data["waste_value"])
+    report["waste_value"] = get_waste_value(company_data["primary_waste_generator"])
 
     #SDGs
     report["selected_sdgs"] = company_data["selected_sdgs"]
