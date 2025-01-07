@@ -95,6 +95,7 @@ def run():
     company_answers["female_employees"] = st.number_input("Number of Female employees", min_value=0, step=1)
     company_answers["lgbtq_employees"] = st.number_input("Number of LGBTQ+ Employees", min_value=0, step=1)
     company_answers["differently_abled_workers"] = st.number_input("Differently abled workers", min_value=0, step=1)
+    company_answers["internal_promotions"] = st.number_input("Number of internal promotions over the last 12 months")
 
     company_answers["employee_separations"] = st.number_input("Number of employee separations over the past 2 years?", min_value=0, step=1)
     company_answers["customer_feedback_score"] = st.slider(
