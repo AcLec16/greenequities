@@ -544,8 +544,8 @@ def calculate_esg_score(company_data, employee_data):
     total_environment = (vbre_rating + enviro_comp + waste_value + green_energy_score + emissions_rating + water_usage_rating + flight_emissions_rating + travel_emissions_rating) / 8
 
     #Total social
-    total_social = (leader_confidence + employee_inclusion + average_salary_rating + diversity_index + (work_hours_rating)(2) 
-         + tenure_promotion_index + health_satisfaction_index + wellbeing_training_index + employee_job_related_training + turnover_rating + wellbeing_training_index + average_culture_satisfaction ) / 12
+    total_social = (leader_confidence + employee_inclusion + average_salary_rating + diversity_index + (work_hours_rating)*2
+         + tenure_promotion_index + health_satisfaction_index + wellbeing_training_index + employee_job_related_training + turnover_rating + average_culture_satisfaction ) / 11
    
     #Total Governance
     total_governance = (location_rating + supplier_retention_score + get_volatility_value(company_data["industry"]) + get_sector_value(company_data["industry"]) + profit_rating + infomation_flow_efficency + structure_rating
