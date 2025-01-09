@@ -118,8 +118,8 @@ def calculate_esg_score(company_data, employee_data):
         }
         return waste_values[primary_waste_generator]
     
-    report["waste_value"] = get_waste_value(company_data["primary_waste_generator"])
-
+    waste_value = get_waste_value(company_data["primary_waste_generator"])
+    report["waste_value"] = waste_value
     #SDGs
     report["selected_sdgs"] = company_data["selected_sdgs"]
 
@@ -541,7 +541,7 @@ def calculate_esg_score(company_data, employee_data):
     report["Operational_Risk"] = (f"Compliance and Regulatory Risk stands at {Operational_Risk:.2f}% putting you at a {risk_level_opp} of risk in this area.")
 
     #Total Environment
-    total_environment = (vbre_rating + enviro_comp + waste_generator_score + green_energy_score + emissions_rating + water_usage_rating + flight_emissions_rating + travel_emissions_rating) / 8
+    total_environment = (vbre_rating + enviro_comp + waste_value + green_energy_score + emissions_rating + water_usage_rating + flight_emissions_rating + travel_emissions_rating) / 8
 
     #Total social
     total_social = (leader_confidence + employee_inclusion + average_salary_rating + diversity_index + (work_hours_rating)(2) 
