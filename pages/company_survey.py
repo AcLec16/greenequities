@@ -20,7 +20,7 @@ def run():
     company_answers["social_media"] = st.text_input("Social Media")
     company_answers["mission_statement"] = st.text_area("Mission statement")
     company_answers["year_of_opening"] = st.number_input("Year of Opening", min_value=1900, max_value=2100, step=1)
-    company_answers["selected_locations"] = st.multiselect(
+    company_answers["selected_locations"] = st.selectbox(
     "Select Office Location:",
     ["Bengaluru", "Delhi", "Hyderabad" "Worli", "Malabar & Cumballa Hill", "Juhu", "Bandra Kurla Complex", "Nariman Point", 
      "Andheri", "Lower Parel", "Parel", "Bandra", "Santacruz", "Ghatkopar", "Thane", 
