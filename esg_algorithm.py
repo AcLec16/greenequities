@@ -53,9 +53,9 @@ def calculate_esg_score(company_data, employee_data):
     report["sustainability_stance"] = company_data["company_stance_sustainability"]
         
     # Green Product Revenue Percentage
-    report["green_product_revenue_percentage"] = company_data["green_product_revenue"] / company_data["total_yearly_revenue"]
+    report["green_product_revenue_percentage"] = (company_data["green_product_revenue"] / company_data["total_yearly_revenue"])* 100
         
-    
+    total_employees = company_data["total_employees", 1]
 
     # Green Energy Score
     green_energy_score = (company_data["green_energy"] / company_data["total_energy"]) * 10
@@ -63,13 +63,18 @@ def calculate_esg_score(company_data, employee_data):
                 
     # Annual Electricity Emissions
     annual_electricity_emissions = kwh_electricity * 0.85 * 12
-    report["phone_charges"] = (kwh_electricity * 1000) * 5
-    emissions_rating = 10 - ((annual_electricity_emissions - 871.25 * company_data["total_employees"]) / (403.75 * company_data["total_employees"])) * 9
+    phone_charges = (kwh_electricity * 1000) * 5
+    report["phone_charges"] = f"The amount of phones charged, based on the electricity usage of {kwh_electricity} kWh, amount to {phone_charges:.2f}."
+    base_rating = ((annual_electricity_emissions - 871.25) * total_employees) / (403.75 * total_employees)
+    emissions_rating = 10 - (base_rating * 9)
     report["emissions_rating"] = emissions_rating
     
     # Water Usage Rating
-    water_usage_rating = 10 - ((company_data["monthly_water_bill"] / 0.05 - 62.85 * company_data["total_employees"]) / (25.7 * company_data["total_employees"])) * 9
-    report["bath_tubs_full"] = (company_data["monthly_water_bill"] / 0.05) / 302
+    monthly_water_bill = company_data["monthly_water_bill", 0]
+    base_value = ((monthly_water_bill / 0.05) - 62.85 * total_employees) / (25.7 * total_employees)
+    water_usage_rating = 10 - (base_value * 9)
+    bath_tubs_full= (monthly_water_bill / 0.05) / 302
+    report["bath_tubs_full"] = f"The monthly water bill equates to approximately {bath_tubs_full:.2f} bath tubs full of water."
     report["water_usage_rating"] = water_usage_rating
     
     # Flight Emissions Rating
@@ -77,11 +82,11 @@ def calculate_esg_score(company_data, employee_data):
     for emp in employee_data:
         total_flight_time += emp["work_travel_hours_year"]
     flight_time_per_employee = total_flight_time / len(employee_data)
-    flight_emissions = company_data["total_employees"] * flight_time_per_employee * 48 * 3.1
-    flight_emissions_rating = 10 - ((flight_emissions - 119398.2466 * company_data["total_employees"]) / (255136.7094 * company_data["total_employees"])) * 9
+    flight_emissions = total_employees * flight_time_per_employee * 48 * 3.1
+    flight_emissions_rating = 10 - ((flight_emissions - 119398.2466 * total_employees) / (255136.7094 * total_employees)) * 9
     report["flight_emissions_rating"] = flight_emissions_rating
-    distance_to_the_moon = (company_data["total_employees"] * flight_time_per_employee * 835) / 384400  # Distance to the moon in km
-    report["distance_to_the_moon"] = distance_to_the_moon
+    distance_to_the_moon = (total_employees * flight_time_per_employee * 835) / 384400 
+    report["distance_to_the_moon"] = f"The total flight time for all employees, would cover a distance of approximately {distance_to_the_moon:.4f} times the distance from Earth to the Moon."
     
     # Travel Distance Emissions
     total_car_dist = 0
@@ -89,16 +94,41 @@ def calculate_esg_score(company_data, employee_data):
         total_car_dist += emp["travel_distance_private_car"]
     average_travel_distance = total_car_dist / len(employee_data)
     fuel_efficiency = 8.9  # Average fuel efficiency in km/l
-    travel_emissions = (((company_data["total_employees"] * average_travel_distance * 255) / 100) * fuel_efficiency) * 2.474
-    travel_emissions_rating = 10 - ((travel_emissions - 971.5 * company_data["total_employees"]) / (403.7 * company_data["total_employees"])) * 9
+    travel_emissions = (((total_employees * average_travel_distance * 255) / 100) * fuel_efficiency) * 2.474
+    travel_emissions_rating = 10 - ((travel_emissions - 971.5 * total_employees) / (403.7 * total_employees)) * 9
     report["travel_emissions_rating"] = travel_emissions_rating
-    times_around_earth = (company_data["total_employees"] * average_travel_distance * 255) / 40075  # Earth circumference in km
-    report["times_around_earth"] = times_around_earth
+    times_around_earth = (total_employees * average_travel_distance * 255) / 40075  # Earth circumference in km
+    report["times_around_earth"] = f"The total travel distance for all employees, with an average travel distance of {average_travel_distance} km per employee, would cover approximately {times_around_earth:.4f} times around the Earth."
 
     total_carbon = annual_electricity_emissions + flight_emissions + travel_emissions
 
     # Carbon Credit Score
-    report["carbon_credit_score"] = (company_data["carbon_credits_bought"]/total_carbon) * 10
+    carbon_credit_score = company_data["carbon_credits_bought"] / total_carbon
+
+    # Assign a rating based on the ratio
+    if carbon_credit_score >= 0.9:
+        carbon_credit_rating = 10
+    elif 0.8 <= carbon_credit_score < 0.9:
+        carbon_credit_rating = 9
+    elif 0.7 <= carbon_credit_score < 0.8:
+        carbon_credit_rating = 8
+    elif 0.6 <= carbon_credit_score < 0.7:
+        carbon_credit_rating = 7
+    elif 0.5 <= carbon_credit_score < 0.6:
+        carbon_credit_rating = 6
+    elif 0.4 <= carbon_credit_score < 0.5:
+        carbon_credit_rating = 5
+    elif 0.3 <= carbon_credit_score < 0.4:
+        carbon_credit_rating = 4
+    elif 0.2 <= carbon_credit_score < 0.3:
+        carbon_credit_rating = 3
+    elif 0.1 <= carbon_credit_score < 0.2:
+        carbon_credit_rating = 2
+    else:
+        carbon_credit_rating = 1
+
+    # Add the carbon credit score and rating to the report
+    report["carbon_credit_rating"] = carbon_credit_rating
     report["average_energy_score"] = (travel_emissions_rating + emissions_rating + flight_emissions_rating) / 3
 
     #Primary Waste generator 
@@ -155,10 +185,10 @@ def calculate_esg_score(company_data, employee_data):
     report["employee_inclusion"] = employee_inclusion
         
     # Diversity Index
-    diversity_index_score = ((company_data["male_employees"] / company_data["total_employees"]) * 100 + 
-                       (company_data["female_employees"] / company_data["total_employees"]) * 100 + 
-                       (company_data["lgbtq_employees"] / company_data["total_employees"]) * 100 + 
-                       (company_data["differently_abled_workers"] / company_data["total_employees"]) * 100) / 4
+    diversity_index_score = ((company_data["male_employees"] / total_employees) * 100 + 
+                       (company_data["female_employees"] / total_employees) * 100 + 
+                       (company_data["lgbtq_employees"] / total_employees) * 100 + 
+                       (company_data["differently_abled_workers"] / total_employees) * 100) / 4
     diversity_index = max(1, min(10, math.ceil((diversity_index_score / 100) * 9 + 1)))
     report["diversity_index"] = diversity_index
     
@@ -200,7 +230,7 @@ def calculate_esg_score(company_data, employee_data):
             num_executives+=1
     average_tenure_executives =  total_exec_tenure / num_executives
     tenure_promotion_index = ((average_tenure_employees / average_tenure_executives) * 
-                              (company_data["total_employees"] / company_data["internal_promotions"])) * 10
+                              (total_employees / company_data["internal_promotions"])) * 10
     report["tenure_promotion_index"] = tenure_promotion_index
 
       
@@ -237,7 +267,7 @@ def calculate_esg_score(company_data, employee_data):
             return 1  # Extremely high turnover, urgent intervention required
     
     # Example usage
-    turnover_rate = (company_data["employee_separations"] / company_data["total_employees"]) * 100
+    turnover_rate = (company_data["employee_separations"] / total_employees) * 100
     turnover_rating = calculate_turnover_rating(turnover_rate)
     report["turnover_rating"] = turnover_rating
         
