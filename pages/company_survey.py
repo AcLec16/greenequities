@@ -22,7 +22,7 @@ def run():
     company_answers["year_of_opening"] = st.number_input("Year of Opening", min_value=1900, max_value=2100, step=1)
     company_answers["selected_locations"] = st.selectbox(
     "Select Office Location:",
-    ["Bengaluru", "Delhi", "Hyderabad" "Worli", "Malabar & Cumballa Hill", "Juhu", "Bandra Kurla Complex", "Nariman Point", 
+    ["Bengaluru", "Delhi", "Hyderabad", "Worli", "Malabar & Cumballa Hill", "Juhu", "Bandra Kurla Complex", "Nariman Point", 
      "Andheri", "Lower Parel", "Parel", "Bandra", "Santacruz", "Ghatkopar", "Thane", 
      "Goregaon", "Byculla", "Fort", "Borivali", "Jogeshwari", "Khar", "Malad", 
      "Vile Parle", "Chembur", "Dharavi", "Colaba", "Dadar"])
