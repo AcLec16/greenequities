@@ -54,7 +54,7 @@ def calculate_esg_score(company_data, employee_data):
         
     # Green Product Revenue Percentage
     report["green_product_revenue_percentage"] = (company_data["green_product_revenue"] / company_data["total_yearly_revenue"])* 100
-    
+
     # Green Energy Score
     green_energy_score = (company_data["green_energy"] / company_data["total_energy"]) * 10
     report["green_energy_score"] = green_energy_score
@@ -68,7 +68,7 @@ def calculate_esg_score(company_data, employee_data):
     report["emissions_rating"] = emissions_rating
     
     # Water Usage Rating
-    monthly_water_bill = company_data["monthly_water_bill", 0]
+    monthly_water_bill = company_data["monthly_water_bill"]
     base_value = ((monthly_water_bill / 0.05) - 62.85 * company_data["total_employees"]) / (25.7 * company_data["total_employees"])
     water_usage_rating = 10 - (base_value * 9)
     bath_tubs_full= (monthly_water_bill / 0.05) / 302
