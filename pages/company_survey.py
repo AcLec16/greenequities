@@ -25,7 +25,7 @@ def run():
     ["Bengaluru", "Delhi", "Hyderabad", "Worli", "Malabar & Cumballa Hill", "Juhu", "Bandra Kurla Complex", "Nariman Point", 
      "Andheri", "Lower Parel", "Parel", "Bandra", "Santacruz", "Ghatkopar", "Thane", 
      "Goregaon", "Byculla", "Fort", "Borivali", "Jogeshwari", "Khar", "Malad", 
-     "Vile Parle", "Chembur", "Dharavi", "Colaba", "Dadar"])
+     "Vile Parle", "Chembur", "Dharavi", "Colaba", "Dadar", "Other"])
     
     company_answers["custom_location"] = st.text_input("Specify other location")
     company_answers["industry"] = st.radio(

@@ -478,49 +478,49 @@ def calculate_esg_score(company_data, employee_data):
 
     #Location_Rating 
 
-    # def get_location_value(selected_locations):
-    #     location_ratings = {
-    #         "Bengaluru": 5,
-    #         "Delhi": 5,
-    #         "Hyderabad": 5,
-    #         "Worli": 5,
-    #         "Malabar & Cumballa Hill": 5,
-    #         "Juhu": 5,
-    #         "Bandra Kurla Complex": 5,
-    #         "Nariman Point": 5,
-    #         "Andheri": 5,
-    #         "Lower Parel": 5,
-    #         "Parel": 5,
-    #         "Bandra": 5,
-    #         "Santacruz": 5,
-    #         "Ghatkopar": 5,
-    #         "Thane": 5,
-    #         "Goregaon": 5,
-    #         "Byculla": 5,
-    #         "Fort": 5,
-    #         "Borivali": 5,
-    #         "Jogeshwari": 5,
-    #         "Khar": 5,
-    #         "Malad": 5,
-    #         "Vile Parle": 5,
-    #         "Chembur": 5,
-    #         "Dharavi": 5,
-    #         "Colaba": 5,
-    #         "Dadar": 5
-    #     }
+    def get_location_value(selected_locations):
+        location_ratings = {
+            "Bengaluru": 5,
+            "Delhi": 5,
+            "Hyderabad": 5,
+            "Worli": 5,
+            "Malabar & Cumballa Hill": 5,
+            "Juhu": 5,
+            "Bandra Kurla Complex": 5,
+            "Nariman Point": 5,
+            "Andheri": 5,
+            "Lower Parel": 5,
+            "Parel": 5,
+            "Bandra": 5,
+            "Santacruz": 5,
+            "Ghatkopar": 5,
+            "Thane": 5,
+            "Goregaon": 5,
+            "Byculla": 5,
+            "Fort": 5,
+            "Borivali": 5,
+            "Jogeshwari": 5,
+            "Khar": 5,
+            "Malad": 5,
+            "Vile Parle": 5,
+            "Chembur": 5,
+            "Dharavi": 5,
+            "Colaba": 5,
+            "Dadar": 5
+        }
 
-    #     if selected_locations == "Other":
-    #         return location_ratings["Khar"]
-    #         # If industry exists in the sector_ratings dictionary, return its value
-    #     elif selected_locations in location_ratings:
-    #             return location_ratings[selected_locations]
-    # location_rating = get_location_value(company_data["selected_locations"])
-    # report["buissnes_location_rating"] = location_rating
-    # if company_data["selected_locations"] == "Other":
-    #     report["selected_locations"] = company_data["custom_locations"]
-    # else:
-    #     report["selected_locations"] = company_data["selected_locations"]
-    #     report["workplace_average"] = (location_rating + physical_workplace_rating) / 2
+        if selected_locations == "Other":
+            return location_ratings["Khar"]
+            # If industry exists in the sector_ratings dictionary, return its value
+        elif selected_locations in location_ratings:
+                return location_ratings[selected_locations]
+    location_rating = get_location_value(company_data["selected_locations"])
+    report["buissnes_location_rating"] = location_rating
+    if company_data["selected_locations"] == "Other":
+        report["selected_locations"] = company_data["custom_locations"]
+    else:
+        report["selected_locations"] = company_data["selected_locations"]
+        report["workplace_average"] = (location_rating + physical_workplace_rating) / 2
 
     location_rating = 5
     #Strategic Risk
