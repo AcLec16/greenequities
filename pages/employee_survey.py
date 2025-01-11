@@ -26,8 +26,8 @@ def run():
         employee_answers["workplace_rating"] = st.slider("Rate your physical workplace (1-10), considering seating, lighting, cleanliness, technology, and equipment.", 1, 10)
         employee_answers["executive_tenure"] = st.number_input("How long have you been in the company (as an Executive)? (in years)", min_value=0, step=1)
         employee_answers["travel_distance_private_car"] = st.number_input("How many kilometers do you spend traveling via private car per day to work?", min_value=0, step=1)
-        employee_answers["Job_related_training"] = st.slider("Now rate the job-related training you’ve received in aspects such as, compliance, technical skills, leadership, and career growth", min_value=0, step=1)
-        employee_answers["leadership_confidence"] = st.slider("rate the leadership")
+        employee_answers["Job_related_training"] = st.slider("Now rate the job-related training you’ve received in aspects such as, compliance, technical skills, leadership, and career growth", 1, 10)
+        employee_answers["leadership_confidence"] = st.slider("How confident are you in the leadership of the organization? (Rate from 1 to 10)", 1, 10)
         if st.button("Submit"):
             store_employee_data(company_code, employee_answers)
             st.success("Employee survey submitted!")

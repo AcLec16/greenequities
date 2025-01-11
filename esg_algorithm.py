@@ -42,8 +42,7 @@ def calculate_esg_score(company_data, employee_data):
         vbre_rating =  9
     else:
         vbre_rating =  10
-            
-
+    
     #Enviro_laws 
     selected_enviro = len(company_data["compliant_laws"])
     enviro_comp = selected_enviro
@@ -56,23 +55,24 @@ def calculate_esg_score(company_data, employee_data):
     report["green_product_revenue_percentage"] = (company_data["green_product_revenue"] / company_data["total_yearly_revenue"])* 100
 
     # Green Energy Score
-    green_energy_score = (company_data["green_energy"] / company_data["total_energy"]) * 10
+    green_energy_score = round((company_data["green_energy"] / company_data["total_energy"]) * 10, 2)
     report["green_energy_score"] = green_energy_score
                 
     # Annual Electricity Emissions
     annual_electricity_emissions = kwh_electricity * 0.85 * 12
     phone_charges = (kwh_electricity * 1000) * 5
-    report["phone_charges"] = f"The amount of phones charged, based on the electricity usage of {kwh_electricity} kWh, amount to {phone_charges:.2f}."
-    base_rating = ((annual_electricity_emissions - 871.25) * company_data["total_employees"]) / (403.75 * company_data["total_employees"])
-    emissions_rating = 10 - (base_rating * 9)
+    report["phone_charges"] = f"You could charge your phone {phone_charges:.2f} times! Based on the electricity usage of {kwh_electricity:.2f} kWh."
+    base_rating = ((annual_electricity_emissions / company_data["total_employees"]) - 871.25) / 403.75
+    emissions_rating = (base_rating * 9) + 1
     report["emissions_rating"] = emissions_rating
     
     # Water Usage Rating
     monthly_water_bill = company_data["monthly_water_bill"]
-    base_value = ((monthly_water_bill / 0.05) - 62.85 * company_data["total_employees"]) / (25.7 * company_data["total_employees"])
+    base_value = ((((monthly_water_bill / 0.05)/company_data["total_employees"]) - 62.85) / 25.7)
     water_usage_rating = 10 - (base_value * 9)
     bath_tubs_full= (monthly_water_bill / 0.05) / 302
-    report["bath_tubs_full"] = f"The monthly water bill equates to approximately {bath_tubs_full:.2f} bath tubs full of water."
+    bath_tubs_full_rounded = round(bath_tubs_full)
+    report["bath_tubs_full"] = f"The monthly water bill equates to approximately {bath_tubs_full_rounded} bath tubs full of water."
     report["water_usage_rating"] = water_usage_rating
     
     # Flight Emissions Rating
@@ -81,11 +81,11 @@ def calculate_esg_score(company_data, employee_data):
         total_flight_time += emp["work_travel_hours_year"]
     flight_time_per_employee = total_flight_time / len(employee_data)
     flight_emissions = company_data["total_employees"] * flight_time_per_employee * 48 * 3.1
-    flight_emissions_rating = 10 - ((flight_emissions - 119398.2466 * company_data["total_employees"]) / (255136.7094 * company_data["total_employees"])) * 9
+    flight_emissions_rating = 10 - (((flight_emissions/company_data["total_employees"]) - 119398.2466) / 255136.7094) * 9
     report["flight_emissions_rating"] = flight_emissions_rating
-    distance_to_the_moon = (company_data["total_employees"] * flight_time_per_employee * 835) / 384400 
-    report["distance_to_the_moon"] = f"The total flight time for all employees, would cover a distance of approximately {distance_to_the_moon:.4f} times the distance from Earth to the Moon."
-    
+    distance_to_the_moon = ((company_data["total_employees"] * flight_time_per_employee * 835) / 384400)*100
+    report["distance_to_the_moon"] = f"The total flight time for all employees would cover approximately {distance_to_the_moon:.2f}% of the distance from Earth to the Moon."
+
     # Travel Distance Emissions
     total_car_dist = 0
     for emp in employee_data:
@@ -93,12 +93,12 @@ def calculate_esg_score(company_data, employee_data):
     average_travel_distance = total_car_dist / len(employee_data)
     fuel_efficiency = 8.9  # Average fuel efficiency in km/l
     travel_emissions = (((company_data["total_employees"] * average_travel_distance * 255) / 100) * fuel_efficiency) * 2.474
-    travel_emissions_rating = 10 - ((travel_emissions - 971.5 * company_data["total_employees"]) / (403.7 * company_data["total_employees"])) * 9
+    travel_emissions_rating = 10 - (((travel_emissions/company_data["total_employees"]) - 971.5) / 403.7) * 9
     report["travel_emissions_rating"] = travel_emissions_rating
     times_around_earth = (company_data["total_employees"] * average_travel_distance * 255) / 40075  # Earth circumference in km
     report["times_around_earth"] = f"The total travel distance for all employees, with an average travel distance of {average_travel_distance} km per employee, would cover approximately {times_around_earth:.4f} times around the Earth."
-
     total_carbon = annual_electricity_emissions + flight_emissions + travel_emissions
+    report["total_carbon"] = total_carbon
 
     # Carbon Credit Score
     carbon_credit_score = company_data["carbon_credits_bought"] / total_carbon
@@ -133,16 +133,16 @@ def calculate_esg_score(company_data, employee_data):
     
     def get_waste_value(primary_waste_generator):
         waste_values = {
-            "Plastic Waste": 7,
-            "Food Waste": 6,
-            "Electronic Waste (e-waste)": 8,
+            "Plastic Waste": 3,
+            "Food Waste": 4,
+            "Electronic Waste (e-waste)": 2,
             "Fabric Scraps": 5,
             "Scrap Metals": 9,
-            "Paper Waste": 4,
-            "Glass Waste": 3,
-            "Hazardous Chemicals or Substances": 10,
-            "Construction and Demolition Debris": 2,
-            "Packaging Waste": 1,
+            "Paper Waste": 7,
+            "Glass Waste": 8,
+            "Hazardous Chemicals or Substances": 1,
+            "Construction and Demolition Debris": 6,
+            "Packaging Waste": 10,
         }
         return waste_values[primary_waste_generator]
     
@@ -303,7 +303,8 @@ def calculate_esg_score(company_data, employee_data):
     
      # 2. Supply chain ESG
     supplier_retention_score = (company_data["remaining_suppliers"] / company_data["all_time_suppliers"]) * 10
-    report["supplier_retention_score"] = supplier_retention_score
+    supplier_retention_score_round = round(supplier_retention_score)
+    report["supplier_retention_score"] = supplier_retention_score_round
     report["supply_statement"] = company_data["supply_statement"]
     
     #Investor/Shareholder Feedback
