@@ -1,7 +1,7 @@
 import streamlit as st
 from firebase_config import get_company_data, get_employee_data, check_company_code, get_employee_count
 from esg_algorithm import calculate_esg_score
-from fpdf import FPDF
+# from fpdf import FPDF
 import os
 
 # # Custom PDF class for generating reports
