@@ -52,7 +52,11 @@ def calculate_esg_score(company_data, employee_data):
     report["sustainability_stance"] = company_data["company_stance_sustainability"]
         
     # Green Product Revenue Percentage
-    report["green_product_revenue_percentage"] = (company_data["green_product_revenue"] / company_data["total_yearly_revenue"])* 100
+    green_product_revenue_percentage = (company_data["green_product_revenue"] / company_data["total_yearly_revenue"])* 100
+    score_product = round((green_product_revenue_percentage / 10), 1)
+    score_product = max(1, min(10, score_product))
+    report["green_product_revenue_percentage"] = score_product
+
 
     # Green Energy Score
     green_energy_score = round((company_data["green_energy"] / company_data["total_energy"]) * 10, 2)
@@ -63,7 +67,7 @@ def calculate_esg_score(company_data, employee_data):
     phone_charges = (kwh_electricity * 1000) * 5
     report["phone_charges"] = f"You could charge your phone {phone_charges:.2f} times! Based on the electricity usage of {kwh_electricity:.2f} kWh."
     base_rating = ((annual_electricity_emissions / company_data["total_employees"]) - 871.25) / 403.75
-    emissions_rating = (base_rating * 9) + 1
+    emissions_rating = 10 - (base_rating * 9) + 1
     report["emissions_rating"] = emissions_rating
     
     # Water Usage Rating
@@ -93,10 +97,11 @@ def calculate_esg_score(company_data, employee_data):
     average_travel_distance = total_car_dist / len(employee_data)
     fuel_efficiency = 8.9  # Average fuel efficiency in km/l
     travel_emissions = (((company_data["total_employees"] * average_travel_distance * 255) / 100) * fuel_efficiency) * 2.474
-    travel_emissions_rating = 10 - (((travel_emissions/company_data["total_employees"]) - 971.5) / 403.7) * 9
+    travel_emissions_rating = round(10 - (((travel_emissions/company_data["total_employees"]) - 971.5) / 403.7) * 9)
     report["travel_emissions_rating"] = travel_emissions_rating
     times_around_earth = (company_data["total_employees"] * average_travel_distance * 255) / 40075  # Earth circumference in km
     report["times_around_earth"] = f"The total travel distance for all employees, with an average travel distance of {average_travel_distance} km per employee, would cover approximately {times_around_earth:.4f} times around the Earth."
+    
     total_carbon = annual_electricity_emissions + flight_emissions + travel_emissions
     report["total_carbon"] = total_carbon
 
