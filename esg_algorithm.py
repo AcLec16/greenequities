@@ -67,12 +67,13 @@ def calculate_esg_score(company_data, employee_data):
     phone_charges = (kwh_electricity * 1000) * 5
     report["phone_charges"] = f"You could charge your phone {phone_charges:.2f} times! Based on the electricity usage of {kwh_electricity:.2f} kWh."
     base_rating = ((annual_electricity_emissions / company_data["total_employees"]) - 871.25) / 403.75
-    emissions_rating = 10 - (base_rating * 9) + 1
-    report["emissions_rating"] = emissions_rating
+    emissions_rating = (base_rating * 9) + 1
+    emissions_rating_s = max(1, min(10, emissions_rating_s))
+    report["emissions_rating"] = emissions_rating_s
     
     # Water Usage Rating
     monthly_water_bill = company_data["monthly_water_bill"]
-    base_value = ((((monthly_water_bill / 0.05)/company_data["total_employees"]) - 62.85) / 25.7)
+    base_value = ((((monthly_water_bill / 0.05)/company_data["total_employees"]) - 21420) / 6476.4)
     water_usage_rating = 10 - (base_value * 9)
     bath_tubs_full= (monthly_water_bill / 0.05) / 302
     bath_tubs_full_rounded = round(bath_tubs_full)
