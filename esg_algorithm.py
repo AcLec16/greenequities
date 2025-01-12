@@ -59,7 +59,7 @@ def calculate_esg_score(company_data, employee_data):
 
 
     # Green Energy Score
-    green_energy_score = round((company_data["green_energy"] / company_data["total_energy"]) * 10, 2)
+    green_energy_score = round((company_data["green_energy"] / company_data["total_energy"]) * 10, 2) 
     report["green_energy_score"] = green_energy_score
                 
     # Annual Electricity Emissions
@@ -73,7 +73,7 @@ def calculate_esg_score(company_data, employee_data):
     
     # Water Usage Rating
     monthly_water_bill = company_data["monthly_water_bill"]
-    base_value = ((((monthly_water_bill / 0.05)/company_data["total_employees"]) - 21420) / 6476.4)
+    base_value = ((((monthly_water_bill / 0.05)/company_data["total_employees"]) - 21420) / 6476.4) 
     water_usage_rating = 10 - (base_value * 9)
     bath_tubs_full= (monthly_water_bill / 0.05) / 302
     bath_tubs_full_rounded = round(bath_tubs_full)
@@ -100,10 +100,10 @@ def calculate_esg_score(company_data, employee_data):
     travel_emissions = (((company_data["total_employees"] * average_travel_distance * 255) / 100) * fuel_efficiency) * 2.474
     travel_emissions_rating = round(10 - (((travel_emissions/company_data["total_employees"]) - 971.5) / 403.7) * 9)
     report["travel_emissions_rating"] = travel_emissions_rating
-    times_around_earth = (company_data["total_employees"] * average_travel_distance * 255) / 40075  # Earth circumference in km
-    report["times_around_earth"] = f"The total travel distance for all employees, with an average travel distance of {average_travel_distance} km per employee, would cover approximately {times_around_earth:.4f} times around the Earth."
+    times_around_earth = round(company_data["total_employees"] * average_travel_distance * 255) / 40075  # Earth circumference in km
+    report["times_around_earth"] = f"The total travel distance for all employees, with an average travel distance of {average_travel_distance} km per employee, would cover approximately {times_around_earth} times around the Earth."
     
-    total_carbon = annual_electricity_emissions + flight_emissions + travel_emissions
+    total_carbon = round(annual_electricity_emissions + flight_emissions + travel_emissions, 2)
     report["total_carbon"] = total_carbon
 
     # Carbon Credit Score
@@ -233,9 +233,9 @@ def calculate_esg_score(company_data, employee_data):
             total_exec_tenure += emp["executive_tenure"]
             num_executives+=1
     average_tenure_executives =  total_exec_tenure / num_executives
-    tenure_promotion_index = ((average_tenure_employees / average_tenure_executives) * 
-                              (company_data["total_employees"] / company_data["internal_promotions"])) * 10
-    report["tenure_promotion_index"] = tenure_promotion_index
+    tenure_promotion_index = ((average_tenure_employees / average_tenure_executives) * (company_data["total_employees"] / company_data["internal_promotions"])) * 10
+    normalized_promotion_index = min((tenure_promotion_index / 100) * 10, 10)
+    report["tenure_promotion_index"] = normalized_promotion_index
 
       
     # Health and Satisfaction Index
@@ -487,33 +487,33 @@ def calculate_esg_score(company_data, employee_data):
 
     def get_location_value(selected_locations):
         location_ratings = {
-            "Bengaluru": 5,
-            "Delhi": 5,
-            "Hyderabad": 5,
-            "Worli": 5,
-            "Malabar & Cumballa Hill": 5,
-            "Juhu": 5,
-            "Bandra Kurla Complex": 5,
-            "Nariman Point": 5,
-            "Andheri": 5,
-            "Lower Parel": 5,
-            "Parel": 5,
-            "Bandra": 5,
-            "Santacruz": 5,
-            "Ghatkopar": 5,
-            "Thane": 5,
-            "Goregaon": 5,
-            "Byculla": 5,
-            "Fort": 5,
-            "Borivali": 5,
-            "Jogeshwari": 5,
-            "Khar": 5,
-            "Malad": 5,
-            "Vile Parle": 5,
-            "Chembur": 5,
-            "Dharavi": 5,
-            "Colaba": 5,
-            "Dadar": 5
+            "Worli": 4.3,
+            "Malabar & Cumballa Hill": 4.5,
+            "Juhu": 4.4,
+            "Bandra Kurla Complex": 4.2,
+            "Nariman Point": 4.8,
+            "Andheri": 4.4,
+            "Lower Parel": 4.3,
+            "Parel": 4.5,
+            "Bandra": 4.9,
+            "Santacruz": 4.2,
+            "Ghatkopar": 4.0,
+            "Thane": 4.3,
+            "Goregaon": 4.3,
+            "Byculla": 4.1,
+            "Fort": 4.3,
+            "Borivali": 5.0,
+            "Jogeshwari": 4.2,
+            "Khar": 4.2,
+            "Malad": 4.2,
+            "Vile Parle": 4.4,
+            "Chembur": 4.3,
+            "Dharavi": 3.4,
+            "Colaba": 1.0,
+            "Dadar": 4.4,
+            "Bengaluru": 4.3,
+            "Delhi": 4.3,
+            "Hyderabad": 4.3
         }
 
         if selected_locations == "Other":
@@ -576,15 +576,15 @@ def calculate_esg_score(company_data, employee_data):
     report["Operational_Risk"] = (f"Compliance and Regulatory Risk stands at {Operational_Risk:.2f}% putting you at a {risk_level_opp} of risk in this area.")
 
     #Total Environment
-    total_environment = (vbre_rating + enviro_comp + waste_value + green_energy_score + emissions_rating + water_usage_rating + flight_emissions_rating + travel_emissions_rating) / 8
+    total_environment = (0.1*vbre_rating + 0.15*enviro_comp + 0.1*waste_value + 0.15*green_energy_score + 0.15*emissions_rating + 0.1*water_usage_rating + 0.05*flight_emissions_rating + 0.05*travel_emissions_rating) / 8
 
     #Total social
-    total_social = (leader_confidence + employee_inclusion + average_salary_rating + diversity_index + (work_hours_rating)*2
-         + tenure_promotion_index + health_satisfaction_index + wellbeing_training_index + employee_job_related_training + turnover_rating + average_culture_satisfaction ) / 11
+    total_social = (0.1*leader_confidence + 0.1*employee_inclusion + 0.1*average_salary_rating + 0.1*diversity_index + 0.1*work_hours_rating + 0.05*tenure_promotion_index + 0.1*health_satisfaction_index + 0.1*wellbeing_training_index + 0.1*employee_job_related_training + 0.05*turnover_rating + 0.1*average_culture_satisfaction) / 11
+
    
     #Total Governance
-    total_governance = (location_rating + supplier_retention_score + get_volatility_value(company_data["industry"]) + get_sector_value(company_data["industry"]) + profit_rating + infomation_flow_efficency + structure_rating
-         + selected_data_laws + selected_anti + (Customer_feedbacks * 2) + physical_workplace_rating + 5.88) / 12
+    total_governance = (0.1 *location_rating + 0.1 *supplier_retention_score + 0.05*get_volatility_value(company_data["industry"]) + 0.05*get_sector_value(company_data["industry"]) + 0.2*profit_rating + 0.1 *infomation_flow_efficency + 0.1 *structure_rating
+         + 0.1 *selected_data_laws + 0.05*selected_anti + 0.1(Customer_feedbacks * 2) + 0.05*physical_workplace_rating + 0.294) / 12
 
     report["total_environment"] = total_environment
     report["total_social"] = total_social
