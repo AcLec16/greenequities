@@ -583,7 +583,7 @@ def calculate_esg_score(company_data, employee_data):
    
     #Total Governance
     total_governance = (0.1 *location_rating + 0.1 *supplier_retention_score + 0.05*get_volatility_value(company_data["industry"]) + 0.05*get_sector_value(company_data["industry"]) + 0.2*profit_rating + 0.1 *infomation_flow_efficency + 0.1 *structure_rating
-         + 0.1 *selected_data_laws + 0.05*selected_anti + 0.1(Customer_feedbacks) + 0.05*physical_workplace_rating + 0.294) / 12
+         + 0.1 *selected_data_laws + 0.05*selected_anti + 0.1*Customer_feedbacks + 0.05*physical_workplace_rating + 0.294) / 12
 
     report["total_environment"] = total_environment
     report["total_social"] = total_social
