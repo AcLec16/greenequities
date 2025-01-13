@@ -298,7 +298,7 @@ def calculate_esg_score(company_data, employee_data):
     report["data_law_compliance"] = selected_data_laws
 
     #Stakeholder_engagment
-    Customer_feedbacks = company_data["customer_feedback_score"]
+    Customer_feedbacks = company_data["customer_feedback_score"] * 2
     report["Customer_feedbacks"] = company_data["customer_feedback_score"]
     report["customer_statement"] = company_data["customer_feedback"]
     
@@ -530,7 +530,7 @@ def calculate_esg_score(company_data, employee_data):
 
     location_rating = 5
     #Strategic Risk
-    strategic_risk =  ((get_sector_value(company_data["industry"]) - 1 / 9)) +  (((Customer_feedbacks * 2) - 1 / 9)) + ((vbre - 1) / 9) + ((leader_confidence - 1) / 9) + ((informed_rating - 1) / 9)
+    strategic_risk =  ((get_sector_value(company_data["industry"]) - 1 / 9)) +  ((Customer_feedbacks - 1 / 9)) + ((vbre - 1) / 9) + ((leader_confidence - 1) / 9) + ((informed_rating - 1) / 9)
     if strategic_risk >= 70:
         risk_level_strat = "high probability"
     elif strategic_risk >= 40:
@@ -583,7 +583,7 @@ def calculate_esg_score(company_data, employee_data):
    
     #Total Governance
     total_governance = (0.1 *location_rating + 0.1 *supplier_retention_score + 0.05*get_volatility_value(company_data["industry"]) + 0.05*get_sector_value(company_data["industry"]) + 0.2*profit_rating + 0.1 *infomation_flow_efficency + 0.1 *structure_rating
-         + 0.1 *selected_data_laws + 0.05*selected_anti + 0.1(Customer_feedbacks * 2) + 0.05*physical_workplace_rating + 0.294) / 12
+         + 0.1 *selected_data_laws + 0.05*selected_anti + 0.1(Customer_feedbacks) + 0.05*physical_workplace_rating + 0.294) / 12
 
     report["total_environment"] = total_environment
     report["total_social"] = total_social
