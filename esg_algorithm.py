@@ -67,13 +67,13 @@ def calculate_esg_score(company_data, employee_data):
     phone_charges = (kwh_electricity * 1000) * 5
     report["phone_charges"] = f"You could charge your phone {phone_charges:.2f} times! Based on the electricity usage of {kwh_electricity:.2f} kWh."
     base_rating = ((annual_electricity_emissions / company_data["total_employees"]) - 871.25) / 403.75
-    emissions_rating = (base_rating * 9) + 1
+    emissions_rating = round((base_rating + 0.89) * 9) + 1
     report["emissions_rating"] = emissions_rating
     
     # Water Usage Rating
     monthly_water_bill = company_data["monthly_water_bill"]
     base_value = ((((monthly_water_bill / 0.05)/company_data["total_employees"]) - 968) / 677.6) 
-    water_usage_rating = ((base_value + 0.46) * 9) + 1
+    water_usage_rating = round((base_value + 0.46) * 9) + 1
     bath_tubs_full= (monthly_water_bill / 0.05) / 302
     bath_tubs_full_rounded = round(bath_tubs_full)
     report["bath_tubs_full"] = f"The monthly water bill equates to approximately {bath_tubs_full_rounded} bath tubs full of water."
@@ -85,7 +85,8 @@ def calculate_esg_score(company_data, employee_data):
         total_flight_time += emp["work_travel_hours_year"]
     flight_time_per_employee = total_flight_time / len(employee_data)
     flight_emissions = company_data["total_employees"] * flight_time_per_employee * 48 * 3.1
-    flight_emissions_rating = 10 - (((flight_emissions/company_data["total_employees"]) - 119398.2466) / 255136.7094) * 9
+    base_emissions_rating =  (((flight_emissions/company_data["total_employees"]) - 119398.2466) / 255136.7094)
+    flight_emissions_rating = round((base_emissions_rating + 0.34) * 9) + 1
     report["flight_emissions_rating"] = flight_emissions_rating
     distance_to_the_moon = ((company_data["total_employees"] * flight_time_per_employee * 835) / 384400)*100
     report["distance_to_the_moon"] = f"The total flight time for all employees would cover approximately {distance_to_the_moon:.2f}% of the distance from Earth to the Moon."
