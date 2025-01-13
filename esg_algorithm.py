@@ -67,13 +67,13 @@ def calculate_esg_score(company_data, employee_data):
     phone_charges = (kwh_electricity * 1000) * 5
     report["phone_charges"] = f"You could charge your phone {phone_charges:.2f} times! Based on the electricity usage of {kwh_electricity:.2f} kWh."
     base_rating = ((annual_electricity_emissions / company_data["total_employees"]) - 871.25) / 403.75
-    emissions_rating = round((base_rating + 0.89) * 9) + 1
+    emissions_rating = ((base_rating + 0.89) * 9) + 1
     report["emissions_rating"] = emissions_rating
     
     # Water Usage Rating
     monthly_water_bill = company_data["monthly_water_bill"]
     base_value = ((((monthly_water_bill / 0.05)/company_data["total_employees"]) - 968) / 677.6) 
-    water_usage_rating = round((base_value + 0.46) * 9) + 1
+    water_usage_rating = ((base_value + 0.46) * 9) + 1
     bath_tubs_full= (monthly_water_bill / 0.05) / 302
     bath_tubs_full_rounded = round(bath_tubs_full)
     report["bath_tubs_full"] = f"The monthly water bill equates to approximately {bath_tubs_full_rounded} bath tubs full of water."
@@ -86,7 +86,7 @@ def calculate_esg_score(company_data, employee_data):
     flight_time_per_employee = total_flight_time / len(employee_data)
     flight_emissions = company_data["total_employees"] * flight_time_per_employee * 48 * 3.1
     base_emissions_rating =  (((flight_emissions/company_data["total_employees"]) - 119398.2466) / 255136.7094)
-    flight_emissions_rating = round((base_emissions_rating + 0.34) * 9) + 1
+    flight_emissions_rating = ((base_emissions_rating + 0.34) * 9) + 1
     report["flight_emissions_rating"] = flight_emissions_rating
     distance_to_the_moon = ((company_data["total_employees"] * flight_time_per_employee * 835) / 384400)*100
     report["distance_to_the_moon"] = f"The total flight time for all employees would cover approximately {distance_to_the_moon:.2f}% of the distance from Earth to the Moon."
@@ -98,7 +98,7 @@ def calculate_esg_score(company_data, employee_data):
     average_travel_distance = total_car_dist / len(employee_data)
     fuel_efficiency = 8.9  # Average fuel efficiency in km/l
     travel_emissions = (((company_data["total_employees"] * average_travel_distance * 255) / 100) * fuel_efficiency) * 2.474
-    travel_emissions_rating = round(10 - (((travel_emissions/company_data["total_employees"]) - 971.5) / 403.7) * 9)
+    travel_emissions_rating = 10 - (((travel_emissions/company_data["total_employees"]) - 971.5) / 403.7) * 9
     report["travel_emissions_rating"] = travel_emissions_rating
     times_around_earth = round(company_data["total_employees"] * average_travel_distance * 255) / 40075  # Earth circumference in km
     report["times_around_earth"] = f"The total travel distance for all employees, with an average travel distance of {average_travel_distance} km per employee, would cover approximately {times_around_earth} times around the Earth."
@@ -528,9 +528,7 @@ def calculate_esg_score(company_data, employee_data):
     else:
         report["selected_locations"] = company_data["selected_locations"]
         report["workplace_average"] = (location_rating + physical_workplace_rating) / 2
-
-    location_rating = 5
-    #Strategic Risk
+    
     strategic_risk =  ((get_sector_value(company_data["industry"]) - 1 / 9)) +  ((Customer_feedbacks - 1 / 9)) + ((vbre - 1) / 9) + ((leader_confidence - 1) / 9) + ((informed_rating - 1) / 9)
     if strategic_risk >= 70:
         risk_level_strat = "high probability"
@@ -576,15 +574,15 @@ def calculate_esg_score(company_data, employee_data):
     report["Operational_Risk"] = (f"Compliance and Regulatory Risk stands at {Operational_Risk:.2f}% putting you at a {risk_level_opp} of risk in this area.")
 
     #Total Environment
-    total_environment = (0.1*vbre_rating + 0.15*enviro_comp + 0.1*waste_value + 0.15*green_energy_score + 0.15*emissions_rating + 0.1*water_usage_rating + 0.05*flight_emissions_rating + 0.05*travel_emissions_rating) / 8
+    total_environment = (vbre_rating + enviro_comp + waste_value + green_energy_score + emissions_rating + water_usage_rating + flight_emissions_rating + travel_emissions_rating) / 8
 
     #Total social
-    total_social = (0.1*leader_confidence + 0.1*employee_inclusion + 0.1*average_salary_rating + 0.1*diversity_index + 0.1*work_hours_rating + 0.05*tenure_promotion_index + 0.1*health_satisfaction_index + 0.1*wellbeing_training_index + 0.1*employee_job_related_training + 0.05*turnover_rating + 0.1*average_culture_satisfaction) / 11
+    total_social = (leader_confidence + employee_inclusion + average_salary_rating + diversity_index + work_hours_rating + tenure_promotion_index + health_satisfaction_index + wellbeing_training_index + employee_job_related_training + turnover_rating + average_culture_satisfaction) / 11
 
    
     #Total Governance
-    total_governance = (0.1 *location_rating + 0.1 *supplier_retention_score + 0.05*get_volatility_value(company_data["industry"]) + 0.05*get_sector_value(company_data["industry"]) + 0.2*profit_rating + 0.1 *infomation_flow_efficency + 0.1 *structure_rating
-         + 0.1 *selected_data_laws + 0.05*selected_anti + 0.1*Customer_feedbacks + 0.05*physical_workplace_rating + 0.294) / 12
+    total_governance = (location_rating + supplier_retention_score + get_volatility_value(company_data["industry"]) + get_sector_value(company_data["industry"]) + profit_rating + infomation_flow_efficency + structure_rating
+         + selected_data_laws + selected_anti + Customer_feedbacks + physical_workplace_rating + 5.78) / 12
 
     report["total_environment"] = total_environment
     report["total_social"] = total_social
