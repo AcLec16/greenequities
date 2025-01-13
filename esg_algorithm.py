@@ -528,7 +528,8 @@ def calculate_esg_score(company_data, employee_data):
     else:
         report["selected_locations"] = company_data["selected_locations"]
         report["workplace_average"] = (location_rating + physical_workplace_rating) / 2
-    
+
+    #Strategic Risk
     strategic_risk =  ((get_sector_value(company_data["industry"]) - 1 / 9)) +  ((Customer_feedbacks - 1 / 9)) + ((vbre - 1) / 9) + ((leader_confidence - 1) / 9) + ((informed_rating - 1) / 9)
     if strategic_risk >= 70:
         risk_level_strat = "high probability"
@@ -574,15 +575,15 @@ def calculate_esg_score(company_data, employee_data):
     report["Operational_Risk"] = (f"Compliance and Regulatory Risk stands at {Operational_Risk:.2f}% putting you at a {risk_level_opp} of risk in this area.")
 
     #Total Environment
-    total_environment = (vbre_rating + enviro_comp + waste_value + green_energy_score + emissions_rating + water_usage_rating + flight_emissions_rating + travel_emissions_rating) / 8
+    total_environment = ((0.1*vbre_rating + 0.15*enviro_comp + 0.1*waste_value + 0.15*green_energy_score + 0.15*emissions_rating + 0.1*water_usage_rating + 0.05*flight_emissions_rating + 0.05*travel_emissions_rating) / 8)*10
 
     #Total social
-    total_social = (leader_confidence + employee_inclusion + average_salary_rating + diversity_index + work_hours_rating + tenure_promotion_index + health_satisfaction_index + wellbeing_training_index + employee_job_related_training + turnover_rating + average_culture_satisfaction) / 11
+    total_social = ((0.1*leader_confidence + 0.1*employee_inclusion + 0.1*average_salary_rating + 0.1*diversity_index + 0.1*work_hours_rating + 0.05*tenure_promotion_index + 0.1*health_satisfaction_index + 0.1*wellbeing_training_index + 0.1*employee_job_related_training + 0.05*turnover_rating + 0.1*average_culture_satisfaction) / 11)*10
 
    
     #Total Governance
-    total_governance = (location_rating + supplier_retention_score + get_volatility_value(company_data["industry"]) + get_sector_value(company_data["industry"]) + profit_rating + infomation_flow_efficency + structure_rating
-         + selected_data_laws + selected_anti + Customer_feedbacks + physical_workplace_rating + 5.78) / 12
+    total_governance = ((0.1 *location_rating + 0.1 *supplier_retention_score + 0.05*get_volatility_value(company_data["industry"]) + 0.05*get_sector_value(company_data["industry"]) + 0.2*profit_rating + 0.1 *infomation_flow_efficency + 0.1 *structure_rating
+         + 0.1 *selected_data_laws + 0.05*selected_anti + 0.1*Customer_feedbacks + 0.05*physical_workplace_rating + 0.294) / 12)*10
 
     report["total_environment"] = total_environment
     report["total_social"] = total_social
