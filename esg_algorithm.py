@@ -73,8 +73,8 @@ def calculate_esg_score(company_data, employee_data):
     
     # Water Usage Rating
     monthly_water_bill = company_data["monthly_water_bill"]
-    base_value = ((((monthly_water_bill / 0.05)/company_data["total_employees"]) - 21420) / 6476.4) 
-    water_usage_rating = 10 - (base_value * 9)
+    base_value = ((((monthly_water_bill / 0.05)/company_data["total_employees"]) - 968) / 677.6) 
+    water_usage_rating = ((base_value + 0.46) * 9) + 1
     bath_tubs_full= (monthly_water_bill / 0.05) / 302
     bath_tubs_full_rounded = round(bath_tubs_full)
     report["bath_tubs_full"] = f"The monthly water bill equates to approximately {bath_tubs_full_rounded} bath tubs full of water."
