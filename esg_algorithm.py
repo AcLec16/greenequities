@@ -68,7 +68,7 @@ def calculate_esg_score(company_data, employee_data):
     report["phone_charges"] = f"You could charge your phone {phone_charges:.2f} times! Based on the electricity usage of {kwh_electricity:.2f} kWh."
     base_rating = ((annual_electricity_emissions / company_data["total_employees"]) - 871.25) / 403.75
     emissions_rating = (base_rating * 9) + 1
-    emissions_rating_s = max(1, min(10, emissions_rating_s))
+    emissions_rating_s = max(1, min(10, emissions_rating))
     report["emissions_rating"] = emissions_rating_s
     
     # Water Usage Rating
