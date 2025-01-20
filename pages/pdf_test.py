@@ -1,5 +1,5 @@
-from fpdf import FPDF
-import os
+#from fpdf import FPDF
+#import os
 
 # Custom PDF class for generating reports
 class PDF(FPDF):
@@ -13,7 +13,7 @@ class PDF(FPDF):
         self.add_page()
 
         # Add a background image
-        self.image("/Users/a.chhawchharia.26/Downloads/logo1.png", x=0, y=0, w=self.w, h=self.h)
+        self.image("/Users/a.chhawchharia.26/Downloads/background_design.png", x=0, y=0, w=self.w, h=self.h)
 
         # Add title text
         self.set_xy(10, 50)  # Set position explicitly
