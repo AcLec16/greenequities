@@ -74,10 +74,11 @@ def calculate_esg_score(company_data, employee_data):
     monthly_water_bill = company_data["monthly_water_bill"]
     base_value = ((((monthly_water_bill / 0.05)/company_data["total_employees"]) - 968) / 677.6) 
     water_usage_rating = ((base_value + 0.46) * 9) + 1
+    rounded_water_usage_rating = round(water_usage_rating, 2)
     bath_tubs_full= (monthly_water_bill / 0.05) / 302
     bath_tubs_full_rounded = round(bath_tubs_full)
     report["bath_tubs_full"] = f"The monthly water bill equates to approximately {bath_tubs_full_rounded} bath tubs full of water."
-    report["water_usage_rating"] = water_usage_rating
+    report["water_usage_rating"] = rounded_water_usage_rating
     
     # Flight Emissions Rating
     total_flight_time = 0
@@ -87,6 +88,7 @@ def calculate_esg_score(company_data, employee_data):
     flight_emissions = company_data["total_employees"] * flight_time_per_employee * 48 * 3.1
     base_emissions_rating =  (((flight_emissions/company_data["total_employees"]) - 119398.2466) / 255136.7094)
     flight_emissions_rating = ((base_emissions_rating + 0.34) * 9) + 1
+    flight_emissions_rating = max(1, min(10, flight_emissions_rating))
     report["flight_emissions_rating"] = flight_emissions_rating
     distance_to_the_moon = ((company_data["total_employees"] * flight_time_per_employee * 835) / 384400)*100
     report["distance_to_the_moon"] = f"The total flight time for all employees would cover approximately {distance_to_the_moon:.2f}% of the distance from Earth to the Moon."
@@ -99,7 +101,8 @@ def calculate_esg_score(company_data, employee_data):
     fuel_efficiency = 8.9  # Average fuel efficiency in km/l
     travel_emissions = (((company_data["total_employees"] * average_travel_distance * 255) / 100) * fuel_efficiency) * 2.474
     travel_emissions_rating = 10 - (((travel_emissions/company_data["total_employees"]) - 971.5) / 403.7) * 9
-    report["travel_emissions_rating"] = travel_emissions_rating
+    travel_emissions_rating_rounded = round(travel_emissions_rating , 2)
+    report["travel_emissions_rating"] = travel_emissions_rating_rounded
     times_around_earth = round(company_data["total_employees"] * average_travel_distance * 255) / 40075  # Earth circumference in km
     report["times_around_earth"] = f"The total travel distance for all employees, with an average travel distance of {average_travel_distance} km per employee, would cover approximately {times_around_earth} times around the Earth."
     
@@ -133,7 +136,7 @@ def calculate_esg_score(company_data, employee_data):
 
     # Add the carbon credit score and rating to the report
     report["carbon_credit_rating"] = carbon_credit_rating
-    report["average_energy_score"] = (travel_emissions_rating + emissions_rating + flight_emissions_rating) / 3
+    report["average_energy_score"] = round((travel_emissions_rating + emissions_rating + flight_emissions_rating) / 3, 2)
 
     #Primary Waste generator 
     
@@ -562,7 +565,7 @@ def calculate_esg_score(company_data, employee_data):
         risk_level_fin = "low probability"
     
     report["Financial_Risk"] = (f"Financial Risk stands at {Financial_risk:.2f}% putting you at a {risk_level_fin} of risk in this area.")
-    
+
     #Operational Risk 
     Operational_Risk = ((infomation_flow_efficency - 1) / 9) + ((supplier_retention_score - 1) / 9) + (0.61) + ((location_rating - 1) / 9) + ((selected_anti - 1) / 9)
     if Operational_Risk >= 70:
@@ -579,7 +582,6 @@ def calculate_esg_score(company_data, employee_data):
 
     #Total social
     total_social = ((0.1*leader_confidence + 0.1*employee_inclusion + 0.1*average_salary_rating + 0.1*diversity_index + 0.1*work_hours_rating + 0.05*tenure_promotion_index + 0.1*health_satisfaction_index + 0.1*wellbeing_training_index + 0.1*employee_job_related_training + 0.05*turnover_rating + 0.1*average_culture_satisfaction) / 11)*10
-
    
     #Total Governance
     total_governance = ((0.1 *location_rating + 0.1 *supplier_retention_score + 0.05*get_volatility_value(company_data["industry"]) + 0.05*get_sector_value(company_data["industry"]) + 0.2*profit_rating + 0.1 *infomation_flow_efficency + 0.1 *structure_rating
