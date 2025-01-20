@@ -18,7 +18,7 @@ class PDF(FPDF):
         image_height = 25
         image_x = self.w - image_width - 10
         image_y = self.h - image_height - 10
-        self.image("logo.png", x=image_x, y=image_y, w=image_width, h=image_height)
+        self.image("logo1.png", x=image_x, y=image_y, w=image_width, h=image_height)
 
 
     def add_section_title(self, title):
