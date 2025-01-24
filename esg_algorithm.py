@@ -159,7 +159,40 @@ def calculate_esg_score(company_data, employee_data):
     waste_value = get_waste_value(company_data["primary_waste_generator"])
     report["waste_value"] = waste_value
     #SDGs
-    report["selected_sdgs"] = company_data["selected_sdgs"]
+    #Ensure company_data["selected_sdgs"] is valid
+    report["selected_sdgs"] = company_data.get("selected_sdgs", [])
+
+    # SDG image paths dictionary
+    sdg_image_paths = {
+        "No Poverty": "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/Poverty.png",
+        "Zero Hunger": "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/Zero Hunger.png",
+        "Good Health and Well-Being": "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/Good health.png",
+        "Quality Education": "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/education.png",
+        "Gender Equality": "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/Gender Equality.png",
+        "Clean Water and Sanitation": "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/Clean water.png",
+        "Affordable and Clean Energy": "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/energy.png",
+        "Decent Work and Economic Growth": "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/decent work.png",
+        "Industry, Innovation and Infrastructure": "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/industry, innovation.png",
+        "Reduced Inequality": "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/inequalities.png",
+        "Sustainable Cities and Communities": "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/sustainable cities.png",
+        "Responsible Consumption and Production": "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/Responsible consumption.png",
+        "Climate Action": "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/climate action.png",
+        "Life Below Water": "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/life below water.png",
+        "Life on Land": "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/life on land.png",
+        "Peace, Justice, and Strong Institutions": "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/peace justice.png",
+        "Partnerships for the Goals": "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/partnerships for the goals.png",
+}
+
+    # Helper function for mapping SDGs to image paths
+    def map_sdgs_to_paths(selected_sdgs, sdg_image_map):
+        missing_sdgs = [sdg for sdg in selected_sdgs if sdg not in sdg_image_map]
+        if missing_sdgs:
+            print(f"Warning: The following SDGs are missing image paths: {missing_sdgs}")
+        return [sdg_image_map[sdg] for sdg in selected_sdgs if sdg in sdg_image_map]
+
+    # Map SDGs to their image paths
+    report["sdg_image_paths"] = map_sdgs_to_paths(report["selected_sdgs"], sdg_image_paths)
+
 
     #######Social##########Social##########Social##########Social##########Social##########Social##########Social#######
     #Leadership_Rating

@@ -1,37 +1,33 @@
-#from fpdf import FPDF
-#import os
+from fpdf import FPDF
+import os
 
 # Custom PDF class for generating reports
 class PDF(FPDF):
-    def header(self):
-        self.set_font('Helvetica', 'B', 16)
-        self.set_text_color(0, 102, 204)
-        self.cell(0, 10, 'ESG Report', 0, 1, 'C')
-        self.ln(10)
+    
     
     def add_cover_page(self, company_name):
         self.add_page()
 
         # Add a background image
-        self.image("/Users/a.chhawchharia.26/Downloads/background_design.png", x=0, y=0, w=self.w, h=self.h)
-
+        self.image("/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/back1.png", x=0, y=0, w=self.w, h=self.h)
         # Add title text
-        self.set_xy(10, 50)  # Set position explicitly
-        self.set_font('Helvetica', 'B', 28)
+        self.set_xy(5, 50)  # Adjust the X position slightly to the left
+        self.set_font('Helvetica', 'B', 44)  # Increase font size for larger text
         self.set_text_color(0, 51, 102)  # Navy blue
-        self.multi_cell(self.w - 20, 15, 'Environmental, Social, \nGovernance Report', align='C')
+        self.multi_cell(self.w - 10, 20, 'Environmental, Social, \nGovernance Report', align='C')  # Reduce margins to stretch wider
+
 
         # Add company name
         self.set_xy(10, 120)
-        self.set_font('Helvetica', 'B', 20)
-        self.set_text_color(0, 102, 204)  # Blue
+        self.set_font('Helvetica', 'B', 30)
+        self.set_text_color(0, 0, 0)  # Blue
         self.cell(self.w - 20, 15, company_name, 0, 1, 'C')
 
         # Add subtext
         self.set_xy(10, 160)
-        self.set_font('Helvetica', 'I', 14)
-        self.set_text_color(100, 100, 100)  # Gray
-        self.cell(self.w - 20, 10, 'An in-depth analysis of ESG metrics and company performance', 0, 1, 'C')
+        self.set_font('Helvetica', 'I', 20)
+        self.set_text_color(0, 0, 0)  # Gray
+        self.cell(self.w - 20, 10, 'ESG metrics and company performance', 0, 1, 'C')
 
 
     def footer(self):
@@ -49,7 +45,7 @@ class PDF(FPDF):
         image_y = self.h - image_height - 10  # Y position (bottom margin)
         
         # Place the image (bottom-right corner)
-        self.image("/Users/a.chhawchharia.26/Downloads/logo1.png", x=image_x, y=image_y, w=image_width, h=image_height)
+        self.image("/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/GElogo.png", x=image_x, y=image_y, w=image_width, h=image_height)
 
 
     def add_section_title(self, title):
@@ -60,7 +56,7 @@ class PDF(FPDF):
 
     def add_text(self, label, value, max_width=180):
         self.set_font('Helvetica', '', 12)
-        self.set_text_color(0, 0, 0)
+        self.set_text_color(255, 255, 255)
         self.multi_cell(0, 10, f'{label}: {value}', border=0, align='L')  # multi_cell for wrapping text
         self.ln(3)
 
@@ -71,39 +67,12 @@ class PDF(FPDF):
         self.ln(5)
     
 
-    
-
 # Function to generate the PDF report
 def generate_pdf(report):
     pdf = PDF()
     pdf.set_auto_page_break(auto=True, margin=15)  # Enable auto page break
-        
-    pdf.add_page()
     
-    def add_cover_page(self, company_name):
-        self.add_page()
-        # Add a background image
-        self.image("/Users/a.chhawchharia.26/Downloads/background_design.png", x=0, y=0, w=self.w, h=self.h)  # Adjust with your background file
-
-        # Add title text
-        self.set_y(50)
-        self.set_font('Helvetica', 'B', 28)
-        self.set_text_color(0, 51, 102)  # Navy blue
-        self.multi_cell(0, 15, 'Environmental, Social, \nGovernance Report', align='C')
-
-        # Add company name
-        self.set_y(120)
-        self.set_font('Helvetica', 'B', 20)
-        self.set_text_color(0, 102, 204)  # Blue
-        self.cell(0, 15, company_name, 0, 1, 'C')
-
-        # Add a subtext
-        self.set_y(160)
-        self.set_font('Helvetica', 'I', 14)
-        self.set_text_color(100, 100, 100)  # Gray
-        self.cell(0, 10, 'An in-depth analysis of ESG metrics and company performance', 0, 1, 'C')
-    
-    
+    pdf.add_cover_page("EcoSphere Solutions Pvt. Ltd.")
     
     pdf.add_page()
     
@@ -124,14 +93,17 @@ def generate_pdf(report):
     # Add a new page for environment data
     pdf.add_page()
     pdf.add_section_title("Environment Data")
-    pdf.add_box("Value-Based Resource Efficiency", report["value_based_resource_efficiency_s"])
+    pdf.add_text("Value-Based Resource Efficiency", report["value_based_resource_efficiency_s"])
     pdf.add_text("Environment Laws Compliance", report["Enviroment_Laws_Compliance"])
     pdf.add_text("Sustainability Stance", report["sustainability_stance"])
     pdf.add_text("Green Product Revenue Percentage", report["green_product_revenue_percentage"])
     pdf.add_text("Green Energy Score", report["green_energy_score"])
     pdf.add_text("Phone Charges", report["phone_charges"])
     pdf.add_text("Emissions Rating", report["emissions_rating"])
+    
     pdf.add_page()
+    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/backlogoenv.png"
+    pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     pdf.add_text("Bath Tubs Full", report["bath_tubs_full"])
     pdf.add_text("Water Usage Rating", report["water_usage_rating"])
     pdf.add_text("Flight Emissions Rating", report["flight_emissions_rating"])
@@ -141,10 +113,35 @@ def generate_pdf(report):
     pdf.add_text("Total Carbon", report["total_carbon"])
     pdf.add_text("Carbon Credit Rating", report["carbon_credit_rating"])
     pdf.add_text("Selected SDGs", ", ".join(report["selected_sdgs"]))
+# Adding images for the selected SDGs
+    # y_offset = pdf.get_y() + 10  # Start placing images below the last text
+    # x_start = 10  # X-coordinate for images
+    # image_width = 40  # Width of each image
+    # image_height = 40  # Height of each image
+    # space_between = 10  # Space between images
+
+    # page_height = pdf.h - pdf.t_margin - pdf.b_margin  # Usable page height
+
+    # for index, image_path in enumerate(report["sdg_image_paths"]):
+    #     if os.path.exists(image_path):
+    #         x_position = x_start + (index % 4) * (image_width + space_between)
+    #         y_position = y_offset + (index // 4) * (image_height + space_between)
+
+    #         # Add a new page if necessary
+    #         if y_position + image_height > page_height:
+    #             pdf.add_page()
+    #             y_offset = pdf.t_margin
+    #             y_position = y_offset + (index // 4) * (image_height + space_between)
+
+    #         pdf.image(image_path, x=x_position, y=y_position, w=image_width, h=image_height)
+    #     else:
+    #         print(f"Warning: Image file not found - {image_path}")
 
 
     # Add a new page for social and governance data
     pdf.add_page()
+    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     pdf.add_section_title("Social and Governance Data")
     pdf.add_text("Average Culture Satisfaction", report["average_culture_satisfaction"])
     pdf.add_text("Employee Inclusion", report["employee_inclusion"])
@@ -160,6 +157,9 @@ def generate_pdf(report):
 
     # Add additional sections as needed
     pdf.add_page()
+
+
+    # Adding content on top of the background
     pdf.add_section_title("Additional Information")
     pdf.add_text("Customer Feedbacks", report["Customer_feedbacks"])
     pdf.add_text("Customer Statement", report["customer_statement"])

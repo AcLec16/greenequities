@@ -12,7 +12,7 @@ def run():
 
     company_answers["company_name"] = st.text_input("Company name") 
     company_answers["form_filler"] = st.text_input("Name of person responsible for filling out this form")
-    company_answers["current_financial_year_month"] = st.text_input("Current date YYYY/MM/DD")
+    company_answers["current_financial_year_month"] = st.date_input("Today's date YYYY/MM/DD")
     company_answers["main_business_activity"] = st.text_area("Description of main business activity (product/service)")
     company_answers["website"] = st.text_input("Website")
     company_answers["email_address"] = st.text_input("Email address")
@@ -21,13 +21,13 @@ def run():
     company_answers["mission_statement"] = st.text_area("Mission statement")
     company_answers["year_of_opening"] = st.number_input("Year of Opening", min_value=1900, max_value=2100, step=1)
     company_answers["selected_locations"] = st.selectbox(
-    "Select Office Location:",
+    "Select Main Office Location:",
     ["Bengaluru", "Delhi", "Hyderabad", "Worli", "Malabar & Cumballa Hill", "Juhu", "Bandra Kurla Complex", "Nariman Point", 
      "Andheri", "Lower Parel", "Parel", "Bandra", "Santacruz", "Ghatkopar", "Thane", 
      "Goregaon", "Byculla", "Fort", "Borivali", "Jogeshwari", "Khar", "Malad", 
      "Vile Parle", "Chembur", "Dharavi", "Colaba", "Dadar", "Other"])
     
-    company_answers["custom_location"] = st.text_input("Specify other location")
+    company_answers["custom_location"] = st.text_input("If your location is not in the list, please specify other location")
     company_answers["industry"] = st.radio(
     "Select Industry:",
     [
@@ -134,11 +134,7 @@ def run():
             "Partnerships for the Goals"
         ]
     )
-    
-    
-    
-    # Governance and Policies
-     
+         
     # Financial and Operational Metrics
     company_answers["monthly_water_bill"] = st.number_input("What is the monthly Water Bill?", min_value=0.0, step=0.01)
     company_answers["monthly_electricity_bill"] = st.number_input("What is the monthly Electricity cost?", min_value=0.0, step=0.01)
