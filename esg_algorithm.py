@@ -5,6 +5,8 @@ def calculate_esg_score(company_data, employee_data):
     report = {}
     
     report["company_name"] =  company_data["company_name"]
+    report["form_filler"] = company_data["form_filler"]
+    report["CEO_message"] = company_data["CEO_message"]
     report["current_financial_year_month"] = company_data["current_financial_year_month"]
     report["main_business_activity"] = company_data["main_business_activity"]
     report["website"] =  company_data["website"]
@@ -14,7 +16,9 @@ def calculate_esg_score(company_data, employee_data):
     report["mission_statement"] =  company_data["mission_statement"]
     report["year_of_opening"] = company_data["year_of_opening"]
     report["selected_locations"] = company_data["selected_locations"]
-    
+    report["csr_person"] = company_data["csr_person"]
+    report["materiality_assessment"] = company_data["materiality_assessment"]
+
     kwh_electricity = company_data["monthly_electricity_bill"] / 8
     #Enviroment 
     # Value Based Revenue Efficiency

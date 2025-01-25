@@ -9,24 +9,24 @@ class PDF(FPDF):
         self.add_page()
 
         # Add a background image
-        self.image("/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/back1.png", x=0, y=0, w=self.w, h=self.h)
+        self.image("/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/Untitled design (24).png", x=0, y=0, w=self.w, h=self.h)
         # Add title text
-        self.set_xy(5, 50)  # Adjust the X position slightly to the left
+        self.set_xy(5, 30)  # Adjust the X position slightly to the left
         self.set_font('Helvetica', 'B', 44)  # Increase font size for larger text
-        self.set_text_color(0, 51, 102)  # Navy blue
+        self.set_text_color(255, 255, 255)  # Navy blue
         self.multi_cell(self.w - 10, 20, 'Environmental, Social, \nGovernance Report', align='C')  # Reduce margins to stretch wider
 
 
         # Add company name
-        self.set_xy(10, 120)
+        self.set_xy(10, 95)
         self.set_font('Helvetica', 'B', 30)
-        self.set_text_color(0, 0, 0)  # Blue
+        self.set_text_color(255, 255, 255)  # Blue
         self.cell(self.w - 20, 15, company_name, 0, 1, 'C')
 
         # Add subtext
-        self.set_xy(10, 160)
+        self.set_xy(10, 130)
         self.set_font('Helvetica', 'I', 20)
-        self.set_text_color(0, 0, 0)  # Gray
+        self.set_text_color(255, 255, 255)  # Gray
         self.cell(self.w - 20, 10, 'ESG metrics and company performance', 0, 1, 'C')
 
 
@@ -49,8 +49,8 @@ class PDF(FPDF):
 
 
     def add_section_title(self, title):
-        self.set_font('Helvetica', 'B', 14)
-        self.set_text_color(0, 0, 0)
+        self.set_font('Helvetica', 'B', 20)
+        self.set_text_color(255, 255, 255)
         self.cell(0, 10, title, 0, 1, 'L')
         self.ln(5)
 
@@ -75,37 +75,66 @@ def generate_pdf(report):
     pdf.add_cover_page("EcoSphere Solutions Pvt. Ltd.")
     
     pdf.add_page()
+    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/pg. 01.png"
+    pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     
-    
-    # Company Details
-    pdf.add_section_title("Company Details")
-    pdf.add_text("Company Name", report["company_name"])
+    pdf.add_page()
+    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
+    pdf.add_section_title("Message from the CEO")
+    pdf.add_text("Message from the CEO", report["CEO_message"])
+    pdf.add_text("Name of the CEO", report["form_filler"])
+
+    pdf.add_page()
+    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
+    pdf.add_section_title("About the report")
+    pdf.add_text("Message from the CEO", report["CEO_message"])
+
+    pdf.add_page()
+    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
+    pdf.add_section_title("Executive Summary")
     pdf.add_text("Financial Year (Month)", report["current_financial_year_month"])
+    pdf.add_text("Company Name", report["company_name"])
+    pdf.add_text("Mission Statement", report["mission_statement"])
+    pdf.add_text("Year of Opening", report["year_of_opening"])
     pdf.add_text("Main Business Activity", report["main_business_activity"])
+    pdf.add_text("Selected Locations", ", ".join(report["selected_locations"]))
+
+    # Company Details
+    pdf.add_page()
+    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
+    pdf.set_y(20)
+    pdf.add_section_title("Corporate Overview")
+    pdf.set_y(40)
     pdf.add_text("Website", report["website"])
     pdf.add_text("Email Address", report["email_address"])
     pdf.add_text("Telephone", report["telephone"])
     pdf.add_text("Social Media", report["social_media"])
-    pdf.add_text("Mission Statement", report["mission_statement"])
-    pdf.add_text("Year of Opening", report["year_of_opening"])
-    pdf.add_text("Selected Locations", ", ".join(report["selected_locations"]))
+    pdf.add_text("Company sustainability", report["sustainability_stance"])
 
     # Add a new page for environment data
     pdf.add_page()
-    pdf.add_section_title("Environment Data")
+    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
+    pdf.set_y(20)
+    pdf.add_section_title("Environmental Performance")
+    pdf.set_y(40)
     pdf.add_text("Value-Based Resource Efficiency", report["value_based_resource_efficiency_s"])
     pdf.add_text("Environment Laws Compliance", report["Enviroment_Laws_Compliance"])
-    pdf.add_text("Sustainability Stance", report["sustainability_stance"])
     pdf.add_text("Green Product Revenue Percentage", report["green_product_revenue_percentage"])
     pdf.add_text("Green Energy Score", report["green_energy_score"])
+    pdf.add_text("Electricity Rating", report["emissions_rating"])
     pdf.add_text("Phone Charges", report["phone_charges"])
-    pdf.add_text("Emissions Rating", report["emissions_rating"])
+    
     
     pdf.add_page()
-    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/backlogoenv.png"
+    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/Untitled design (21).png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
-    pdf.add_text("Bath Tubs Full", report["bath_tubs_full"])
     pdf.add_text("Water Usage Rating", report["water_usage_rating"])
+    pdf.add_text("Bath Tubs Full", report["bath_tubs_full"])
     pdf.add_text("Flight Emissions Rating", report["flight_emissions_rating"])
     pdf.add_text("Distance to the Moon", report["distance_to_the_moon"])
     pdf.add_text("Travel Emissions Rating", report["travel_emissions_rating"])
@@ -140,48 +169,75 @@ def generate_pdf(report):
 
     # Add a new page for social and governance data
     pdf.add_page()
-    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/Untitled design (22).png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
-    pdf.add_section_title("Social and Governance Data")
+    pdf.set_y(20)
+    pdf.add_section_title("Social Sustainability")
+    pdf.set_y(45)
     pdf.add_text("Average Culture Satisfaction", report["average_culture_satisfaction"])
     pdf.add_text("Employee Inclusion", report["employee_inclusion"])
     pdf.add_text("Diversity Index", report["diversity_index"])
     pdf.add_text("Employee Compensation Fairness", report["employee_compensation_fairness"])
     pdf.add_text("Work Hours", report["work_hours"])
-    pdf.add_text("Tenure Promotion Index", report["tenure_promotion_index"])
-    pdf.add_text("Health Satisfaction Index", report["health_satisfaction_index"])
-    pdf.add_text("Turnover Rating", report["turnover_rating"])
-    pdf.add_text("Wellbeing Training Index", report["wellbeing_training_index"])
-    pdf.add_text("Employee Job-Related Training", report["employee_job_related_training"])
-    pdf.add_text("Supplier Retention Score", report["supplier_retention_score"])
+    pdf.add_text("Career Growth", report["tenure_promotion_index"])
+    pdf.add_text("Health & Safety", report["health_satisfaction_index"])
+    pdf.add_text("Employee Turnover Rating", report["turnover_rating"])
+    pdf.add_text("Employee Wellbeing Development Index", report["wellbeing_training_index"])
+    pdf.add_text("Employee Job-Related Development", report["employee_job_related_training"])
+    pdf.add_text("Workplace Average", report["workplace_average"])
+
 
     # Add additional sections as needed
     pdf.add_page()
-
-
+    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/Untitled design (23).png"
+    pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     # Adding content on top of the background
-    pdf.add_section_title("Additional Information")
+    pdf.set_y(20)
+    pdf.add_section_title("Stakeholder engagement")
+    pdf.set_y(40)
     pdf.add_text("Customer Feedbacks", report["Customer_feedbacks"])
     pdf.add_text("Customer Statement", report["customer_statement"])
-    pdf.add_text("NGO Statement", report["NGO_statement"])
     pdf.add_text("Social Impact Partnerships", report["social_impact_partnerships"])
-    pdf.add_text("Sector Growth Rating", report["Sector_growth_Rating"])
+    pdf.add_text("NGO Statement", report["NGO_statement"])
+    pdf.add_text("Supplier Retention Score", report["supplier_retention_score"])
+    pdf.add_text("supplier_statement", report["supply_statement"])
+    pdf.add_text("Investor/Shareholder_statement", report["Investor/Shareholder_statement"])
+
+    pdf.add_page()
+    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
+    pdf.set_y(20)
+    pdf.add_section_title("Leadership and Governance")
+    pdf.set_y(40)
+    # Adding other sections
+    pdf.add_text("Corporate Structure", report["cooperate_stucture"]) 
+    pdf.add_text("Information Flow Efficiency", report["infomation_flow_efficency"])
+    pdf.add_text("Profit to Revenue Ratio", report["profit_to_revenue_ratio"])
+    pdf.add_text("Business Location Rating", report["buissnes_location_rating"])
     pdf.add_text("Awards Received", report["awards_received"])
     pdf.add_text("Compliance Certifications", report["compliance_certifications"])
     pdf.add_text("Anti-Corruption Score", report["Anti_Corruption_score"])
-    
-    # Adding other sections
-    pdf.add_text("Information Flow Efficiency", report["infomation_flow_efficency"])
+
+    pdf.add_page()
+    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
+    pdf.set_y(20)
+    pdf.add_section_title("Market Sentiment & Sector Growth")
+    pdf.set_y(40)
     pdf.add_text("Geopolitical Risk Index", report["Geopolitical_Risk_Index"])
     pdf.add_text("India News Sentiment", report["India_News_sentiment"])
     pdf.add_text("India Internet Sentiment", report["India_Internet_sentiment"])
     pdf.add_text("Market Uncertainty", report["Market_Uncertainty"])
-    pdf.add_text("Corporate Structure", report["cooperate_stucture"])
-    pdf.add_text("Profit to Revenue Ratio", report["profit_to_revenue_ratio"])
-    pdf.add_text("Business Location Rating", report["buissnes_location_rating"])
-    pdf.add_text("Workplace Average", report["workplace_average"])
+    pdf.add_text("Sector Growth Rating", report["Sector_growth_Rating"])
 
     # Adding risk and other sections
+    pdf.add_page()
+    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
+    pdf.set_y(20)
+    pdf.set_font("Arial", size=26)
+    pdf.add_section_title("Final Scores")
+    pdf.set_y(50)
     pdf.add_text("Strategic Risk", report["strategic_risk"])
     pdf.add_text("Compliance and Regulatory Risk", report["Compliance_and_Regulatory_Risk"])
     pdf.add_text("Financial Risk", report["Financial_Risk"])
@@ -200,7 +256,11 @@ def generate_pdf(report):
 
 # Sample data for testing
 sample_report = {
+    "CEO_message": "Hello, My name is CEO",
+    "form_filler": "CEO",
+    "supply_statement": "Hello I help people",
     "company_name": "EcoSphere Solutions Pvt. Ltd.",
+    "Investor/Shareholder_statement": "Investors",
     "current_financial_year_month": "2025/01/11",
     "main_business_activity": "Manufacturing and distribution of eco-friendly packaging solutions.",
     "website": "www.ecospheresolutions.com",

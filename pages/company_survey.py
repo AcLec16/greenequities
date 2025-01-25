@@ -11,7 +11,8 @@ def run():
     #General Company Infomation 
 
     company_answers["company_name"] = st.text_input("Company name") 
-    company_answers["form_filler"] = st.text_input("Name of person responsible for filling out this form")
+    company_answers["CEO_message"] = st.text_input("Message from the CEO regarding responsibility and sustainability in the company")
+    company_answers["form_filler"] = st.text_input("Name of the CEO")
     company_answers["current_financial_year_month"] = st.date_input("Today's date YYYY/MM/DD")
     company_answers["main_business_activity"] = st.text_area("Description of main business activity (product/service)")
     company_answers["website"] = st.text_input("Website")
@@ -21,7 +22,7 @@ def run():
     company_answers["mission_statement"] = st.text_area("Mission statement")
     company_answers["year_of_opening"] = st.number_input("Year of Opening", min_value=1900, max_value=2100, step=1)
     company_answers["selected_locations"] = st.selectbox(
-    "Select Main Office Location:",
+    "Select Main Office Location:", 
     ["Bengaluru", "Delhi", "Hyderabad", "Worli", "Malabar & Cumballa Hill", "Juhu", "Bandra Kurla Complex", "Nariman Point", 
      "Andheri", "Lower Parel", "Parel", "Bandra", "Santacruz", "Ghatkopar", "Thane", 
      "Goregaon", "Byculla", "Fort", "Borivali", "Jogeshwari", "Khar", "Malad", 
@@ -39,6 +40,17 @@ def run():
     company_answers["csr_person"] = st.radio(
     "Does the entity have a specified Committee of the Board/Director responsible for corporate responsibility-related activities?", 
     ("Yes", "No"))
+
+    company_answers["materiality_assessment"] = st.multiselect("Please select and rank the aspects that are most material to your organization",[
+    "Climate Change Impact", "Resource Efficiency and Circular Economy", "Water and Waste Management",
+    "Energy Management and Renewable Energy Usage", "Carbon Emissions and Offsetting", "Biodiversity and Ecosystem Preservation",
+    "Employee Wellbeing and Safety", "Diversity, Equity, and Inclusion (DEI)", "Human Rights and Labor Practices",
+    "Community Engagement and Social Impact", "Corporate Governance and Leadership", "Compliance and Business Ethics",
+    "Customer Privacy and Data Protection", "Product Quality and Safety", "Innovation, Research, and Development",
+    "Sustainable Supply Chain Management","Stakeholder Engagement and Transparency","Risk Management and Resilience",
+    "Financial Performance and Economic Impact","Regulatory Compliance and Anti-Corruption Measures",
+    ])
+ 
     
     
     # Environmental 
@@ -134,6 +146,7 @@ def run():
             "Partnerships for the Goals"
         ]
     )
+   
          
     # Financial and Operational Metrics
     company_answers["monthly_water_bill"] = st.number_input("What is the monthly Water Bill?", min_value=0.0, step=0.01)
