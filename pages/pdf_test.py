@@ -75,7 +75,7 @@ def generate_pdf(report):
     pdf.add_cover_page("EcoSphere Solutions Pvt. Ltd.")
     
     pdf.add_page()
-    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/pg. 01.png"
+    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/pg. 01 (1).png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     
     pdf.add_page()
@@ -102,6 +102,7 @@ def generate_pdf(report):
     pdf.add_text("Main Business Activity", report["main_business_activity"])
     pdf.add_text("Selected Locations", ", ".join(report["selected_locations"]))
 
+
     # Company Details
     pdf.add_page()
     background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
@@ -113,7 +114,15 @@ def generate_pdf(report):
     pdf.add_text("Email Address", report["email_address"])
     pdf.add_text("Telephone", report["telephone"])
     pdf.add_text("Social Media", report["social_media"])
+    
+    pdf.add_page()
+    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
+    pdf.set_y(20)
     pdf.add_text("Company sustainability", report["sustainability_stance"])
+    materiality_list = report["materiality_assessment"]
+    formatted_materiality = "\n".join([f"{i + 1}. {item}" for i, item in enumerate(materiality_list)])
+    pdf.add_text("Materiality Assessment", formatted_materiality)
 
     # Add a new page for environment data
     pdf.add_page()
@@ -123,12 +132,14 @@ def generate_pdf(report):
     pdf.add_section_title("Environmental Performance")
     pdf.set_y(40)
     pdf.add_text("Value-Based Resource Efficiency", report["value_based_resource_efficiency_s"])
-    pdf.add_text("Environment Laws Compliance", report["Enviroment_Laws_Compliance"])
+    pdf.add_text("Environment Laws Compliance", report["Enviroment_Laws_Compliance_list"])
     pdf.add_text("Green Product Revenue Percentage", report["green_product_revenue_percentage"])
     pdf.add_text("Green Energy Score", report["green_energy_score"])
     pdf.add_text("Electricity Rating", report["emissions_rating"])
     pdf.add_text("Phone Charges", report["phone_charges"])
-    
+    env_list = report["Enviroment_Laws_Compliance_list"]
+    formatted_env = "\n".join([f"{i + 1}. {item}" for i, item in enumerate(env_list)])
+    pdf.add_text("Enviromental Law compliance", formatted_env)
     
     pdf.add_page()
     background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/Untitled design (21).png"
@@ -194,14 +205,14 @@ def generate_pdf(report):
     # Adding content on top of the background
     pdf.set_y(20)
     pdf.add_section_title("Stakeholder engagement")
-    pdf.set_y(40)
+    pdf.set_y(50)
     pdf.add_text("Customer Feedbacks", report["Customer_feedbacks"])
     pdf.add_text("Customer Statement", report["customer_statement"])
     pdf.add_text("Social Impact Partnerships", report["social_impact_partnerships"])
     pdf.add_text("NGO Statement", report["NGO_statement"])
     pdf.add_text("Supplier Retention Score", report["supplier_retention_score"])
-    pdf.add_text("supplier_statement", report["supply_statement"])
-    pdf.add_text("Investor/Shareholder_statement", report["Investor/Shareholder_statement"])
+    pdf.add_text("Supplier Statement", report["supply_statement"])
+    pdf.add_text("Investor/Shareholder Statement", report["Investor/Shareholder_statement"])
 
     pdf.add_page()
     background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
@@ -217,6 +228,13 @@ def generate_pdf(report):
     pdf.add_text("Awards Received", report["awards_received"])
     pdf.add_text("Compliance Certifications", report["compliance_certifications"])
     pdf.add_text("Anti-Corruption Score", report["Anti_Corruption_score"])
+    soc_list = report["Anti_Corruption_score_list"]
+    formatted_soc = "\n".join([f"{i + 1}. {item}" for i, item in enumerate(soc_list)])
+    pdf.add_text("Anti-Corruption Law compliance", formatted_soc)
+    pdf.add_text("Anti-Corruption Policy link", report["anti_corruption_policy_link"])
+    data_list = report["data_law_compliance_list"]
+    formatted_data = "\n".join([f"{i + 1}. {item}" for i, item in enumerate(data_list)])
+    pdf.add_text("Data and Technology Law compliance", formatted_data)
 
     pdf.add_page()
     background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
@@ -229,6 +247,8 @@ def generate_pdf(report):
     pdf.add_text("India Internet Sentiment", report["India_Internet_sentiment"])
     pdf.add_text("Market Uncertainty", report["Market_Uncertainty"])
     pdf.add_text("Sector Growth Rating", report["Sector_growth_Rating"])
+    pdf.add_text("Sector Volatility Rating", report["sector_volatility"])
+
 
     # Adding risk and other sections
     pdf.add_page()
@@ -258,6 +278,16 @@ def generate_pdf(report):
 sample_report = {
     "CEO_message": "Hello, My name is CEO",
     "form_filler": "CEO",
+    "Enviroment_Laws_Compliance_list": [
+        "Climate Change Impact", "Resource Efficiency and Circular Economy", "wgweggwg"],
+    "anti_corruption_policy_link": 4,
+    "Anti_Corruption_score_list": [
+        "Climate Change Impact", "Resource Efficiency and Circular Economy", "egwefwg"],
+    "data_law_compliance_list": [
+        "Climate Change Impact",
+        "Resource Efficiency and Circular Economy",
+        "Water Conservation Practices"
+    ],
     "supply_statement": "Hello I help people",
     "company_name": "EcoSphere Solutions Pvt. Ltd.",
     "Investor/Shareholder_statement": "Investors",
@@ -276,12 +306,12 @@ sample_report = {
     "green_product_revenue_percentage": 4.2,
     "green_energy_score": 6.67,
     "phone_charges": "You could charge your phone 75,000,000 times! Based on the electricity usage of 15,000 kWh.",
-    "emissions_rating": 0.24684210526315775,
+    "emissions_rating": 6,
     "bath_tubs_full": "The monthly water bill equates to approximately 993 bath tubs full of water.",
-    "water_usage_rating": 4.734893742621016,
-    "flight_emissions_rating": -0.059941116556549545,
+    "water_usage_rating": 4.7,
+    "flight_emissions_rating":6,
     "distance_to_the_moon": "The total flight time for all employees would cover approximately 1216.44 of the distance from Earth to the Moon.",
-    "travel_emissions_rating": 4.746029960366605,
+    "travel_emissions_rating": 4.74,
     "times_around_earth": "The total travel distance for all employees, with an average travel distance of 21.5 km per employee, would cover approximately 43.77 times around the Earth.",
     "total_carbon": 1372574.32,
     "carbon_credit_rating": 1,
@@ -291,6 +321,20 @@ sample_report = {
         "Quality Education",
         "No Poverty",
         "Decent Work and Economic Growth"
+    ],
+    "materiality_assessment": [
+        "Climate Change Impact", 
+        "Energy Management and Renewable Energy Usage", 
+        "Carbon Emissions and Offsetting", 
+        "Water and Waste Management", 
+        "Biodiversity and Ecosystem Preservation", 
+        "Employee Wellbeing and Safety", 
+        "Diversity, Equity, and Inclusion (DEI)", 
+        "Human Rights and Labor Practices", 
+        "Community Engagement and Social Impact", 
+        "Customer Privacy and Data Protection", 
+        "Corporate Governance and Leadership", 
+        "Compliance and Business Ethics",
     ],
     "diversity_index": 4,
     "employee_compensation_fairness": 7.5,
@@ -318,6 +362,7 @@ sample_report = {
     "profit_to_revenue_ratio": 4.5,
     "buissnes_location_rating": 6.3,
     "workplace_average": 7.0,
+    "sector_volatility": 3,
     "strategic_risk": 6.5,
     "Compliance_and_Regulatory_Risk": 7.2,
     "Financial_Risk": 5.3,

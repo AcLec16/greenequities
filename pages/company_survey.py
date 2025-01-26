@@ -42,13 +42,18 @@ def run():
     ("Yes", "No"))
 
     company_answers["materiality_assessment"] = st.multiselect("Please select and rank the aspects that are most material to your organization",[
-    "Climate Change Impact", "Resource Efficiency and Circular Economy", "Water and Waste Management",
-    "Energy Management and Renewable Energy Usage", "Carbon Emissions and Offsetting", "Biodiversity and Ecosystem Preservation",
-    "Employee Wellbeing and Safety", "Diversity, Equity, and Inclusion (DEI)", "Human Rights and Labor Practices",
-    "Community Engagement and Social Impact", "Corporate Governance and Leadership", "Compliance and Business Ethics",
-    "Customer Privacy and Data Protection", "Product Quality and Safety", "Innovation, Research, and Development",
-    "Sustainable Supply Chain Management","Stakeholder Engagement and Transparency","Risk Management and Resilience",
-    "Financial Performance and Economic Impact","Regulatory Compliance and Anti-Corruption Measures",
+    "Climate Change Impact", 
+        "Energy Management and Renewable Energy Usage", 
+        "Carbon Emissions and Offsetting", 
+        "Water and Waste Management", 
+        "Biodiversity and Ecosystem Preservation", 
+        "Employee Wellbeing and Safety", 
+        "Diversity, Equity, and Inclusion (DEI)", 
+        "Human Rights and Labor Practices", 
+        "Community Engagement and Social Impact", 
+        "Customer Privacy and Data Protection", 
+        "Corporate Governance and Leadership", 
+        "Compliance and Business Ethics",
     ])
  
     
@@ -196,13 +201,8 @@ def run():
         "Telecom Regulatory Authority of India (TRAI) Guidelines"
     ]
 )
-    company_answers["anti_corruption_policy"] = st.selectbox(
-        "Does the business have anti-corruption policies?", ("Yes", "No")
-    )
+
     company_answers["anti_corruption_policy_link"] = st.text_input("Anti-corruption policy link (if available)")
-    company_answers["board_director_responsibility"] = st.selectbox(
-        "Entity has Board/Director responsible for corporate responsibility activities", ("Yes", "No")
-    )
     company_answers["Investor/Shareholder_statement"] = st.text_area("How does your company ensure that its investments and shareholder activities align with sustainable environmental, social, and governance (ESG) practices, and what steps are taken to support long-term responsible growth?")
     company_answers["supply_statement"] = st.text_area("How does your company ensure sustainability across its supply chain, and what specific measures are taken to align with environmental, social, and governance (ESG) principles?")
 

@@ -51,7 +51,7 @@ def calculate_esg_score(company_data, employee_data):
     selected_enviro = len(company_data["compliant_laws"])
     enviro_comp = selected_enviro
     report["Enviroment_Laws_Compliance"] = enviro_comp
-    
+    report["Enviroment_Laws_Compliance_list"] = company_data["compliant_laws"]
     #sustainability_statement
     report["sustainability_stance"] = company_data["company_stance_sustainability"]
         
@@ -204,7 +204,7 @@ def calculate_esg_score(company_data, employee_data):
     for emp in employee_data:
         total_leader +=  emp["leadership_confidence"]
     leader_confidence = total_leader / len(employee_data)
-            
+    report["leader_confidence"] = leader_confidence      
     # Average of Employee Answers for "Company Culture" + EMP Satisfaction / 2
     total_emp_culture = 0 
     for emp in employee_data:
@@ -338,6 +338,7 @@ def calculate_esg_score(company_data, employee_data):
     
     selected_data_laws = len(company_data["data_comp"])
     report["data_law_compliance"] = selected_data_laws
+    report["data_law_compliance_list"] = company_data["data_comp"]
 
     #Stakeholder_engagment
     Customer_feedbacks = company_data["customer_feedback_score"] * 2
@@ -398,6 +399,7 @@ def calculate_esg_score(company_data, employee_data):
     #Anti Corruption
     selected_anti = len(company_data["Anti_Corruption"])
     report["Anti_Corruption_score"] = selected_anti 
+    report["Anti_Corruption_score_list"] = company_data["Anti_Corruption"]
 
     #Volatility 
     
@@ -422,6 +424,7 @@ def calculate_esg_score(company_data, employee_data):
         # If industry exists in the sector_ratings dictionary, return its value
         elif industry in sector_ratings_volatility:
             return sector_ratings_volatility[industry]
+        report["sector_volatility"] = sector_ratings_volatility
     
     #Information Asymmetry
     total_informed = 0 
