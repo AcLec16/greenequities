@@ -9,7 +9,7 @@ class PDF(FPDF):
         self.add_page()
 
         # Add a background image
-        self.image("/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/Untitled design (24).png", x=0, y=0, w=self.w, h=self.h)
+        self.image("images/Untitled design (24).png", x=0, y=0, w=self.w, h=self.h)
         # Add title text
         self.set_xy(5, 30)  # Adjust the X position slightly to the left
         self.set_font('Helvetica', 'B', 44)  # Increase font size for larger text
@@ -45,7 +45,7 @@ class PDF(FPDF):
         image_y = self.h - image_height - 10  # Y position (bottom margin)
         
         # Place the image (bottom-right corner)
-        self.image("/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/GElogo.png", x=image_x, y=image_y, w=image_width, h=image_height)
+        self.image("images/GElogo.png", x=image_x, y=image_y, w=image_width, h=image_height)
 
 
     def add_section_title(self, title):
@@ -75,24 +75,24 @@ def generate_pdf(report):
     pdf.add_cover_page("EcoSphere Solutions Pvt. Ltd.")
     
     pdf.add_page()
-    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/pg. 01 (1).png"
+    background_image_path = "images/pg. 01 (1).png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     
     pdf.add_page()
-    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    background_image_path = "images/black_back.png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     pdf.add_section_title("Message from the CEO")
     pdf.add_text("Message from the CEO", report["CEO_message"])
     pdf.add_text("Name of the CEO", report["form_filler"])
 
     pdf.add_page()
-    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    background_image_path = "images/black_back.png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     pdf.add_section_title("About the report")
     pdf.add_text("Message from the CEO", report["CEO_message"])
 
     pdf.add_page()
-    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    background_image_path = "images/black_back.png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     pdf.add_section_title("Executive Summary")
     pdf.add_text("Financial Year (Month)", report["current_financial_year_month"])
@@ -105,7 +105,7 @@ def generate_pdf(report):
 
     # Company Details
     pdf.add_page()
-    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    background_image_path = "images/black_back.png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     pdf.set_y(20)
     pdf.add_section_title("Corporate Overview")
@@ -116,7 +116,7 @@ def generate_pdf(report):
     pdf.add_text("Social Media", report["social_media"])
     
     pdf.add_page()
-    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    background_image_path = "images/black_back.png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     pdf.set_y(20)
     pdf.add_text("Company sustainability", report["sustainability_stance"])
@@ -126,7 +126,7 @@ def generate_pdf(report):
 
     # Add a new page for environment data
     pdf.add_page()
-    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    background_image_path = "images/black_back.png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     pdf.set_y(20)
     pdf.add_section_title("Environmental Performance")
@@ -142,7 +142,7 @@ def generate_pdf(report):
     pdf.add_text("Enviromental Law compliance", formatted_env)
     
     pdf.add_page()
-    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/Untitled design (21).png"
+    background_image_path = "images/Untitled design (21).png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     pdf.add_text("Water Usage Rating", report["water_usage_rating"])
     pdf.add_text("Bath Tubs Full", report["bath_tubs_full"])
@@ -180,7 +180,7 @@ def generate_pdf(report):
 
     # Add a new page for social and governance data
     pdf.add_page()
-    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/Untitled design (22).png"
+    background_image_path = "images/Untitled design (22).png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     pdf.set_y(20)
     pdf.add_section_title("Social Sustainability")
@@ -200,7 +200,7 @@ def generate_pdf(report):
 
     # Add additional sections as needed
     pdf.add_page()
-    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/Untitled design (23).png"
+    background_image_path = "images/Untitled design (23).png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     # Adding content on top of the background
     pdf.set_y(20)
@@ -215,7 +215,7 @@ def generate_pdf(report):
     pdf.add_text("Investor/Shareholder Statement", report["Investor/Shareholder_statement"])
 
     pdf.add_page()
-    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    background_image_path = "images/black_back.png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     pdf.set_y(20)
     pdf.add_section_title("Leadership and Governance")
@@ -237,7 +237,7 @@ def generate_pdf(report):
     pdf.add_text("Data and Technology Law compliance", formatted_data)
 
     pdf.add_page()
-    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    background_image_path = "images/black_back.png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     pdf.set_y(20)
     pdf.add_section_title("Market Sentiment & Sector Growth")
@@ -252,7 +252,7 @@ def generate_pdf(report):
 
     # Adding risk and other sections
     pdf.add_page()
-    background_image_path = "/Users/a.chhawchharia.26/Documents/GitHub/greenequities/pages/images/black_back.png"
+    background_image_path = "images/black_back.png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     pdf.set_y(20)
     pdf.set_font("Arial", size=26)
@@ -272,106 +272,3 @@ def generate_pdf(report):
     pdf_file = "ESG_Report.pdf"
     pdf.output(pdf_file)
     return pdf_file
-
-
-# Sample data for testing
-sample_report = {
-    "CEO_message": "Hello, My name is CEO",
-    "form_filler": "CEO",
-    "Enviroment_Laws_Compliance_list": [
-        "Climate Change Impact", "Resource Efficiency and Circular Economy", "wgweggwg"],
-    "anti_corruption_policy_link": 4,
-    "Anti_Corruption_score_list": [
-        "Climate Change Impact", "Resource Efficiency and Circular Economy", "egwefwg"],
-    "data_law_compliance_list": [
-        "Climate Change Impact",
-        "Resource Efficiency and Circular Economy",
-        "Water Conservation Practices"
-    ],
-    "supply_statement": "Hello I help people",
-    "company_name": "EcoSphere Solutions Pvt. Ltd.",
-    "Investor/Shareholder_statement": "Investors",
-    "current_financial_year_month": "2025/01/11",
-    "main_business_activity": "Manufacturing and distribution of eco-friendly packaging solutions.",
-    "website": "www.ecospheresolutions.com",
-    "email_address": "contact@ecospheresolutions.com",
-    "telephone": "+91-9876543210",
-    "social_media": "LinkedIn: EcoSphere Solutions Instagram: @ecospheresolutions",
-    "mission_statement": "To revolutionize packaging by offering sustainable, biodegradable, and cost-effective solutions that reduce environmental harm.",
-    "year_of_opening": 2015,
-    "selected_locations": ["Bengaluru"],
-    "value_based_resource_efficiency_s": "Value-Based Resource Efficiency 5 for every 1 of stressed resources",
-    "Enviroment_Laws_Compliance": 4,
-    "sustainability_stance": "We are committed to innovating sustainable packaging solutions that minimize environmental impact and support circular economies.",
-    "green_product_revenue_percentage": 4.2,
-    "green_energy_score": 6.67,
-    "phone_charges": "You could charge your phone 75,000,000 times! Based on the electricity usage of 15,000 kWh.",
-    "emissions_rating": 6,
-    "bath_tubs_full": "The monthly water bill equates to approximately 993 bath tubs full of water.",
-    "water_usage_rating": 4.7,
-    "flight_emissions_rating":6,
-    "distance_to_the_moon": "The total flight time for all employees would cover approximately 1216.44 of the distance from Earth to the Moon.",
-    "travel_emissions_rating": 4.74,
-    "times_around_earth": "The total travel distance for all employees, with an average travel distance of 21.5 km per employee, would cover approximately 43.77 times around the Earth.",
-    "total_carbon": 1372574.32,
-    "carbon_credit_rating": 1,
-    "average_culture_satisfaction": 6.25,
-    "employee_inclusion": 5.75,
-    "selected_sdgs": [
-        "Quality Education",
-        "No Poverty",
-        "Decent Work and Economic Growth"
-    ],
-    "materiality_assessment": [
-        "Climate Change Impact", 
-        "Energy Management and Renewable Energy Usage", 
-        "Carbon Emissions and Offsetting", 
-        "Water and Waste Management", 
-        "Biodiversity and Ecosystem Preservation", 
-        "Employee Wellbeing and Safety", 
-        "Diversity, Equity, and Inclusion (DEI)", 
-        "Human Rights and Labor Practices", 
-        "Community Engagement and Social Impact", 
-        "Customer Privacy and Data Protection", 
-        "Corporate Governance and Leadership", 
-        "Compliance and Business Ethics",
-    ],
-    "diversity_index": 4,
-    "employee_compensation_fairness": 7.5,
-    "work_hours": 5,
-    "tenure_promotion_index": 4,
-    "health_satisfaction_index": 7.5,
-    "turnover_rating": 4.5,
-    "wellbeing_training_index": 8.9,
-    "employee_job_related_training": 8.75,
-    "supplier_retention_score": 5.25,
-    "Customer_feedbacks": "Customer service for eco-friendly packaging has been responsive and proactive.",
-    "customer_statement": "We are committed to improving the quality of our products and services.",
-    "NGO_statement": "Working with local NGOs to support environmental causes.",
-    "social_impact_partnerships": "Partnered with the local sustainability nonprofit for a waste-reduction campaign.",
-    "Sector_growth_Rating": 4.5,
-    "awards_received": "Winner of the Green Business Award in 2023.",
-    "compliance_certifications": "ISO 14001:2015 certified.",
-    "Anti_Corruption_score": 7.8,
-    "infomation_flow_efficency": 5.6,
-    "Geopolitical_Risk_Index": 3.8,
-    "India_News_sentiment": 5.7,
-    "India_Internet_sentiment": 5.1,
-    "Market_Uncertainty": 7.2,
-    "cooperate_stucture": "Flexible organizational structure with regular cross-department collaboration.",
-    "profit_to_revenue_ratio": 4.5,
-    "buissnes_location_rating": 6.3,
-    "workplace_average": 7.0,
-    "sector_volatility": 3,
-    "strategic_risk": 6.5,
-    "Compliance_and_Regulatory_Risk": 7.2,
-    "Financial_Risk": 5.3,
-    "Operational_Risk": 5.9,
-    "total_environment": 7.8,
-    "total_social": 7.5,
-    "total_governance": 8.1
-}
-
-# Generate and save the PDF
-pdf_file = generate_pdf(sample_report)
-print(f"Report generated and saved as {pdf_file}")

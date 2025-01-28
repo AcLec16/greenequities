@@ -1,7 +1,7 @@
 import streamlit as st
 from firebase_config import get_company_data, get_employee_data, check_company_code, get_employee_count
 from esg_algorithm import calculate_esg_score
-from pdf_generation import generate_pdf
+from pdf_test import generate_pdf
 import os
 
 # Streamlit App
