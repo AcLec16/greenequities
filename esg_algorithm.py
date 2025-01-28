@@ -15,7 +15,6 @@ def calculate_esg_score(company_data, employee_data):
     report["social_media"] =  company_data["social_media"]
     report["mission_statement"] =  company_data["mission_statement"]
     report["year_of_opening"] = company_data["year_of_opening"]
-    report["selected_locations"] = company_data["selected_locations"]
     report["csr_person"] = company_data["csr_person"]
     report["materiality_assessment"] = company_data["materiality_assessment"]
     report["anti_corruption_policy_link"] = company_data["anti_corruption_policy_link"]
@@ -571,6 +570,9 @@ def calculate_esg_score(company_data, employee_data):
     else:
         report["selected_locations"] = company_data["selected_locations"]
         report["workplace_average"] = (location_rating + physical_workplace_rating) / 2
+        
+    
+
 
     #Strategic Risk
     strategic_risk =  ((get_sector_value(company_data["industry"]) - 1 / 9)) +  ((Customer_feedbacks - 1 / 9)) + ((vbre - 1) / 9) + ((leader_confidence - 1) / 9) + ((informed_rating - 1) / 9)
