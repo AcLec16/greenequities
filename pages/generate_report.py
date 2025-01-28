@@ -14,11 +14,11 @@ def run():
         num_emp = get_employee_count(company_code)
         if num_emp > 1:
             if st.button("Generate Report"):
-                company_data = get_company_data(company_code)
-                employee_data = get_employee_data(company_code)
-                
-                report = calculate_esg_score(company_data, employee_data)
-                
+                with st.spinner("Getting Data"):
+                    company_data = get_company_data(company_code)
+                    employee_data = get_employee_data(company_code)
+                with st.spinner("Generating Report"):
+                    report = calculate_esg_score(company_data, employee_data)
 
                 # Generate and display PDF
                 with st.spinner("Generating PDF"):
