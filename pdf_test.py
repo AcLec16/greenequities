@@ -154,28 +154,28 @@ def generate_pdf(report):
     pdf.add_text("Carbon Credit Rating", report["carbon_credit_rating"])
     pdf.add_text("Selected SDGs", ", ".join(report["selected_sdgs"]))
 # Adding images for the selected SDGs
-    # y_offset = pdf.get_y() + 10  # Start placing images below the last text
-    # x_start = 10  # X-coordinate for images
-    # image_width = 40  # Width of each image
-    # image_height = 40  # Height of each image
-    # space_between = 10  # Space between images
+    y_offset = pdf.get_y() + 10  # Start placing images below the last text
+    x_start = 10  # X-coordinate for images
+    image_width = 40  # Width of each image
+    image_height = 40  # Height of each image
+    space_between = 10  # Space between images
 
-    # page_height = pdf.h - pdf.t_margin - pdf.b_margin  # Usable page height
+    page_height = pdf.h - pdf.t_margin - pdf.b_margin  # Usable page height
 
-    # for index, image_path in enumerate(report["sdg_image_paths"]):
-    #     if os.path.exists(image_path):
-    #         x_position = x_start + (index % 4) * (image_width + space_between)
-    #         y_position = y_offset + (index // 4) * (image_height + space_between)
+    for index, image_path in enumerate(report["sdg_image_paths"]):
+        if os.path.exists(image_path):
+            x_position = x_start + (index % 4) * (image_width + space_between)
+            y_position = y_offset + (index // 4) * (image_height + space_between)
 
-    #         # Add a new page if necessary
-    #         if y_position + image_height > page_height:
-    #             pdf.add_page()
-    #             y_offset = pdf.t_margin
-    #             y_position = y_offset + (index // 4) * (image_height + space_between)
+            # Add a new page if necessary
+            if y_position + image_height > page_height:
+                pdf.add_page()
+                y_offset = pdf.t_margin
+                y_position = y_offset + (index // 4) * (image_height + space_between)
 
-    #         pdf.image(image_path, x=x_position, y=y_position, w=image_width, h=image_height)
-    #     else:
-    #         print(f"Warning: Image file not found - {image_path}")
+            pdf.image(image_path, x=x_position, y=y_position, w=image_width, h=image_height)
+        else:
+            print(f"Warning: Image file not found - {image_path}")
 
 
     # Add a new page for social and governance data
