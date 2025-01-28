@@ -24,7 +24,7 @@ def calculate_esg_score(company_data, employee_data):
     # Value Based Revenue Efficiency
     VRE_denominator = company_data["monthly_electricity_bill"] + company_data["monthly_water_bill"] + company_data["monthly_salary_costs"] + company_data["monthly_land_costs"] + company_data["monthly_raw_material_costs"]
     vbre = company_data["total_yearly_revenue"] /  VRE_denominator
-    report["value_based_resource_efficiency_s"] = f"Value-Based Resource Efficiency (value_based_resource_efficiency) for every ₹1 of stressed resources: {vbre:.2f}"
+    report["value_based_resource_efficiency_s"] = f"Value-Based Resource Efficiency Rs(value_based_resource_efficiency) for every Rs 1 of stressed resources: {vbre:.2f}"
     vbre_rating = 0
     if vbre <= 0.5:
         vbre_rating =  1
