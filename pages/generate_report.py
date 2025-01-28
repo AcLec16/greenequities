@@ -19,7 +19,7 @@ def run():
                 
                 report = calculate_esg_score(company_data, employee_data)
                 st.write("**ESG Report Data**")
-                st.json(report)
+            
 
                 # Generate and display PDF
                 pdf_file = generate_pdf(report)
