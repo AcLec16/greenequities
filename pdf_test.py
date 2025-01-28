@@ -142,7 +142,7 @@ def generate_pdf(report):
     pdf.add_text("Enviromental Law compliance", "\n" + formatted_env)
     
     pdf.add_page()
-    background_image_path = "images/pg. 01 (2).png"
+    background_image_path = "images/pg. 01 (3).png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     pdf.add_text("Water Usage Rating", report["water_usage_rating"])
     pdf.add_text("Bath Tubs Full", report["bath_tubs_full"])
