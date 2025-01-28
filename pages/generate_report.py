@@ -22,7 +22,8 @@ def run():
                 st.write(report["selected_locations"])
 
                 # Generate and display PDF
-                pdf_file = generate_pdf(report)
+                with st.spinner("Generating PDF"):
+                    pdf_file = generate_pdf(report)
                 with open(pdf_file, "rb") as pdf:
                     st.download_button(
                         label="Download ESG Report as PDF",
