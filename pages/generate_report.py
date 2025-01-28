@@ -18,8 +18,7 @@ def run():
                 employee_data = get_employee_data(company_code)
                 
                 report = calculate_esg_score(company_data, employee_data)
-                st.write("**ESG Report Data**")
-                st.write(report["selected_locations"])
+                
 
                 # Generate and display PDF
                 with st.spinner("Generating PDF"):
