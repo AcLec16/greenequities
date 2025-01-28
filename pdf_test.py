@@ -100,7 +100,7 @@ def generate_pdf(report):
     pdf.add_text("Mission Statement", report["mission_statement"])
     pdf.add_text("Year of Opening", report["year_of_opening"])
     pdf.add_text("Main Business Activity", report["main_business_activity"])
-    pdf.add_text("Selected Locations", ", ".join(report["selected_locations"]))
+    pdf.add_text("Selected Locations", report["selected_locations"])
 
 
     # Company Details
@@ -122,7 +122,7 @@ def generate_pdf(report):
     pdf.add_text("Company sustainability", report["sustainability_stance"])
     materiality_list = report["materiality_assessment"]
     formatted_materiality = "\n".join([f"{i + 1}. {item}" for i, item in enumerate(materiality_list)])
-    pdf.add_text("Materiality Assessment", formatted_materiality)
+    pdf.add_text("Materiality Assessment","\n" + formatted_materiality)
 
     # Add a new page for environment data
     pdf.add_page()
@@ -139,7 +139,7 @@ def generate_pdf(report):
     pdf.add_text("Phone Charges", report["phone_charges"])
     env_list = report["Enviroment_Laws_Compliance_list"]
     formatted_env = "\n".join([f"{i + 1}. {item}" for i, item in enumerate(env_list)])
-    pdf.add_text("Enviromental Law compliance", formatted_env)
+    pdf.add_text("Enviromental Law compliance", "\n" + formatted_env)
     
     pdf.add_page()
     background_image_path = "images/Untitled design (21).png"
@@ -230,11 +230,11 @@ def generate_pdf(report):
     pdf.add_text("Anti-Corruption Score", report["Anti_Corruption_score"])
     soc_list = report["Anti_Corruption_score_list"]
     formatted_soc = "\n".join([f"{i + 1}. {item}" for i, item in enumerate(soc_list)])
-    pdf.add_text("Anti-Corruption Law compliance", formatted_soc)
+    pdf.add_text("Anti-Corruption Law compliance", "\n" +  formatted_soc)
     pdf.add_text("Anti-Corruption Policy link", report["anti_corruption_policy_link"])
     data_list = report["data_law_compliance_list"]
     formatted_data = "\n".join([f"{i + 1}. {item}" for i, item in enumerate(data_list)])
-    pdf.add_text("Data and Technology Law compliance", formatted_data)
+    pdf.add_text("Data and Technology Law compliance", "\n" + formatted_data)
 
     pdf.add_page()
     background_image_path = "images/black_back.png"
