@@ -422,7 +422,8 @@ def calculate_esg_score(company_data, employee_data):
         # If industry exists in the sector_ratings dictionary, return its value
         elif industry in sector_ratings_volatility:
             return sector_ratings_volatility[industry]
-        report["sector_volatility"] = sector_ratings_volatility
+    
+    report["sector_volatility"] = get_volatility_value(company_data("industry"))
     
     #Information Asymmetry
     total_informed = 0 
