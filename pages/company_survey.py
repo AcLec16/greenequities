@@ -17,9 +17,9 @@ def run():
 
     #General Company Infomation 
 
-    company_answers["company_name"] = st.text_input("Company name") 
-    company_answers["CEO_message"] = st.text_input("Message from the CEO regarding responsibility and sustainability in the company")
+    company_answers["company_name"] = st.text_input("Company name")
     company_answers["form_filler"] = st.text_input("Name of the CEO")
+    company_answers["CEO_message"] = st.text_input("Message from the CEO regarding responsibility and sustainability in the company")
     company_answers["current_financial_year_month"] = st.date_input("Today's date YYYY/MM/DD")
     company_answers["main_business_activity"] = st.text_area("Description of main business activity (product/service)")
     company_answers["website"] = st.text_input("Website")
@@ -235,5 +235,3 @@ def run():
         company_code = str(uuid.uuid4())[:8]  # Generate unique code
         store_company_data(company_code, company_answers)
         st.success(f"Survey submitted! Share this code with your employees: {company_code} ask them to fill out the Employee survey (Min 7 Employees)")
-    else:
-        st.error("Please fill out all fields before submitting.")
