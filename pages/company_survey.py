@@ -10,7 +10,7 @@ LOGO_URL = "images/GElogo.png"  # Replace with actual URL or file path
 # Add logo to the top-left corner
 st.logo(
     image=LOGO_URL,
-    size="medium",  # Options: "small", "medium", "large"
+    size="large",  # Options: "small", "medium", "large"
     link="https://greenequities.org",  # Replace with your website
 )
 
