@@ -32,6 +32,7 @@ def run():
         if st.button("Submit"):
             store_employee_data(company_code, employee_answers)
             st.success("Employee survey submitted!")
+            st.ballons
 
     elif company_code != '':
         st.error("Incorrect Company Code")

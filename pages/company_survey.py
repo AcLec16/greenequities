@@ -8,7 +8,7 @@ from firebase_config import store_company_data
 
 
 # Display logo in the top-left corner
-st.logo(image="images/Untitled design (17).png", size="large", link="https://greenequities.org")
+st.logo(image="images/GElogo.png", size="large", link="https://greenequities.org")
 
 def run():
     st.header("Company Survey Form")
@@ -234,4 +234,4 @@ def run():
     if st.button("Submit"):
         company_code = str(uuid.uuid4())[:8]  # Generate unique code
         store_company_data(company_code, company_answers)
-        st.success(f"Survey submitted! Share this code with your employees: {company_code}")
+        st.success(f"Survey submitted! Share this code with your employees: {company_code} ask them to fill out the Employee survey (Min 7 Employees)")
