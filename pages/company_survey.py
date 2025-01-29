@@ -235,3 +235,5 @@ def run():
         company_code = str(uuid.uuid4())[:8]  # Generate unique code
         store_company_data(company_code, company_answers)
         st.success(f"Survey submitted! Share this code with your employees: {company_code} ask them to fill out the Employee survey (Min 7 Employees)")
+    else:
+        st.error("Please fill out all fields before submitting.")
