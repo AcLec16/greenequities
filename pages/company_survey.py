@@ -6,8 +6,9 @@ from firebase_config import store_company_data
 
 
 
-# Display a bigger logo at the top-left
-st.logo("images/GElogo.png", width=200)  # Adjust width as needed
+
+# Display logo in the top-left corner
+st.logo(image="images/Untitled design (17).png", size="large", link="https://greenequities.org")
 
 def run():
     st.header("Company Survey Form")
