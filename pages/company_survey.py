@@ -3,6 +3,17 @@ import uuid
 
 from firebase_config import store_company_data
 
+
+# Define your logo image URL or file path
+LOGO_URL = "images/GElogo.png"  # Replace with actual URL or file path
+
+# Add logo to the top-left corner
+st.logo(
+    image=LOGO_URL,
+    size="medium",  # Options: "small", "medium", "large"
+    link="https://greenequities.org",  # Replace with your website
+)
+
 def run():
     st.header("Company Survey Form")
     # company_name = st.text_input("Company Name")
