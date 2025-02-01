@@ -6,6 +6,7 @@ def calculate_esg_score(company_data, employee_data):
     
     report["company_name"] =  company_data["company_name"]
     report["form_filler"] = company_data["form_filler"]
+    #report["CEO_Picture"] = company_data["CEO_pic"] 
     report["CEO_message"] = company_data["CEO_message"]
     report["current_financial_year_month"] = company_data["current_financial_year_month"]
     report["main_business_activity"] = company_data["main_business_activity"]
