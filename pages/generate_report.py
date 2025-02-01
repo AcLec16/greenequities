@@ -12,7 +12,7 @@ def run():
 
     if company_code != '' and check_company_code(company_code):
         num_emp = get_employee_count(company_code)
-        if num_emp > 6:
+        if num_emp > 2:
             if st.button("Generate Report"):
                 with st.spinner("Getting Data"):
                     company_data = get_company_data(company_code)
