@@ -17,11 +17,11 @@ def run():
                 with st.spinner("Getting Data"):
                     company_data = get_company_data(company_code)
                     employee_data = get_employee_data(company_code)
-                with st.spinner("Generating Report"):
+                with st.spinner("Generating PDF"):
                     report = calculate_esg_score(company_data, employee_data)
 
                 # Generate and display PDF
-                with st.spinner("Generating PDF"):
+                with st.spinner("Generating Report"):
                     pdf_file = generate_pdf(report)
                 with open(pdf_file, "rb") as pdf:
                     st.download_button(
