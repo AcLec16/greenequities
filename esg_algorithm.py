@@ -108,7 +108,7 @@ def calculate_esg_score(company_data, employee_data):
     travel_emissions_rating = 10 - (((travel_emissions/company_data["total_employees"]) - 971.5) / 403.7) * 9
     travel_emissions_rating_rounded = round(travel_emissions_rating , 2)
     report["travel_emissions_rating"] = travel_emissions_rating_rounded
-    times_around_earth = round(company_data["total_employees"] * average_travel_distance * 255) / 40075  # Earth circumference in km
+    times_around_earth = round((company_data["total_employees"] * average_travel_distance * 255) / 40075)  # Earth circumference in km
     report["times_around_earth"] = f"The total travel distance for all employees, with an average travel distance of {average_travel_distance} km per employee, would cover approximately {times_around_earth} times around the Earth."
     
     total_carbon = round(annual_electricity_emissions + flight_emissions + travel_emissions, 2)
