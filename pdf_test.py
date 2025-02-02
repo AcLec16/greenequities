@@ -82,10 +82,12 @@ def generate_pdf(report):
     background_image_path = "images/black_back.png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
     pdf.add_section_title("Message from the CEO")
+    pdf.set_y(40)
     pdf.add_text("Message", report["CEO_message"])
+    pdf.set_x(40)
     pdf.add_text("Regards: ", report["form_filler"])
  
-    about = "This ESG Report from Green Equities offers an integrated snapshot of your company's performance across environmental, social, and governance dimensions. It consolidates essential metrics and data points to reflect your sustainability practices, risk management, and corporate responsibility, providing a clear picture of your current ESG status. Designed to support internal review and facilitate transparent communication with stakeholders, the report demonstrates your commitment to sustainable business practices and regulatory compliance. It serves as a vital resource for understanding how your operations align with ESG principles and guides your company's ongoing efforts toward long-term, responsible growth."
+    about = "This ESG Report from Green Equities offers an integrated snapshot of your company's performance across environmental, social, and governance dimensions. It consolidates essential metrics and data points to reflect your sustainability practices, risk management, and corporate responsibility, providing a clear picture of your current ESG status. Designed to support internal review and facilitate transparent communication with stakeholders, the report demonstrates your commitment to sustainable business practices and regulatory compliance. It serves as a vital resource for understanding how your operations align with ESG principles and guides your companys ongoing efforts toward long-term, responsible growth."
     pdf.add_page()
     background_image_path = "images/black_back.png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
