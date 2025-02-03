@@ -3,7 +3,7 @@ import streamlit as st
 st.set_page_config(page_title="ESG Score Application", layout="wide")
 
 # Main app with navigation
-st.title("ESG Score Calculator")
+st.title("ESG Diagnosis by Green Equities")
 st.sidebar.title("Navigation")
 
 # Navigation to pages
