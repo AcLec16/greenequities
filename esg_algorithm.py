@@ -20,6 +20,7 @@ def calculate_esg_score(company_data, employee_data):
     report["materiality_assessment"] = company_data["materiality_assessment"]
     report["anti_corruption_policy_link"] = company_data["anti_corruption_policy_link"]
     kwh_electricity = company_data["monthly_electricity_bill"] / 8
+    green_energy = company_data["green_energy"] / 8
     #Enviroment 
     # Value Based Revenue Efficiency
     VRE_denominator = company_data["monthly_electricity_bill"] + company_data["monthly_water_bill"] + company_data["monthly_salary_costs"] + company_data["monthly_land_costs"] + company_data["monthly_raw_material_costs"]
@@ -63,7 +64,7 @@ def calculate_esg_score(company_data, employee_data):
 
 
     # Green Energy Score
-    green_energy_score = round((company_data["green_energy"] / company_data["total_energy"]) * 10, 2) 
+    green_energy_score = round((green_energy / kwh_electricity) * 10, 2) 
     report["green_energy_score"] = green_energy_score
                 
     # Annual Electricity Emissions

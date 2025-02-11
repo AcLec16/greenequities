@@ -69,8 +69,8 @@ def run():
     # Environmental 
     company_answers["carbon_credits_bought"] = st.number_input("Carbon credits bought (Co2 emissions)", min_value=0.0, step=0.01)
     company_answers["green_product_revenue"] = st.number_input("Green Product Revenue", min_value=0.0, step=0.01)
-    company_answers["green_energy"] = st.number_input("Energy from Sustainable sources (KwH)", min_value=0.0, step=0.01)
-    company_answers["total_energy"] = st.number_input("Total Energy Used per month (KwH)", min_value=0.0, step=0.01)
+    company_answers["total_energy"] = st.number_input("Monthly Cost of total Energy cost per month (Rs)", min_value=0.0, step=0.01)
+    company_answers["green_energy"] = st.number_input("Monthly Cost of Energy from Sustainable sources per month (Rs)", min_value=0.0, step=0.01)
 
     company_answers["primary_waste_generator"] = st.radio(
         "What is your company's primary waste generator:", ["Plastic Waste",
