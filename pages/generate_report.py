@@ -2,7 +2,7 @@ import streamlit as st
 from firebase_config import get_company_data, get_employee_data, check_company_code, get_employee_count
 from esg_algorithm import calculate_esg_score
 from pdf_test import generate_pdf
-import os
+from AIpowered_ESG import get_esg_ai_recommendations
 
 # Streamlit App
 def run():
@@ -19,7 +19,9 @@ def run():
                     employee_data = get_employee_data(company_code)
                 with st.spinner("Generating PDF"):
                     report = calculate_esg_score(company_data, employee_data)
-
+                suggestion = get_esg_ai_recommendations(report)
+                st.subheader("ESG AI Report")
+                st.write(suggestion)
                 # Generate and display PDF
                 with st.spinner("Generating Report"):
                     pdf_file = generate_pdf(report)
