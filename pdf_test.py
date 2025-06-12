@@ -68,7 +68,7 @@ class PDF(FPDF):
     
 
 # Function to generate the PDF report
-def generate_pdf(report):
+def generate_pdf(report, suggestion):
     pdf = PDF()
     pdf.set_auto_page_break(auto=True, margin=15)  # Enable auto page break
     
@@ -270,6 +270,16 @@ def generate_pdf(report):
     pdf.add_text("Total Environment", report["total_environment"])
     pdf.add_text("Total Social", report["total_social"])
     pdf.add_text("Total Governance", report["total_governance"])
+
+    # AI Recommendations
+    pdf.add_page()
+    pdf.add_text("AI Recommendations", suggestion["diagnosis"])
+    pdf.add_text("Environmental Analysis", suggestion["analysis"]["environmental"])
+    pdf.add_text("Social Analysis", suggestion["analysis"]["social"])
+    pdf.add_text("Governance Analysis", suggestion["analysis"]["governance"])
+    pdf.add_section_title("Suggestions")
+    for i, suggestion_text in enumerate(suggestion["suggestions"], start=1):
+        pdf.add_text(f"Suggestion {i}", suggestion_text)
 
     # Save the PDF
     pdf_file = "ESG_Report.pdf"
