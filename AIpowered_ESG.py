@@ -90,7 +90,7 @@ def create_prompt_from_report_fields(fields):
     return prompt
 
 def get_esg_ai_recommendations(report):
-    client = openai.OpenAI(api_key=st.secrets("openai"))
+    client = openai.OpenAI(api_key=st.secrets["openai"])
     #fields = extract_all_esg_fields(report)
     prompt_text = create_prompt_from_report_fields(report)
     response = client.chat.completions.create(
