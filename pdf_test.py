@@ -275,18 +275,22 @@ def generate_pdf(report, suggestion):
     pdf.add_page()
     background_image_path = "images/black_back.png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)
+
+    # Section title
     pdf.set_y(20)
     pdf.add_section_title("The ESG Solutions and Recommendations")
 
+    # ESG Diagnosis and Analysis
     pdf.set_y(40)
-    pdf.add_text("AI Recommendations", suggestion["diagnosis"])
+    pdf.add_text("AI Diagnosis", suggestion["diagnosis"])
     pdf.add_text("Environmental Analysis", suggestion["analysis"]["environmental"])
     pdf.add_text("Social Analysis", suggestion["analysis"]["social"])
     pdf.add_text("Governance Analysis", suggestion["analysis"]["governance"])
 
+    # Suggestions
     pdf.add_section_title("Suggestions for Improvement")
-    for i, suggestion_text in enumerate(suggestion["suggestions"], start=1):
-        pdf.add_box(f"Suggestion {i}", suggestion_text)
+    for i, text in enumerate(suggestion["suggestions"], start=1):
+        pdf.add_box(f"Suggestion {i}", text)
 
     # Save the PDF
     pdf_file = "ESG_Report.pdf"

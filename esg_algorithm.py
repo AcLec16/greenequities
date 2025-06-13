@@ -573,7 +573,6 @@ def calculate_esg_score(company_data, employee_data):
         report["selected_locations"] = company_data["selected_locations"]
         report["workplace_average"] = (location_rating + physical_workplace_rating) / 2
         
-
     #Strategic Risk
     strategic_risk =  ((get_sector_value(company_data["industry"]) - 1 / 9)) +  ((Customer_feedbacks - 1 / 9)) + ((vbre - 1) / 9) + ((leader_confidence - 1) / 9) + ((informed_rating - 1) / 9)
     if strategic_risk >= 70:
