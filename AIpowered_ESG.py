@@ -91,38 +91,40 @@ def create_prompt_from_report_fields(fields):
 
 def get_esg_ai_recommendations(report):
     client = openai.OpenAI(api_key=st.secrets["openai"])
-    #fields = extract_all_esg_fields(report)
     prompt_text = create_prompt_from_report_fields(report)
     response = client.chat.completions.create(
         model="gpt-4",
         messages=[
-            {"role": "system", "content": """
+            {
+                "role": "system",
+                "content": """
 You are a sustainability consultant specialized in Indian startups.
 
-Below is ESG data from a startup's ESG report. Based on this, do the following in JSON format:
+Below is ESG data from a startup's ESG report. Based on this, do the following in **valid Python dictionary** format (not JSON):
 
 1. Briefly diagnose the startup's Environmental, Social, and Governance performance.
 2. Provide a short analysis (1-2 lines each) for each ESG category: "environmental", "social", and "governance".
 3. Provide 8 to 10 realistic, clear, and actionable recommendations for improving their ESG performance. These must be tailored for a startup operating in India.
 
-Respond strictly in the following JSON format:
+Respond strictly in the following Python dictionary format:
 
 {
-  "diagnosis": "<short paragraph about overall ESG status>",
-  "analysis": {
-    "environmental": "<1-2 lines>",
-    "social": "<1-2 lines>",
-    "governance": "<1-2 lines>"
+  'diagnosis': '<short paragraph about overall ESG status>',
+  'analysis': {
+    'environmental': '<1-2 lines>',
+    'social': '<1-2 lines>',
+    'governance': '<1-2 lines>'
   },
-  "suggestions": [
-    "<suggestion 1>",
-    "<suggestion 2>",
-    "... up to 10 suggestions"
+  'suggestions': [
+    '<suggestion 1>',
+    '<suggestion 2>',
+    # ... up to 10 suggestions
   ]
-}"""},
+}
+"""
+            },
             {"role": "user", "content": prompt_text}
         ],
         temperature=0.7,
-        max_tokens=800
     )
     return response.choices[0].message.content
