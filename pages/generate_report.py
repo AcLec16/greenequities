@@ -20,9 +20,10 @@ def run():
                     employee_data = get_employee_data(company_code)
                 with st.spinner("Generating PDF"):
                     report = calculate_esg_score(company_data, employee_data)
-                suggestion = json.loads(get_esg_ai_recommendations(report))
+                suggestion = get_esg_ai_recommendations(report)
                 # st.subheader("ESG AI Report")
-                # st.write(suggestion)
+                st.write(suggestion)
+                suggestion = json.loads(suggestion)
                 # Generate and display PDF
                 with st.spinner("Generating Report"):
                     pdf_file = generate_pdf(report,suggestion)
