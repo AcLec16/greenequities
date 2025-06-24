@@ -21,7 +21,7 @@ def run():
                     report = calculate_esg_score(company_data, employee_data)
                 suggestion = get_esg_ai_recommendations(report)
                 # st.subheader("ESG AI Report")
-                # st.write(suggestion)
+                st.write(suggestion)
                 # Generate and display PDF
                 with st.spinner("Generating Report"):
                     pdf_file = generate_pdf(report,suggestion)
