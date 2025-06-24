@@ -109,15 +109,15 @@ Below is ESG data from a startup's ESG report. Based on this, do the following i
 Respond strictly in the following JSON format:
 
 {
-  'diagnosis': '<short paragraph about overall ESG status>',
-  'analysis': {
-    'environmental': '<1-2 lines>',
-    'social': '<1-2 lines>',
-    'governance': '<1-2 lines>'
+  "diagnosis": "<short paragraph about overall ESG status>",
+  "analysis": {
+    "environmental": "<1-2 lines>",
+    "social": "<1-2 lines>",
+    "governance": "<1-2 lines>"
   },
-  'suggestions': [
-    '<suggestion 1>',
-    '<suggestion 2>',
+  "suggestions": [
+    "<suggestion 1>",
+    "<suggestion 2>",
     # ... up to 10 suggestions
   ]
 }
