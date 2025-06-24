@@ -283,11 +283,8 @@ def generate_pdf(report, suggestion):
     # ESG Diagnosis and Analysis
     pdf.set_y(40)
     pdf.add_text("Intelligent Assessment", suggestion["diagnosis"])
-    pdf.set_y(15)
     pdf.add_text("Environmental Analysis", suggestion["analysis"]["environmental"])
-    pdf.set_y(10)
     pdf.add_text("Social Analysis", suggestion["analysis"]["social"])
-    pdf.set_y(10)
     pdf.add_text("Governance Analysis", suggestion["analysis"]["governance"])
     
     pdf.add_page()
