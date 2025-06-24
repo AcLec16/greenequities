@@ -623,7 +623,11 @@ def calculate_esg_score(company_data, employee_data):
 
     #Total social
     total_social = round(((0.1*leader_confidence + 0.1*employee_inclusion + 0.1*average_salary_rating + 0.1*diversity_index + 0.1*work_hours_rating + 0.05*tenure_promotion_index + 0.1*health_satisfaction_index + 0.1*wellbeing_training_index + 0.1*employee_job_related_training + 0.05*turnover_rating + 0.1*average_culture_satisfaction) / 11)*10, 2)
-   
+    if total_social > 10:
+        total_social = 10
+    # Ensure the score is at least 1
+    if total_social < 1:
+        total_social = 1   
     #Total Governance
     total_governance = round(((0.1 *location_rating + 0.1 *supplier_retention_score + 0.05*get_volatility_value(company_data["industry"]) + 0.05*get_sector_value(company_data["industry"]) + 0.2*profit_rating + 0.1 *infomation_flow_efficency + 0.1 *structure_rating
          + 0.1 *selected_data_laws + 0.05*selected_anti + 0.1*Customer_feedbacks + 0.05*physical_workplace_rating + 0.294) / 12)*10, 2)
