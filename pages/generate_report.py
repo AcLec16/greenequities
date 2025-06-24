@@ -18,13 +18,14 @@ def run():
                 with st.spinner("Getting Data"):
                     company_data = get_company_data(company_code)
                     employee_data = get_employee_data(company_code)
-                with st.spinner("Generating PDF"):
+                with st.spinner("Calculating ESG Score"):
                     report = calculate_esg_score(company_data, employee_data)
-                suggestion = get_esg_ai_recommendations(report)
-                # st.subheader("ESG AI Report")
-                st.write(suggestion)
-                suggestion = json.loads(suggestion)
-                # Generate and display PDF
+                with st.spinner("Generating Recommendations")
+                    suggestion = get_esg_ai_recommendations(report)
+                    # st.subheader("ESG AI Report")
+                    # st.write(suggestion)
+                    suggestion = json.loads(suggestion)
+                    # Generate and display PDF
                 with st.spinner("Generating Report"):
                     pdf_file = generate_pdf(report,suggestion)
                 with open(pdf_file, "rb") as pdf:
