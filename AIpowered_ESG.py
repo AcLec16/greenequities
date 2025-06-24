@@ -106,7 +106,7 @@ Below is ESG data from a startup's ESG report. Based on this, do the following i
 2. Provide a short analysis (1-2 lines each) for each ESG category: "environmental", "social", and "governance".
 3. Provide 8 to 10 realistic, clear, and actionable recommendations for improving their ESG performance. These must be tailored for a startup operating in India.
 
-Respond strictly in the following Python dictionary format:
+Respond strictly in the following JSON format:
 
 {
   'diagnosis': '<short paragraph about overall ESG status>',
