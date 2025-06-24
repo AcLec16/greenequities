@@ -20,7 +20,7 @@ def run():
                     employee_data = get_employee_data(company_code)
                 with st.spinner("Calculating ESG Score"):
                     report = calculate_esg_score(company_data, employee_data)
-                with st.spinner("Generating Recommendations")
+                with st.spinner("Generating Recommendations"):
                     suggestion = get_esg_ai_recommendations(report)
                     # st.subheader("ESG AI Report")
                     # st.write(suggestion)
