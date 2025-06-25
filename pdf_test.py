@@ -320,7 +320,7 @@ def generate_pdf(report, suggestion):
         "Green Equities disclaims any liability for losses or damages incurred as a result of using or relying on the information, recommendations, or diagnostic scores provided in this report. "
         "The performance of any investments is subject to market risks, and past performance is not indicative of future results."
     )
-    pdf.add_text(disclaimer_text) 
+    pdf.add_text("Risk Disclaimer", disclaimer_text) 
 
     # Save the PDF
     pdf_file = "ESG_Report.pdf"
