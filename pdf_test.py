@@ -305,6 +305,7 @@ def generate_pdf(report, suggestion):
 
     # Set the font size smaller
     pdf.set_font("Arial", size=8)
+
     # Move to the bottom of the page
     pdf.set_y(-30)  # Adjust this value as needed to position the text
 
@@ -312,7 +313,15 @@ def generate_pdf(report, suggestion):
     pdf.add_section_title("Risk Disclaimer")
 
     # Add the disclaimer text
-    pdf.add_text("The recommendations and diagnostic scores provided in this report by Green Equities are based on our best judgment and the information available at the time of publication. While we strive for accuracy and thoroughness, we make no representations or warranties regarding the completeness, reliability, or suitability of the information contained herein. The recommendations should be considered as general guidance and not as specific financial advice. Users are encouraged to conduct their own due diligence and consult with qualified financial professionals before making any investment decisions based on the insights presented. Green Equities disclaims any liability for losses or damages incurred as a result of using or relying on the information, recommendations, or diagnostic scores provided in this report. The performance of any investments is subject to market risks, and past performance is not indicative of future results.")
+    disclaimer_text = (
+        "The recommendations and diagnostic scores provided in this report by Green Equities are based on our best judgment and the information available at the time of publication. "
+        "While we strive for accuracy and thoroughness, we make no representations or warranties regarding the completeness, reliability, or suitability of the information contained herein. "
+        "The recommendations should be considered as general guidance and not as specific financial advice. Users are encouraged to conduct their own due diligence and consult with qualified financial professionals before making any investment decisions based on the insights presented. "
+        "Green Equities disclaims any liability for losses or damages incurred as a result of using or relying on the information, recommendations, or diagnostic scores provided in this report. "
+        "The performance of any investments is subject to market risks, and past performance is not indicative of future results."
+    )
+    pdf.add_text(disclaimer_text) 
+
     # Save the PDF
     pdf_file = "ESG_Report.pdf"
     pdf.output(pdf_file)
