@@ -306,9 +306,6 @@ def generate_pdf(report, suggestion):
     # Set the font size smaller
     pdf.set_font("Arial", size=8)
 
-    # Move to the bottom of the page
-    pdf.set_y(-30)  # Adjust this value as needed to position the text
-
     # Add section title
     pdf.add_section_title("Risk Disclaimer")
 
