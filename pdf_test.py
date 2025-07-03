@@ -229,6 +229,13 @@ def generate_pdf(report, suggestion):
     pdf.add_text("Profit to Revenue Ratio", report["profit_to_revenue_ratio"])
     pdf.add_text("Business Location Rating", report["buissnes_location_rating"])
     pdf.add_text("Awards Received", report["awards_received"])
+    
+    pdf.add_page()
+    background_image_path = "images/black_back.png"
+    pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
+    pdf.set_y(20)
+    pdf.add_section_title("Business Compliance")
+    pdf.set_y(40)
     pdf.add_text("Compliance Certifications", report["compliance_certifications"])
     pdf.add_text("Anti-Corruption Score", report["Anti_Corruption_score"])
     soc_list = report["Anti_Corruption_score_list"]
@@ -245,10 +252,6 @@ def generate_pdf(report, suggestion):
     pdf.set_y(20)
     pdf.add_section_title("Market Sentiment & Sector Growth")
     pdf.set_y(40)
-    pdf.add_text("Geopolitical Risk Index", report["Geopolitical_Risk_Index"])
-    pdf.add_text("India News Sentiment", report["India_News_sentiment"])
-    pdf.add_text("India Internet Sentiment", report["India_Internet_sentiment"])
-    pdf.add_text("Market Uncertainty", report["Market_Uncertainty"])
     pdf.add_text("Sector Growth Rating", report["Sector_growth_Rating"])
     pdf.add_text("Sector Volatility Rating", report["sector_volatility"])
 
@@ -315,7 +318,7 @@ def generate_pdf(report, suggestion):
         "While we strive for accuracy and thoroughness, we make no representations or warranties regarding the completeness, reliability, or suitability of the information contained herein. "
         "The recommendations should be considered as general guidance and not as specific financial advice. Users are encouraged to conduct their own due diligence and consult with qualified financial professionals before making any investment decisions based on the insights presented. "
         "Green Equities disclaims any liability for losses or damages incurred as a result of using or relying on the information, recommendations, or diagnostic scores provided in this report. "
-        "The performance of any investments is subject to market risks, and past performance is not indicative of future results."
+
     )
     pdf.add_text("Risk Disclaimer", disclaimer_text) 
 
