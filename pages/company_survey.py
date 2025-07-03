@@ -16,7 +16,7 @@ def run():
     company_answers = {}
 
     #General Company Infomation 
-
+    company_answers["company_name"] =  st.text_input("Enter Company Name")
     company_answers["form_filler"] = st.text_input("Full name of the CEO")
     company_answers["CEO_message"] = st.text_area("Brief message from the CEO on sustainability and corporate responsibility")
     #company_answers["CEO_pic"] = st.file_uploader("Upload a image of the CEO ", type=["jpg", "jpeg", "png"])
