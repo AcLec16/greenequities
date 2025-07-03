@@ -561,8 +561,10 @@ def calculate_esg_score(company_data, employee_data):
     else:
         risk_level_strat = "low probability"
     
-    report["strategic_risk"] = (f"Strategic Risk stands at {strategic_risk:.2f}% putting you at a {risk_level_strat} of risk in this area.")
-
+    report["Strategic_Risk"] = (
+    f"Strategic Risk stands at {strategic_risk:.2f}%, putting you at a {risk_level_strat} level of risk in this area. "
+    "This indicates potential challenges in long-term planning, market positioning, or adapting to change—key factors that affect competitiveness and growth."
+)
     #Compliance and Regulatory Risk
     Compliance_and_Regulatory_Risk = ((health_confidence - 1) / 9) + ((enviro_comp - 1) / 9) + ((employee_job_related_training - 1) / 9) + ((employee_health - 1) / 9) + ((emp_satisfaction - 1) / 9) 
     + ((average_salary_rating - 1) / 9) + ((selected_data_laws - 1) / 9) * 100 
@@ -573,8 +575,10 @@ def calculate_esg_score(company_data, employee_data):
     else:
         risk_level = "low probability"
     
-    report["Compliance_and_Regulatory_Risk"] = (f"Compliance and Regulatory Risk stands at {Compliance_and_Regulatory_Risk:.2f}% putting you at a {risk_level} of risk in this area.")
-        
+    report["Compliance_and_Regulatory_Risk"] = (
+        f"Compliance and Regulatory Risk stands at {Compliance_and_Regulatory_Risk:.2f}%, putting you at a {risk_level} level of risk in this area. "
+        "This suggests exposure to regulatory violations or weak compliance systems, which could lead to fines, audits, or reputational damage."
+    )        
     #Financial Risk
     Financial_risk = ((get_volatility_value(company_data["industry"]) - 1) / 9) + ((get_sector_value(company_data["industry"]) - 1) / 9) +  ((profit_rating - 1) / 9) / 3 
     if  Financial_risk >= 70:
@@ -584,8 +588,10 @@ def calculate_esg_score(company_data, employee_data):
     else:
         risk_level_fin = "low probability"
     
-    report["Financial_Risk"] = (f"Financial Risk stands at {Financial_risk:.2f}% putting you at a {risk_level_fin} of risk in this area.")
-
+    report["Financial_Risk"] = (
+        f"Financial Risk stands at {Financial_risk:.2f}%, putting you at a {risk_level_fin} level of risk in this area. "
+        "This reflects concerns around cash flow, funding stability, or cost management, which can affect business continuity and investor confidence."
+    )
     #Operational Risk 
     Operational_Risk = ((infomation_flow_efficency - 1) / 9) + ((supplier_retention_score - 1) / 9) + (0.61) + ((location_rating - 1) / 9) + ((selected_anti - 1) / 9)
     if Operational_Risk >= 70:
@@ -595,7 +601,10 @@ def calculate_esg_score(company_data, employee_data):
     else:
         risk_level_opp = "low probability"
     
-    report["Operational_Risk"] = (f"Compliance and Regulatory Risk stands at {Operational_Risk:.2f}% putting you at a {risk_level_opp} of risk in this area.")
+    report["Operational_Risk"] = (
+        f"Operational Risk stands at {Operational_Risk:.2f}%, putting you at a {risk_level_opp} level of risk in this area. "
+        "This points to potential issues in day-to-day processes, workforce efficiency, or system reliability that could impact delivery or scalability."
+    )
 
     #Total Environment
     total_environment = round(((0.1*vbre_rating + 0.15*enviro_comp + 0.1*waste_value + 0.15*green_energy_score + 0.15*emissions_rating + 0.1*water_usage_rating + 0.05*flight_emissions_rating + 0.05*travel_emissions_rating) / 8)*10, 2)
