@@ -4,7 +4,6 @@ import math
 def calculate_esg_score(company_data, employee_data):
     report = {}
     
-    report["company_name"] =  company_data["company_name"]
     report["form_filler"] = company_data["form_filler"]
     #report["CEO_Picture"] = company_data["CEO_pic"] 
     report["CEO_message"] = company_data["CEO_message"]
