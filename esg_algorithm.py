@@ -230,9 +230,8 @@ def calculate_esg_score(company_data, employee_data):
         
     # Diversity Index
     diversity_index_score = ((company_data["male_employees"] / company_data["total_employees"]) * 100 + 
-                       (company_data["female_employees"] / company_data["total_employees"]) * 100 + 
-                       (company_data["lgbtq_employees"] / company_data["total_employees"]) * 100 + 
-                       (company_data["differently_abled_workers"] / company_data["total_employees"]) * 100) / 4
+                       (company_data["female_employees"] / company_data["total_employees"]) * 100 +  
+                       (company_data["differently_abled_workers"] / company_data["total_employees"]) * 100) / 3
     diversity_index = max(1, min(10, math.ceil((diversity_index_score / 100) * 9 + 1)))
     report["diversity_index"] = diversity_index
     

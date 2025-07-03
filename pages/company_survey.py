@@ -20,7 +20,7 @@ def run():
     company_answers["form_filler"] = st.text_input("Full name of the CEO")
     company_answers["CEO_message"] = st.text_area("Brief message from the CEO on sustainability and corporate responsibility")
     #company_answers["CEO_pic"] = st.file_uploader("Upload a image of the CEO ", type=["jpg", "jpeg", "png"])
-    company_answers["current_financial_year_month"] = st.date_input("Today's date YYYY/MM/DD")
+    company_answers["current_financial_year_month"] = st.text_input("Today's date YYYY/MM/DD")
     company_answers["main_business_activity"] = st.text_area("Description of main business activity (product/service)")
     company_answers["website"] = st.text_input("Website")
     company_answers["email_address"] = st.text_input("Email address")
@@ -115,7 +115,6 @@ def run():
     company_answers["total_employees"] = st.number_input("Total number of Employees", min_value=0, step=1)
     company_answers["male_employees"] = st.number_input("Number of Male Employees", min_value=0, step=1)
     company_answers["female_employees"] = st.number_input("Number of Female employees", min_value=0, step=1)
-    company_answers["lgbtq_employees"] = st.number_input("Number of LGBTQ+ Employees", min_value=0, step=1)
     company_answers["differently_abled_workers"] = st.number_input("Differently abled workers", min_value=0, step=1)
     company_answers["internal_promotions"] = st.number_input("Number of internal promotions over the last 12 months")
 
