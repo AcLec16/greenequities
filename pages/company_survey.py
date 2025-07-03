@@ -20,7 +20,6 @@ def run():
     company_answers["form_filler"] = st.text_input("Full name of the CEO")
     company_answers["CEO_message"] = st.text_area("Brief message from the CEO on sustainability and corporate responsibility")
     #company_answers["CEO_pic"] = st.file_uploader("Upload a image of the CEO ", type=["jpg", "jpeg", "png"])
-    company_answers["CEO_message"] = st.text_input("Message from the CEO regarding responsibility and sustainability in the company")
     company_answers["current_financial_year_month"] = st.date_input("Today's date YYYY/MM/DD")
     company_answers["main_business_activity"] = st.text_area("Description of main business activity (product/service)")
     company_answers["website"] = st.text_input("Website")
