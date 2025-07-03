@@ -459,22 +459,6 @@ def calculate_esg_score(company_data, employee_data):
     #GeoPoli Risk 
     
     # 5. Organizational Structure
-    role_scores = {
-        "Chairman": 10,
-        "CEO": 9,
-        "COO": 8,
-        "CFO": 7,
-        "General Manager": 6,
-        "Department Head": 5,
-        "Employee": 1
-    }
-    
-    # Get the selected roles from the multiselect
-    selection = company_data["roles"]
-    total_score = 0
-    for role in selection:
-        total_score += role_scores[role]
-    
     # Calculate total score based on the selected roles
     structure_type = "Flat (Horizontal) Structure: This structure supports faster decision-making, open communication, and flexible roles — all of which can boost innovation and agility. However, as your team grows, it’s important to establish clearer responsibilities and processes to maintain efficiency and avoid operational bottlenecks."
     structure_rating = 4
