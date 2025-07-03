@@ -345,7 +345,6 @@ def calculate_esg_score(company_data, employee_data):
     report["customer_statement"] = company_data["customer_feedback"]
     
     #NGOs 
-    report["NGO_statement"] = company_data["NGO_statement"]
     report["social_impact_partnerships"] = company_data["social_impact_partnerships"]
     
      # 2. Supply chain ESG
@@ -460,10 +459,6 @@ def calculate_esg_score(company_data, employee_data):
     report["infomation_flow_efficency"] = infomation_flow_efficency
     
     #GeoPoli Risk 
-    report["Geopolitical_Risk_Index"] = 6.6 
-    report["India_News_sentiment"] = 5.09
-    report["India_Internet_sentiment"] = 6.08
-    report["Market_Uncertainty"] = 5.78
     
     # 5. Organizational Structure
     role_scores = {
@@ -483,24 +478,8 @@ def calculate_esg_score(company_data, employee_data):
         total_score += role_scores[role]
     
     # Calculate total score based on the selected roles
-    structure_type = ""
-    structure_rating = 0
-
-    if 25 <= total_score <= 28:  # More hierarchical, with high-level roles selected
-        structure_type = "Hierarchical (Traditional) Structure"
-        structure_rating = 3
-    elif 13 <= total_score <= 24:  # Moderate selection, with both senior and mid-level roles
-        structure_type = "Flat (Horizontal) Structure"
-        structure_rating = 5
-    elif 15 <= total_score <= 21 and "Department Head" in selection:  # Departmental heads indicate matrix structure
-        structure_type = "Matrix Structure"
-        structure_rating = 4
-    elif 14 <= total_score <= 24 and any(role in selection for role in ["General Manager", "Department Head"]):  # Divisional structure
-        structure_type = "Divisional Structure"
-        structure_rating = 2
-    else:
-        structure_type = "Non-Standard Structure" 
-        structure_rating = 3
+    structure_type = "Flat (Horizontal) Structure: This structure supports faster decision-making, open communication, and flexible roles — all of which can boost innovation and agility. However, as your team grows, it’s important to establish clearer responsibilities and processes to maintain efficiency and avoid operational bottlenecks."
+    structure_rating = 4
     report["cooperate_stucture"] = structure_type
     
     #profit to revenue ratio 

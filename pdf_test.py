@@ -121,7 +121,7 @@ def generate_pdf(report, suggestion):
     pdf.add_page()
     background_image_path = "images/black_back.png"
     pdf.image(background_image_path, x=0, y=0, w=pdf.w, h=pdf.h)  # Full-page background
-    pdf.set_y(20)
+    pdf.set_y(30)
     pdf.add_text("Company sustainability", report["sustainability_stance"])
     materiality_list = report["materiality_assessment"]
     formatted_materiality = "\n".join([f"{i + 1}. {item}" for i, item in enumerate(materiality_list)])
@@ -212,7 +212,6 @@ def generate_pdf(report, suggestion):
     pdf.add_text("Customer Feedbacks", report["Customer_feedbacks"])
     pdf.add_text("Customer Statement", report["customer_statement"])
     pdf.add_text("Social Impact Partnerships", report["social_impact_partnerships"])
-    pdf.add_text("NGO Statement", report["NGO_statement"])
     pdf.add_text("Supplier Retention Score", report["supplier_retention_score"])
     pdf.add_text("Supplier Statement", report["supply_statement"])
     pdf.add_text("Investor/Shareholder Statement", report["Investor/Shareholder_statement"])

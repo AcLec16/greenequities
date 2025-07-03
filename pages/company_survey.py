@@ -17,8 +17,8 @@ def run():
 
     #General Company Infomation 
 
-    company_answers["company_name"] = st.text_input("Company name")
-    company_answers["form_filler"] = st.text_input("Name of the CEO")
+    company_answers["form_filler"] = st.text_input("Full name of the CEO")
+    company_answers["CEO_message"] = st.text_area("Brief message from the CEO on sustainability and corporate responsibility")
     #company_answers["CEO_pic"] = st.file_uploader("Upload a image of the CEO ", type=["jpg", "jpeg", "png"])
     company_answers["CEO_message"] = st.text_input("Message from the CEO regarding responsibility and sustainability in the company")
     company_answers["current_financial_year_month"] = st.date_input("Today's date YYYY/MM/DD")
@@ -86,7 +86,7 @@ def run():
 
     )
 
-    company_answers["waste_stance"] = st.text_area("Briefly describe the waste management practices adopted in your establishments. Describe the strategy adopted by your company to reduce usage of hazardous and toxic chemicals in your products and processes and the practices adopted to manage such wastes")
+    company_answers["waste_stance"] = st.text_area("Briefly describe your company's waste management practices.")
 
     company_answers["compliant_laws"] = st.multiselect(
         "Is your entity compliant with the following environmental laws? Select all that apply:",
@@ -108,9 +108,7 @@ def run():
         "Business’ current stance on environmental sustainability (100 words or less)"
     )
     company_answers["clean_tech_initiatives"] = st.text_area(
-        """If the entity has undertaken any specific initiatives or used innovative technology or solutions to improve resource
-    efficiency, or reduce impact due to emissions/effluent discharge/waste generated, please provide details of the same
-    as well as outcome of such initiatives:""")
+        "Has your company implemented any clean technologies or innovative processes to reduce emissions, waste, or improve resource efficiency? Briefly describe the initiative(s) and any measurable outcomes.")
     
     # Social Metrics
 
@@ -144,9 +142,8 @@ def run():
 )
 
        # NGO Community Engagement
-    company_answers["NGO_statement"] = st.text_area("In what ways does your company collaborate with non-profit and NGO partners to foster sustainability, and how do you ensure these partnerships contribute positively to environmental, social, and governance (ESG) objectives?")
     company_answers["social_impact_partnerships"] = st.text_area(
-        "Has your organization partnered with Social impact organizations, NGOs, or charities? If so, please list")
+        "Has your organization partnered with Social impact organizations, NGOs, or charities? If so, list them")
 
     company_answers["selected_sdgs"] = st.multiselect(
         "Choose 3 SDGs that relate best to your organization", [
@@ -162,20 +159,20 @@ def run():
    
          
     # Financial and Operational Metrics
-    company_answers["monthly_water_bill"] = st.number_input("What is the monthly Water Bill?", min_value=0.0, step=0.01)
-    company_answers["monthly_electricity_bill"] = st.number_input("What is the monthly Electricity cost?", min_value=0.0, step=0.01)
-    company_answers["monthly_profit"] = st.number_input("Yearly Profit", min_value=0.0, step=0.01)
-    company_answers["monthly_salary_costs"] = st.number_input("Monthly salary Costs", min_value=0.0, step=0.01)
+    company_answers["monthly_water_bill"] = st.number_input("What is the monthly Water Bill? (Rs)", min_value=0.0, step=0.01)
+    company_answers["monthly_electricity_bill"] = st.number_input("What is the monthly Electricity cost? (Rs)", min_value=0.0, step=0.01)
+    company_answers["monthly_profit"] = st.number_input("Average Monthly Profit (Rs)", min_value=0.0, step=0.01)
+    company_answers["monthly_salary_costs"] = st.number_input("Monthly salary Costs (Rs)", min_value=0.0, step=0.01)
     company_answers["monthly_land_costs"] = st.number_input(
-        "Monthly Land Costs (Rent, Storage facilities, Manufacturing facilities)", min_value=0.0, step=0.01)
+        "Monthly Land Costs (Office Rent, Storage facilities, Manufacturing facilities) (Rs)", min_value=0.0, step=0.01)
     company_answers["monthly_raw_material_costs"] = st.number_input(
-        "Monthly costs of acquiring new raw material (if applicable)", min_value=0.0, step=0.01)
-    company_answers["total_yearly_revenue"] = st.number_input("Total Monthly Revenue", min_value=0.0, step=0.01)
+        "Monthly costs of acquiring new raw material (if applicable)(Rs)", min_value=0.0, step=0.01)
+    company_answers["total_yearly_revenue"] = st.number_input("Average Monthly Revenue (Rs)", min_value=0.0, step=0.01)
      
      
      # Supplier Information
     company_answers["all_time_suppliers"] = st.number_input("How many all-time suppliers have you had?", min_value=0, step=1)
-    company_answers["remaining_suppliers"] = st.number_input("What is the Number of remaining suppliers?", min_value=0, step=1)
+    company_answers["remaining_suppliers"] = st.number_input("What is the Number of current suppliers?", min_value=0, step=1)
     
     
     
@@ -211,8 +208,8 @@ def run():
 )
 
     company_answers["anti_corruption_policy_link"] = st.text_input("Anti-corruption policy link (if available)")
-    company_answers["Investor/Shareholder_statement"] = st.text_area("How does your company ensure that its investments and shareholder activities align with sustainable environmental, social, and governance (ESG) practices, and what steps are taken to support long-term responsible growth?")
-    company_answers["supply_statement"] = st.text_area("How does your company ensure sustainability across its supply chain, and what specific measures are taken to align with environmental, social, and governance (ESG) principles?")
+    company_answers["Investor/Shareholder_statement"] = st.text_area("How does your company ensure that its investments and shareholder activities align with sustainable business practices, and long-term responsible growth?")
+    company_answers["supply_statement"] = st.text_area("How does your company ensure sustainability and ethical practices across its supply chain")
 
 
  
@@ -221,16 +218,7 @@ def run():
     company_answers["awards_received"] = st.text_area(
         "List any Awards received by the business"
     )
-   
 
-    # Management and Structure
-    company_answers["roles"] = st.multiselect(
-        "Please list the management structure of your company from the top down by selecting positions from the dropdowns below:",
-        [
-            "Chairman", "CEO", "COO", "CFO", "General Manager", "Department Head", "Employee"
-        ]
-    )
-   
 
     if st.button("Submit"):
         company_code = str(uuid.uuid4())[:8]  # Generate unique code
