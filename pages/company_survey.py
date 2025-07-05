@@ -20,7 +20,7 @@ def run():
     company_answers["form_filler"] = st.text_input("Full name of the CEO")
     company_answers["CEO_message"] = st.text_area("Brief message from the CEO on sustainability and corporate responsibility")
     #company_answers["CEO_pic"] = st.file_uploader("Upload a image of the CEO ", type=["jpg", "jpeg", "png"])
-    company_answers["current_financial_year_month"] = st.text_input("Today's date YYYY/MM/DD")
+    company_answers["current_financial_year_month"] = st.text_input("Todays date YYYY/MM/DD")
     company_answers["main_business_activity"] = st.text_area("Description of main business activity (product/service)")
     company_answers["website"] = st.text_input("Website")
     company_answers["email_address"] = st.text_input("Email address")
@@ -72,7 +72,7 @@ def run():
     company_answers["green_energy"] = st.number_input("Monthly Cost of Energy from Sustainable sources per month (Rs)", min_value=0.0, step=0.01)
 
     company_answers["primary_waste_generator"] = st.radio(
-        "What is your company's primary waste generator:", ["Plastic Waste",
+        "What is your companys primary waste generator:", ["Plastic Waste",
             "Food Waste",
             "Electronic Waste (e-waste)",
             "Fabric Scraps",
@@ -85,7 +85,7 @@ def run():
 
     )
 
-    company_answers["waste_stance"] = st.text_area("Briefly describe your company's waste management practices.")
+    company_answers["waste_stance"] = st.text_area("Briefly describe your companys waste management practices.")
 
     company_answers["compliant_laws"] = st.multiselect(
         "Is your entity compliant with the following environmental laws? Select all that apply:",
