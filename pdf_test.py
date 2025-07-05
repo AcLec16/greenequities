@@ -263,7 +263,7 @@ def generate_pdf(report, suggestion):
     pdf.set_font("Arial", size=26)
     pdf.add_section_title("Final Scores")
     pdf.set_y(50)
-    pdf.add_text("Strategic Risk", report["Strategic_risk"])
+    pdf.add_text("Strategic Risk", report["Strategic_Risk"])
     pdf.add_text("Compliance and Regulatory Risk", report["Compliance_and_Regulatory_Risk"])
     pdf.add_text("Financial Risk", report["Financial_Risk"])
     pdf.add_text("Operational Risk", report["Operational_Risk"])

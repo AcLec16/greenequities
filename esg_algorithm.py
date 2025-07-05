@@ -545,7 +545,7 @@ def calculate_esg_score(company_data, employee_data):
         risk_level_strat = "low probability"
     
     report["Strategic_Risk"] = (
-    f"Strategic Risk stands at 60%, putting you at a medium level of risk in this area. "
+    f"Strategic Risk stands at {strategic_risk:.2f}%, putting you at a {risk_level_strat} level of risk in this area. "
     "This indicates potential challenges in long-term planning, market positioning, or adapting to change—key factors that affect competitiveness and growth."
 )
     #Compliance and Regulatory Risk
