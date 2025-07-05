@@ -461,7 +461,7 @@ def calculate_esg_score(company_data, employee_data):
     
     # 5. Organizational Structure
     # Calculate total score based on the selected roles
-    structure_type = "Flat (Horizontal) Structure: This structure supports faster decision-making, open communication, and flexible roles, all of which can boost innovation and agility. However, as your team grows, it’s important to establish clearer responsibilities and processes to maintain efficiency and avoid operational bottlenecks."
+    structure_type = "Flat (Horizontal) Structure: This structure supports faster decision-making, open communication, and flexible roles, all of which can boost innovation and agility. However, as your team grows, its important to establish clearer responsibilities and processes to maintain efficiency and avoid operational bottlenecks."
     structure_rating = 4
     report["cooperate_stucture"] = structure_type
     

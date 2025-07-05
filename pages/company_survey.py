@@ -104,7 +104,7 @@ def run():
     )
     
     company_answers["company_stance_sustainability"] = st.text_area(
-        "Business’ current stance on environmental sustainability (100 words or less)"
+        "Business current stance on environmental sustainability (100 words or less)"
     )
     company_answers["clean_tech_initiatives"] = st.text_area(
         "Has your company implemented any clean technologies or innovative processes to reduce emissions, waste, or improve resource efficiency? Briefly describe the initiative(s) and any measurable outcomes.")
