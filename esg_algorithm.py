@@ -461,7 +461,7 @@ def calculate_esg_score(company_data, employee_data):
     
     # 5. Organizational Structure
     # Calculate total score based on the selected roles
-    structure_type = "Flat (Horizontal) Structure: This structure supports faster decision-making, open communication, and flexible roles — all of which can boost innovation and agility. However, as your team grows, it’s important to establish clearer responsibilities and processes to maintain efficiency and avoid operational bottlenecks."
+    structure_type = "Flat (Horizontal) Structure: This structure supports faster decision-making, open communication, and flexible roles, all of which can boost innovation and agility. However, as your team grows, it’s important to establish clearer responsibilities and processes to maintain efficiency and avoid operational bottlenecks."
     structure_rating = 4
     report["cooperate_stucture"] = structure_type
     
@@ -546,7 +546,7 @@ def calculate_esg_score(company_data, employee_data):
     
     report["Strategic_Risk"] = (
     f"Strategic Risk stands at {strategic_risk:.2f}%, putting you at a {risk_level_strat} level of risk in this area. "
-    "This indicates potential challenges in long-term planning, market positioning, or adapting to change—key factors that affect competitiveness and growth."
+    "This indicates potential challenges in long-term planning, market positioning, or adapting to change-key factors that affect competitiveness and growth."
 )
     #Compliance and Regulatory Risk
     Compliance_and_Regulatory_Risk = ((health_confidence - 1) / 9) + ((enviro_comp - 1) / 9) + ((employee_job_related_training - 1) / 9) + ((employee_health - 1) / 9) + ((emp_satisfaction - 1) / 9) 
