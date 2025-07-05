@@ -25,7 +25,7 @@ def calculate_esg_score(company_data, employee_data):
     # Value Based Revenue Efficiency
     VRE_denominator = company_data["monthly_electricity_bill"] + company_data["monthly_water_bill"] + company_data["monthly_salary_costs"] + company_data["monthly_land_costs"] + company_data["monthly_raw_material_costs"]
     vbre = company_data["total_yearly_revenue"] /  VRE_denominator
-    report["value_based_resource_efficiency_s"] = f"Value-Based Resource Efficiency Rs(value_based_resource_efficiency) for every Rs 1 of stressed resources: {vbre:.2f}"
+    report["value_based_resource_efficiency_s"] = f"The Value Based Resource Efficiency for every Rs 1 of stressed resources used, creates: {vbre:.2f} in revenue"
     vbre_rating = 0
     if vbre <= 0.5:
         vbre_rating =  1
@@ -591,18 +591,26 @@ def calculate_esg_score(company_data, employee_data):
 
     #Total Environment
     total_environment = round(((0.1*vbre_rating + 0.15*enviro_comp + 0.1*waste_value + 0.15*green_energy_score + 0.15*emissions_rating + 0.1*water_usage_rating + 0.05*flight_emissions_rating + 0.05*travel_emissions_rating) / 8)*10, 2)
-
+    if total_environment > 10:
+        total_environment = 9.2
+    # Ensure the score is at least 1
+    if total_environment < 1:
+        total_environment = 1  
     #Total social
     total_social = round(((0.1*leader_confidence + 0.1*employee_inclusion + 0.1*average_salary_rating + 0.1*diversity_index + 0.1*work_hours_rating + 0.05*tenure_promotion_index + 0.1*health_satisfaction_index + 0.1*wellbeing_training_index + 0.1*employee_job_related_training + 0.05*turnover_rating + 0.1*average_culture_satisfaction) / 11)*10, 2)
     if total_social > 10:
-        total_social = 10
+        total_social = 9.8
     # Ensure the score is at least 1
     if total_social < 1:
-        total_social = 1   
+        total_social = 2.1   
     #Total Governance
     total_governance = round(((0.1 *location_rating + 0.1 *supplier_retention_score + 0.05*get_volatility_value(company_data["industry"]) + 0.05*get_sector_value(company_data["industry"]) + 0.2*profit_rating + 0.1 *infomation_flow_efficency + 0.1 *structure_rating
          + 0.1 *selected_data_laws + 0.05*selected_anti + 0.1*Customer_feedbacks + 0.05*physical_workplace_rating + 0.294) / 12)*10, 2)
-
+    if total_governance > 10:
+        total_governance = 9.6
+    # Ensure the score is at least 1
+    if total_governance < 1:
+        total_governance = 1.6  
     report["total_environment"] = total_environment
     report["total_social"] = total_social
     report["total_governance"] = total_governance

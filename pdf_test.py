@@ -135,7 +135,6 @@ def generate_pdf(report, suggestion):
     pdf.add_section_title("Environmental Performance")
     pdf.set_y(40)
     pdf.add_text("Value-Based Resource Efficiency", report["value_based_resource_efficiency_s"])
-    pdf.add_text("Environment Laws Compliance", report["Enviroment_Laws_Compliance_list"])
     pdf.add_text("Green Product Revenue Percentage", report["green_product_revenue_percentage"])
     pdf.add_text("Green Energy Score", report["green_energy_score"])
     pdf.add_text("Electricity Rating", report["emissions_rating"])
@@ -153,7 +152,7 @@ def generate_pdf(report, suggestion):
     pdf.add_text("Distance to the Moon", report["distance_to_the_moon"])
     pdf.add_text("Travel Emissions Rating", report["travel_emissions_rating"])
     pdf.add_text("Times Around Earth", report["times_around_earth"])
-    pdf.add_text("Total Carbon", report["total_carbon"])
+    pdf.add_text("Total Carbon (Ton)", report["total_carbon"])
     pdf.add_text("Carbon Credit Rating", report["carbon_credit_rating"])
     pdf.add_text("Selected SDGs", ", ".join(report["selected_sdgs"]))
 # Adding images for the selected SDGs
