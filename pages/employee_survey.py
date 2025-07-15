@@ -29,45 +29,34 @@ def run():
         employee_answers["Job_related_training"] = st.slider("Rate the job-related training you have received in aspects such as compliance, technical skills, leadership, and career growth. (Rate from 1 to 10)", 1, 10)
         employee_answers["leadership_confidence"] = st.slider("How confident are you in the leadership of the organization? (Rate from 1 to 10)", 1, 10)
 
-        if st.button("Submit"):
+    if st.button("Submit"):
+            form_valid = True  # Assume everything is filled correctly
+
             if employee_answers["work_hours_week"] == 0:
                 st.error("Please enter the average work hours per week.")
-            elif employee_answers["company_culture_alignment"] == 1:
-                st.error("Please rate your alignment with company culture (1 to 10).")
-            elif employee_answers["employer_satisfaction"] == 1:
-                st.error("Please rate your satisfaction with your employer.")
-            elif employee_answers["compensation_fairness"] == 1:
-                st.error("Please rate your perception of compensation fairness.")
-            elif employee_answers["colleague_respect"] == 1:
-                st.error("Please rate how respected you feel by colleagues.")
-            elif employee_answers["health_wellbeing"] == 1:
-                st.error("Please rate your workplace's support for your health and well-being.")
-            elif employee_answers["inclusion"] == 1:
-                st.error("Please rate your sense of inclusion in the team.")
-            elif employee_answers["informed_by_management"] == 1:
-                st.error("Please rate how well-informed you feel by management.")
-            elif employee_answers["work_travel_hours_year"] == 0:
+                form_valid = False
+            if employee_answers["work_travel_hours_year"] == 0:
                 st.error("Please enter your annual work-related air travel hours.")
-            elif employee_answers["training_opportunities"] == 1:
-                st.error("Please rate the quality of training and learning opportunities.")
-            elif employee_answers["information_flow_time"] == 0:
+                form_valid = False
+            if employee_answers["information_flow_time"] == 0:
                 st.error("Please enter the average time for internal information flow.")
-            elif employee_answers["company_tenure"] == 0:
+                form_valid = False
+            if employee_answers["company_tenure"] == 0:
                 st.error("Please enter your total years with the company.")
-            elif employee_answers["workplace_rating"] == 1:
-                st.error("Please rate your physical workplace environment.")
-            elif employee_answers["executive_tenure"] == 0:
+                form_valid = False
+            if employee_answers["executive_tenure"] == 0:
                 st.error("Please enter your executive-level tenure (if applicable).")
-            elif employee_answers["travel_distance_private_car"] == 0:
+                form_valid = False
+            if employee_answers["travel_distance_private_car"] == 0:
                 st.error("Please enter your daily commute distance using a private car.")
-            elif employee_answers["Job_related_training"] == 1:
-                st.error("Please rate the job-related training you've received.")
-            elif employee_answers["leadership_confidence"] == 1:
-                st.error("Please rate your confidence in the company's leadership.")
-            else:
+                form_valid = False
+
+            # Submit only if all required fields are valid
+            if form_valid:
                 st.success("All required fields are filled. Submitting employee survey...")
-            store_employee_data(company_code, employee_answers)
-            st.success("Employee survey submitted!")
+                store_employee_data(company_code, employee_answers)
+                st.success("Employee survey submitted!")
+
             
 
     elif company_code != '':
