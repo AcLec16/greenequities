@@ -219,10 +219,46 @@ def run():
 
 
     if st.button("Submit"):
-        if company_answers["anti_corruption_policy_link"] == "":
-            st.error("Please fill Anti Corruption Link")
-        elif company_answers["compliance_certifications"] == "":
-            st.error
+        if company_answers["monthly_water_bill"] == 0.0:
+            st.error("Please enter your monthly water bill.")
+        elif company_answers["monthly_electricity_bill"] == 0.0:
+            st.error("Please enter your monthly electricity bill.")
+        elif company_answers["monthly_profit"] == 0.0:
+            st.error("Please enter your average monthly profit.")
+        elif company_answers["monthly_salary_costs"] == 0.0:
+            st.error("Please enter your monthly salary costs.")
+        elif company_answers["monthly_land_costs"] == 0.0:
+            st.error("Please enter your monthly land costs.")
+        elif company_answers["monthly_raw_material_costs"] == 0.0:
+            st.error("Please enter your monthly raw material costs.")
+        elif company_answers["total_yearly_revenue"] == 0.0:
+            st.error("Please enter your total monthly revenue.")
+        elif company_answers["all_time_suppliers"] == 0:
+            st.error("Please enter the number of all-time suppliers.")
+        elif company_answers["remaining_suppliers"] == 0:
+            st.error("Please enter the number of current suppliers.")
+        elif company_answers["total_employees"] == 0:
+            st.error("Please enter the total number of employees.")
+        elif company_answers["male_employees"] == 0:
+            st.error("Please enter the number of male employees.")
+        elif company_answers["female_employees"] == 0:
+            st.error("Please enter the number of female employees.")
+        elif company_answers["differently_abled_workers"] == 0:
+            st.error("Please enter the number of differently abled workers.")
+        elif company_answers["internal_promotions"] == 0:
+            st.error("Please enter the number of internal promotions in the last 12 months.")
+        elif company_answers["employee_separations"] == 0:
+            st.error("Please enter the number of employee separations in the past 2 years.")
+        elif company_answers["carbon_credits_bought"] == 0.0:
+            st.error("Please enter the amount of carbon credits bought.")
+        elif company_answers["green_product_revenue"] == 0.0:
+            st.error("Please enter your green product revenue.")
+        elif company_answers["total_energy"] == 0.0:
+            st.error("Please enter your total monthly energy cost.")
+        elif company_answers["green_energy"] == 0.0:
+            st.error("Please enter your monthly cost for green energy.")
+        else:
+            st.success("All required fields are filled. Submitting form...")
         company_code = str(uuid.uuid4())[:8]  # Generate unique code
         store_company_data(company_code, company_answers)
         st.success(f"Survey submitted! Share this code with your employees: {company_code} ask them to fill out the Employee survey (Min 5 Employees)")
