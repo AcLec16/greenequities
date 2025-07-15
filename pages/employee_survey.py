@@ -56,8 +56,5 @@ def run():
                 st.success("All required fields are filled. Submitting employee survey...")
                 store_employee_data(company_code, employee_answers)
                 st.success("Employee survey submitted!")
-
-            
-
-    elif company_code != '':
-        st.error("Incorrect Company Code")
+            elif company_code != '':
+                st.error("Incorrect Company Code")
