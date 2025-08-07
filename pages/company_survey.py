@@ -68,7 +68,6 @@ def run():
     # Environmental 
     company_answers["carbon_credits_bought"] = st.number_input("Carbon credits bought (Co2 emissions)", min_value=0.0, step=0.01)
     company_answers["green_product_revenue"] = st.number_input("Green Product Revenue", min_value=0.0, step=0.01)
-    company_answers["total_energy"] = st.number_input("Monthly Cost of total Energy cost per month (Rs)", min_value=0.0, step=0.01)
     company_answers["green_energy"] = st.number_input("Monthly Cost of Energy from Sustainable sources per month (Rs)", min_value=0.0, step=0.01)
 
     company_answers["primary_waste_generator"] = st.radio(
@@ -85,7 +84,7 @@ def run():
 
     )
 
-    company_answers["waste_stance"] = st.text_area("Briefly describe your companys waste management practices.")
+    company_answers["waste_stance"] = st.text_area("Briefly describe your companys waste management practices. (Optional)")
 
     company_answers["compliant_laws"] = st.multiselect(
         "Is your entity compliant with the following environmental laws? Select all that apply:",
@@ -103,7 +102,7 @@ def run():
         ]
     )
     
-    company_answers["company_stance_sustainability"] = st.text_area(
+    company_answers["company_stance_sustainability (Optional)"] = st.text_area(
         "Business current stance on environmental sustainability (100 words or less)"
     )
     company_answers["clean_tech_initiatives"] = st.text_area(
@@ -121,7 +120,7 @@ def run():
     company_answers["employee_separations"] = st.number_input("Number of employee separations over the past 2 years?", min_value=0, step=1)
     company_answers["customer_feedback_score"] = st.slider(
         "Customer feedback score (using company feedback system or Google Business rating)", min_value=0, max_value=5, step=1)
-    company_answers["customer_feedback"] = st.text_area("Describe the mechanisms in place to receive and respond to consumer complaints and feedback.")
+    company_answers["customer_feedback"] = st.text_area("Describe the mechanisms in place to receive and respond to consumer complaints and feedback. (Optional)")
     
     company_answers["health_practices"] = st.multiselect(
     "Which of the following health practices does your business currently implement? Select all that apply.",
@@ -206,15 +205,15 @@ def run():
 )
 
     company_answers["anti_corruption_policy_link"] = st.text_input("Anti-corruption policy link (if available)")
-    company_answers["Investor/Shareholder_statement"] = st.text_area("How does your company ensure that its investments and shareholder activities align with sustainable business practices, and long-term responsible growth?")
-    company_answers["supply_statement"] = st.text_area("How does your company ensure sustainability and ethical practices across its supply chain")
+    company_answers["Investor/Shareholder_statement"] = st.text_area("How does your company ensure that its investments and shareholder activities align with sustainable business practices, and long-term responsible growth? (Optional)" )
+    company_answers["supply_statement"] = st.text_area("How does your company ensure sustainability and ethical practices across its supply chain (Optional)")
 
 
  
 
-    company_answers["compliance_certifications"] = st.text_area("List any Compliance certifications received by the business")
+    company_answers["compliance_certifications"] = st.text_area("List any Compliance certifications received by the business (Optional)")
     company_answers["awards_received"] = st.text_area(
-        "List any Awards received by the business"
+        "List any Awards received by the business (Optional)"
     )
 
 
@@ -270,9 +269,6 @@ def run():
             form_valid = False
         if company_answers["green_product_revenue"] == 0.0:
             st.error("Please enter your green product revenue.")
-            form_valid = False
-        if company_answers["total_energy"] == 0.0:
-            st.error("Please enter your total monthly energy cost.")
             form_valid = False
         if company_answers["green_energy"] == 0.0:
             st.error("Please enter your monthly cost for green energy.")
