@@ -234,12 +234,10 @@ def generate_pdf(report, suggestion):
     pdf.set_y(20)
     pdf.add_section_title("Business Compliance")
     pdf.set_y(40)
-    pdf.add_text("Compliance Certifications", report["compliance_certifications"])
     pdf.add_text("Anti-Corruption Score", report["Anti_Corruption_score"])
     soc_list = report["Anti_Corruption_score_list"]
     formatted_soc = "\n".join([f"{i + 1}. {item}" for i, item in enumerate(soc_list)])
     pdf.add_text("Anti-Corruption Law compliance", "\n" +  formatted_soc)
-    pdf.add_text("Anti-Corruption Policy link", report["anti_corruption_policy_link"])
     data_list = report["data_law_compliance_list"]
     formatted_data = "\n".join([f"{i + 1}. {item}" for i, item in enumerate(data_list)])
     pdf.add_text("Data and Technology Law compliance", "\n" + formatted_data)

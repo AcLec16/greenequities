@@ -204,14 +204,12 @@ def run():
     ]
 )
 
-    company_answers["anti_corruption_policy_link"] = st.text_input("Anti-corruption policy link (if available)")
     company_answers["Investor/Shareholder_statement"] = st.text_area("How does your company ensure that its investments and shareholder activities align with sustainable business practices, and long-term responsible growth? (Optional)" )
     company_answers["supply_statement"] = st.text_area("How does your company ensure sustainability and ethical practices across its supply chain (Optional)")
 
 
  
 
-    company_answers["compliance_certifications"] = st.text_area("List any Compliance certifications received by the business (Optional)")
     company_answers["awards_received"] = st.text_area(
         "List any Awards received by the business (Optional)"
     )
